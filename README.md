@@ -11,7 +11,7 @@ CMR Lab 2026 is my personal home laboratory for developing practical skills in:
 - Automation
 - Infrastructure Documentation
 
-The lab is being built from the ground up with an emphasis on documentation, repeatability, and professional practices.
+The lab is being built from the ground up with an emphasis on documentation, repeatability and professional practices.
 
 ## Current Status
 
