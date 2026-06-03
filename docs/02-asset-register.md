@@ -1,5 +1,13 @@
 # CMR Lab Asset Register
 
+## Status
+
+Draft
+
+## Purpose
+
+This document serves as the authoritative inventory of all hardware, network infrastructure, compute resources, and utility devices that form part of CMR Lab 2026.
+
 **Version:** 1.0
 **Last Updated:** June 2026
 **Owner:** Charles Rattan
@@ -239,3 +247,9 @@ Active: 7
 Offline/Spare: 4
 
 Total: 11
+
+## Last Review
+
+| Date | Reviewer | Notes |
+|--------|--------|--------|
+| 2026-06-03 | Charles Rattan | Initial asset register created |
