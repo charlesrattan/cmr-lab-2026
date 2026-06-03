@@ -17,6 +17,17 @@ The lab is being built from the ground up with an emphasis on documentation, rep
 
 Foundation Phase
 
+## Current Phase
+
+Phase 0: Foundation and Documentation
+
+## Current Focus
+
+- Establishing GitHub documentation workflow
+- Building asset register
+- Creating decision log
+- Preparing for hardware discovery and validation
+
 ## Owner
 
 Charles Rattan
