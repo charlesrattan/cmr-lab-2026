@@ -1,5 +1,50 @@
 # CMR Lab 2026 - Target Architecture
 
+## Confirmed Architecture Direction
+
+The CMR Lab rebuild will move away from the current unstable and Wi-Fi-dependent setup toward a more structured, wired and documented infrastructure.
+
+### Current State
+
+- ISP router provides internet access.
+- Linksys router currently handles the main home/lab network.
+- Ubuntu server currently runs on an old MacBook.
+- Important devices are still dependent on Wi-Fi.
+- Several unused hardware assets are available but not yet fully tested.
+
+### Target State
+
+- Replace the Linksys router with the UniFi Security Gateway.
+- Use the UniFi Cloud Key to manage UniFi devices.
+- Continue using the UniFi AC Pro access point for wireless access.
+- Recover one Dell OptiPlex 7010 to become the primary lab server.
+- Move core services away from the MacBook and onto the OptiPlex server.
+- Wire important infrastructure devices where possible instead of relying on Wi-Fi.
+
+| Device Type          | Naming Format | Example      |
+| -------------------- | ------------- | ------------ |
+| Gateway              | cmr-gw-##     | cmr-gw-01    |
+| Access Point         | cmr-ap-##     | cmr-ap-01    |
+| Server               | cmr-srv-##    | cmr-srv-01   |
+| Admin Workstation    | cmr-admin-##  | cmr-admin-01 |
+| Security Workstation | cmr-kali-##   | cmr-kali-01  |
+| Raspberry Pi         | cmr-pi-##     | cmr-pi-01    |
+
+
+### Target Network Layout
+
+```text
+ISP Router
+    |
+UniFi Security Gateway
+    |
+Switch
+    |
+    +-- UniFi AC Pro
+    +-- OptiPlex Server
+    +-- Admin PC
+    +-- Future Lab Devices
+
 ## Vision
 
 Create a documented, secure, and scalable home laboratory supporting:

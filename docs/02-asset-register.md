@@ -218,6 +218,20 @@ Priority 4
 * UniFi Cloud Key
 * Cisco 8-Port Switch
 
+## Hardware Assets Requiring Inspection
+
+| Asset | Current Status | Intended Role | Notes |
+|---|---|---|---|
+| Dell OptiPlex 7010 Unit 1 | Unknown / poor condition | Candidate server | Needs inspection |
+| Dell OptiPlex 7010 Unit 2 | Unknown / poor condition | Parts donor or candidate server | Needs inspection |
+| Dell OptiPlex 7010 Unit 3 | Unknown / poor condition | Parts donor or candidate server | Needs inspection |
+| MacBook Ubuntu Server | Active but unreliable | Temporary server | No battery, MagSafe unreliable |
+| UniFi Security Gateway | Offline | Target gateway | Needs testing |
+| UniFi Cloud Key | Offline | UniFi controller | Needs testing |
+| UniFi AC Pro | Available / in use | Wireless access point | To be managed through UniFi |
+| Linksys Router | Active | Current router | To be replaced eventually |
+| Cisco RV042G | Excluded | Not in current scope | Removed from rebuild plan |
+
 ## Total Assets Managed
 
 Active: 7
