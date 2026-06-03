@@ -1,29 +1,46 @@
 # CMR Lab 2026 - Target Architecture
 
-## Current Phase
+## Vision
 
-Foundation
+Create a documented, secure, and scalable home laboratory supporting:
 
-## Strategic Goals
-
-- Stable family services
-- Secure remote access
-- Professional documentation
-- Network segmentation
-- Home automation
-- Monitoring and observability
+- Family services
+- ICT learning
 - Cybersecurity testing
 - AI experimentation
+- Systems administration
+- Network engineering
 - Portfolio development
 
 ## Future Core Infrastructure
 
-- Firewall
+### Networking
+
+- OPNsense Firewall
 - Managed Switch
-- Access Point
-- Primary Server
+- UniFi Wireless
+
+### Compute
+
+- Primary Proxmox Server
 - Utility Nodes
-- Monitoring Platform
-- Backup Platform
+- Security Testing Platform
+
+### Services
+
+- Jellyfin
+- Ollama
+- Grafana
+- Homebridge
+- Monitoring
+- VPN
+
+### Security
+
+- Network Segmentation
+- Firewall Rules
+- MFA
+- Backups
+- Vulnerability Management
 
 Status: Draft
