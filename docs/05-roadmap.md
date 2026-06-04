@@ -19,7 +19,9 @@ Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 - [x] Confirm BIOS access
 - [x] Complete Dell diagnostics
 - [x] Install additional 500 GB HDD
-- [ ] Inventory recovered DDR3 RAM
+- [x] Test recovered DDR3 RAM - failed / not usable
+- [ ] Purchase compatible DDR3 RAM for OptiPlex 7010 SFF
+- [ ] Install and test RAM upgrade
 - [ ] Test SSD health and bootability
 - [ ] Upgrade server RAM to at least 16 GB
 - [ ] Decide final Proxmox storage layout
