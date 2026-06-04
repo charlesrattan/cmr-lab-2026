@@ -56,6 +56,19 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Status           | Active                    |
 | Role             | Primary Server            |
 
+## CMR-LAB-SRV-02
+
+| Attribute | Value |
+| --------- | ----- |
+| Device | Dell OptiPlex 7010 SFF |
+| CPU | Intel Core i7-3770 @ 3.40 GHz |
+| RAM | 4 GB DDR3 currently installed |
+| DIMM Slots | 4 |
+| Storage | 500 GB SSD detected, 500 GB HDD installed |
+| Status | Validated |
+| Intended Role | Primary Proxmox candidate |
+| Notes | Recovered using parts from remaining OptiPlex units. POST successful, BIOS accessible, Dell diagnostics passed. Requires RAM upgrade before Proxmox deployment. |
+
 ### Hosted Services
 
 * Jellyfin
@@ -149,12 +162,14 @@ This document serves as the authoritative inventory of all hardware, network inf
 
 ## CMR-LAB-SW-01
 
-| Attribute | Value                          |
-| --------- | ------------------------------ |
-| Device    | Cisco 8-Port Switch            |
-| Status    | Offline                        |
-| Role      | Spare Switching Infrastructure |
-
+| Attribute | Value |
+| --------- | ----- |
+| Device | TP-Link TL-SF1008P |
+| Type | 8-Port PoE Switch |
+| Speed | Fast Ethernet / 100 Mbps |
+| Status | Offline / Available |
+| Role | Utility PoE switch for testing and temporary deployments |
+| Notes | Not suitable as the long-term core lab switch because it is not Gigabit and is unmanaged |
 ---
 
 # 5. Current Logical Topology
@@ -239,6 +254,12 @@ Priority 4
 | UniFi AC Pro | Available / in use | Wireless access point | To be managed through UniFi |
 | Linksys Router | Active | Current router | To be replaced eventually |
 | Cisco RV042G | Excluded | Not in current scope | Removed from rebuild plan |
+
+## Hardware Validation Notes
+
+- Remaining OptiPlex units were used as parts donors to recover the validated Dell OptiPlex 7010 SFF.
+- There are no longer three separate OptiPlex server candidates.
+- Current focus is to inventory recovered DDR3 RAM and confirm SSD health.
 
 ## Total Assets Managed
 

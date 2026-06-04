@@ -10,18 +10,21 @@ Redesign and rebuild the CMR home lab from the ground up using available hardwar
 
 Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 
-### Tasks
+## Immediate Priorities
 
-- [ ] Inspect OptiPlex 7010 Unit 1
-- [ ] Inspect OptiPlex 7010 Unit 2
-- [ ] Inspect OptiPlex 7010 Unit 3
-- [ ] Identify working power supply
-- [ ] Identify working motherboard
-- [ ] Identify best available CPU
-- [ ] Identify total usable RAM
-- [ ] Identify available storage
-- [ ] Decide whether an SSD needs to be purchased
-- [ ] Build one working OptiPlex from the best parts
+- [x] Recover first OptiPlex
+- [x] Confirm CPU
+- [x] Confirm motherboard operation
+- [x] Confirm SSD presence
+- [x] Confirm BIOS access
+- [x] Complete Dell diagnostics
+- [x] Install additional 500 GB HDD
+- [ ] Inventory recovered DDR3 RAM
+- [ ] Test SSD health and bootability
+- [ ] Upgrade server RAM to at least 16 GB
+- [ ] Decide final Proxmox storage layout
+- [ ] Install Proxmox
+- [ ] Migrate services from MacBook server
 
 ### Success Criteria
 
