@@ -41,7 +41,7 @@ This document serves as the authoritative inventory of all hardware, network inf
 
 ---
 
-## CMR-LAB-SRV-01
+## CMR-LAB-SRV-02
 
 | Attribute        | Value                     |
 | ---------------- | ------------------------- |
@@ -56,18 +56,18 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Status           | Active                    |
 | Role             | Primary Server            |
 
-## CMR-LAB-SRV-02
+## CMR-LAB-SRV-01
 
 | Attribute | Value |
-| --------- | ----- |
+|---|---|
 | Device | Dell OptiPlex 7010 SFF |
 | CPU | Intel Core i7-3770 @ 3.40 GHz |
-| RAM | 4 GB DDR3 currently installed |
-| DIMM Slots | 4 |
-| Storage | 500 GB SSD detected, 500 GB HDD installed |
-| Status | Validated |
-| Intended Role | Primary Proxmox candidate |
-| Notes | Recovered using parts from remaining OptiPlex units. POST successful, BIOS accessible, Dell diagnostics passed. Requires RAM upgrade before Proxmox deployment. |
+| RAM | 20 GB DDR3 |
+| RAM Notes | 2 x 8 GB + 1 x 4 GB installed; one DIMM slot appears faulty |
+| Storage | 500 GB SSD + 1 TB HDD |
+| Status | Built / Ready for OS Installation |
+| Intended Role | Primary Proxmox Server |
+| Notes | System recovered using parts from remaining OptiPlex units. POST successful, BIOS accessible, Dell diagnostics passed. |
 
 ### Hosted Services
 
@@ -167,8 +167,8 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Device | TP-Link TL-SF1008P |
 | Type | 8-Port PoE Switch |
 | Speed | Fast Ethernet / 100 Mbps |
-| Status | Offline / Available |
-| Role | Utility PoE switch for testing and temporary deployments |
+| Status | Online / Available |
+| Role | Lab utility switch for wired bedroom lab devices |
 | Notes | Not suitable as the long-term core lab switch because it is not Gigabit and is unmanaged |
 ---
 

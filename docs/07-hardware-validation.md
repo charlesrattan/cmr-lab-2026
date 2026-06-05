@@ -44,6 +44,28 @@ The remaining OptiPlex units were salvaged to get the validated unit operational
 - [ ] Accessible
 
 ### Cisco Switch
-
 - [ ] Model identified
 - [ ] Tested
+
+## Server Build Completion
+
+| Item | Result |
+|---|---|
+| Platform | Dell OptiPlex 7010 SFF |
+| CPU | Intel Core i7-3770 @ 3.40 GHz |
+| RAM | 20 GB DDR3 confirmed |
+| RAM Notes | 2 x 8 GB + 1 x 4 GB installed; one DIMM slot appears faulty |
+| Primary Storage | 500 GB SSD |
+| Secondary Storage | 1 TB HDD |
+| Network | Connected to wired lab switch |
+| Final Build Status | Ready for Proxmox installation |
+
+## Wired Lab Network Validation
+
+| Device | Connection Status |
+|---|---|
+| Dell Micro Main PC | Connected |
+| TP-Link TL-SF1008P | Online |
+| UniFi Cloud Key Gen1 | Connected |
+| UniFi Security Gateway | Connected for testing |
+| Dell OptiPlex 7010 Server | Connected |
