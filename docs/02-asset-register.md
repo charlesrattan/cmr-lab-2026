@@ -89,6 +89,21 @@ This document serves as the authoritative inventory of all hardware, network inf
 | User | charles |
 | SSH | active |
 
+## VM110
+
+| Attribute | Value |
+| --- | --- |
+| Name | unifi-controller-01|
+| Role | Unifi Controller |
+| vCPU | 1 |
+| RAM | 2GB |
+| Disk | 20GB |
+| IP | 10.146.91.85 |
+| OS | Ubuntu Server 26.04 LTS |
+| Status | Operational |
+| User | charles |
+| SSH | active |
+
 ### Hosted Services
 
 * Jellyfin
