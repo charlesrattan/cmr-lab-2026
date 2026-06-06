@@ -17,3 +17,4 @@ This document records important decisions made during the CMR Lab 2026 rebuild.
 | 2026-06-04 | Designate recovered Dell OptiPlex 7010 SFF as primary Proxmox candidate | POST, BIOS access, CPU, storage and diagnostics were successfully validated | Accepted |
 | 2026-06-05 | Move CMR Lab from hardware validation to Proxmox readiness | Server build completed with 20 GB RAM, 500 GB SSD, 1 TB HDD and wired lab network established | Accepted |
 | 2026-06-06 | Deploy Proxmox VE on `cmr-srv-01` | The OptiPlex 7010 SFF was validated, upgraded, connected to wired lab infrastructure and confirmed suitable as the primary hypervisor | Accepted |
+| 2026-06-06 | Use Proxmox as primary infrastructure platform | Cloud Key Gen1 successfully recovered but considered legacy hardware with limited upgrade path | Accepted |

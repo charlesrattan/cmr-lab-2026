@@ -74,6 +74,21 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Role | Primary Proxmox Hypervisor |
 | Notes | Installed headless. Web UI accessible at https://10.146.91.13:8006. Proxmox repositories corrected for no-subscription updates. |
 
+## VM100
+
+| Attribute | Value |
+| --- | --- |
+| Name | ubuntu-mgmt-01 |
+| Role | Management VM |
+| vCPU | 2 |
+| RAM | 4GB |
+| Disk | 50GB |
+| IP | 10.146.91.99 |
+| OS | Ubuntu Server 26.04 LTS |
+| Status | Operational |
+| User | charles |
+| SSH | active |
+
 ### Hosted Services
 
 * Jellyfin

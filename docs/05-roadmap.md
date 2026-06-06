@@ -28,10 +28,15 @@ Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 - [x] Convert server to headless operation
 - [x] Configure no-subscription update repository
 - [x] Update and reboot Proxmox host
-- [ ] Configure 1 TB HDD as secondary Proxmox storage
-- [ ] Create first test VM
-- [ ] Document Proxmox baseline configuration
+- [x] Configure 1 TB HDD as secondary Proxmox storage
+- [x] Create first test VM
+- [x] Document Proxmox baseline configuration
 - [ ] Plan migration from MacBook server
+- [ ] Create VM110 (UniFi Controller)
+- [ ] Migrate UniFi management from main PC
+- [ ] Evaluate USG deployment
+- [ ] Implement backups
+- [ ] Deploy Docker services
 
 ### Success Criteria
 

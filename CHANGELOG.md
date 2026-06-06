@@ -10,13 +10,17 @@
 - Confirmed Intel Core i7-3770 with 8 logical CPUs.
 - Confirmed EFI boot mode.
 - Converted server to headless operation.
-- Configured BIOS power recovery for automatic restart after power restoration.
+- Configured no-subscription repositories.
+- Enabled automatic recovery after power loss.
 
 ### Storage
 
 - Confirmed PNY 500GB SATA SSD detected and passed SMART.
 - Confirmed WDC WD1002FBYS 1TB HDD detected and passed SMART.
 - Identified 1TB HDD still contains existing NTFS partition and will be repurposed later.
+- Added 1TB HDD as hdd-storage.
+- Configured secondary storage repository.
+- Established SSD/HDD storage separation.
 
 ### Repository Configuration
 
@@ -25,6 +29,28 @@
 - Disabled Ceph enterprise repository.
 - Successfully completed `apt update`.
 - Completed update/reboot validation and confirmed Proxmox web UI returned successfully.
+
+### Virtualization
+
+- Uploaded Ubuntu Server ISO.
+- Created VM100 (ubuntu-mgmt-01).
+- Configured:
+  - 2 vCPU
+  - 4GB RAM
+  - 50GB SSD-backed disk
+- Installed Ubuntu Server.
+- Installed OpenSSH Server.
+- Installed and enabled QEMU Guest Agent.
+- Created snapshot: Fresh Ubuntu Install.
+
+### UniFi Infrastructure
+
+- Recovered UniFi Cloud Key Gen1.
+- Factory reset and upgraded Cloud Key firmware.
+- Confirmed UniFi controller operational.
+- Confirmed AP reachable at 10.146.91.153.
+- Determined AP is adopted by existing controller on main workstation.
+- Evaluated migration of network management to Proxmox-hosted controller.
 
 ### Project Impact
 
