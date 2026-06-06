@@ -22,10 +22,16 @@ Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 - [x] Install and confirm 20 GB RAM
 - [x] Establish wired lab network using new CAT6 run
 - [x] Connect main PC, server, Cloud Key, and USG to lab switch
-- [ ] Create Proxmox installer USB
-- [ ] Install Proxmox on 500 GB SSD
-- [ ] Configure 1 TB HDD as secondary storage
-- [ ] Migrate services from MacBook server
+- [x] Create Proxmox installer USB
+- [x] Install Proxmox on 500 GB SSD
+- [x] Configure Proxmox management access
+- [x] Convert server to headless operation
+- [x] Configure no-subscription update repository
+- [x] Update and reboot Proxmox host
+- [ ] Configure 1 TB HDD as secondary Proxmox storage
+- [ ] Create first test VM
+- [ ] Document Proxmox baseline configuration
+- [ ] Plan migration from MacBook server
 
 ### Success Criteria
 

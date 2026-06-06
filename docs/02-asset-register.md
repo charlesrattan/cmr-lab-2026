@@ -61,13 +61,18 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Attribute | Value |
 |---|---|
 | Device | Dell OptiPlex 7010 SFF |
+| Hostname | cmr-srv-01.local |
+| IP Address | 10.146.91.13 |
+| Operating System | Proxmox VE 9.2.2 |
 | CPU | Intel Core i7-3770 @ 3.40 GHz |
-| RAM | 20 GB DDR3 |
+| Logical CPUs | 8 |
+| RAM | 19.42 GiB detected / 20 GB installed |
 | RAM Notes | 2 x 8 GB + 1 x 4 GB installed; one DIMM slot appears faulty |
-| Storage | 500 GB SSD + 1 TB HDD |
-| Status | Built / Ready for OS Installation |
-| Intended Role | Primary Proxmox Server |
-| Notes | System recovered using parts from remaining OptiPlex units. POST successful, BIOS accessible, Dell diagnostics passed. |
+| Storage | PNY 500GB SATA SSD + WDC WD1002FBYS 1TB HDD |
+| Boot Mode | EFI |
+| Status | Operational |
+| Role | Primary Proxmox Hypervisor |
+| Notes | Installed headless. Web UI accessible at https://10.146.91.13:8006. Proxmox repositories corrected for no-subscription updates. |
 
 ### Hosted Services
 

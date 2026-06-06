@@ -69,3 +69,21 @@ The remaining OptiPlex units were salvaged to get the validated unit operational
 | UniFi Cloud Key Gen1 | Connected |
 | UniFi Security Gateway | Connected for testing |
 | Dell OptiPlex 7010 Server | Connected |
+
+## Proxmox Installation Validation
+
+| Check | Result |
+|---|---|
+| Proxmox Version | Proxmox VE 9.2.2 |
+| Hostname | cmr-srv-01 |
+| Management IP | 10.146.91.13 |
+| Web UI | Accessible |
+| Login Realm | Linux PAM |
+| CPU Detected | Intel Core i7-3770, 8 logical CPUs |
+| Memory Detected | 19.42 GiB |
+| Boot Mode | EFI |
+| SSD SMART Status | Passed |
+| HDD SMART Status | Passed |
+| Repository Update | No-subscription repository configured |
+| Post-update Reboot | Successful |
+| Headless Operation | Confirmed |
