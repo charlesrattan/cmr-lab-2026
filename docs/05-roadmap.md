@@ -31,12 +31,17 @@ Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 - [x] Configure 1 TB HDD as secondary Proxmox storage
 - [x] Create first test VM
 - [x] Document Proxmox baseline configuration
+- [x] Create VM110 for UniFi Network Controller
+- [x] Install UniFi Network Application on VM110
+- [x] Migrate UniFi AP from Dell Micro controller to VM110
+- [x] Enable VM auto-start after Proxmox reboot
 - [ ] Plan migration from MacBook server
-- [ ] Create VM110 (UniFi Controller)
-- [ ] Migrate UniFi management from main PC
-- [ ] Evaluate USG deployment
 - [ ] Implement backups
 - [ ] Deploy Docker services
+- [ ] Create UniFi controller backup from VM110
+- [ ] Document WiFi configuration
+- [ ] Test USG adoption in isolated mode
+- [ ] Plan Dell Micro controller decommission cleanup
 
 ### Success Criteria
 

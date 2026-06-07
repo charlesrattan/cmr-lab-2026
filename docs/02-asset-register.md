@@ -89,20 +89,21 @@ This document serves as the authoritative inventory of all hardware, network inf
 | User | charles |
 | SSH | active |
 
-## VM110
+## VM110 - unifi-controller-01
 
 | Attribute | Value |
-| --- | --- |
-| Name | unifi-controller-01|
-| Role | Unifi Controller |
+|---|---|
+| VM ID | 110 |
+| Name | unifi-controller-01 |
+| IP Address | 10.146.91.172 |
+| Host | cmr-srv-01 |
+| OS | Ubuntu Server 24.04 |
 | vCPU | 1 |
-| RAM | 2GB |
-| Disk | 20GB |
-| IP | 10.146.91.85 |
-| OS | Ubuntu Server 26.04 LTS |
+| RAM | 2 GB |
+| Disk | 20 GB |
+| Role | UniFi Network Controller |
 | Status | Operational |
-| User | charles |
-| SSH | active |
+| Notes | Runs UniFi Network Application. CPU type changed to `host` to support MongoDB. AP migrated from Dell Micro controller. Auto-start enabled. |
 
 ### Hosted Services
 

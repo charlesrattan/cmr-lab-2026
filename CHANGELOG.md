@@ -1,3 +1,21 @@
+## 2026-06-07
+
+### UniFi Controller Migration
+
+- Created VM110 `unifi-controller-01` using Ubuntu Server 24.04.
+- Installed Java 21, MongoDB, and UniFi Network Application.
+- Resolved MongoDB startup failure by changing VM110 CPU type from `x86-64-v2-AES` to `host`.
+- Confirmed UniFi Network Application loaded successfully at `https://10.146.91.172:8443`.
+- Recreated existing WiFi SSIDs on the new controller.
+- Migrated UniFi AC Pro from the Dell Micro controller to VM110.
+- Confirmed AP adoption into VM110.
+- Enabled automatic startup for VM100 and VM110 after Proxmox host reboot.
+
+### Operational Notes
+
+- Old Dell Micro UniFi controller was removed after AP migration.
+- VM110 is now the active UniFi Network Controller for CMR Lab.
+
 ## 2026-06-06
 
 ### Proxmox Deployment

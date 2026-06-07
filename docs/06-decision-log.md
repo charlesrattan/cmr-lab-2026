@@ -18,3 +18,5 @@ This document records important decisions made during the CMR Lab 2026 rebuild.
 | 2026-06-05 | Move CMR Lab from hardware validation to Proxmox readiness | Server build completed with 20 GB RAM, 500 GB SSD, 1 TB HDD and wired lab network established | Accepted |
 | 2026-06-06 | Deploy Proxmox VE on `cmr-srv-01` | The OptiPlex 7010 SFF was validated, upgraded, connected to wired lab infrastructure and confirmed suitable as the primary hypervisor | Accepted |
 | 2026-06-06 | Use Proxmox as primary infrastructure platform | Cloud Key Gen1 successfully recovered but considered legacy hardware with limited upgrade path | Accepted |
+| 2026-06-07 | Host UniFi Network Controller on Proxmox VM110 | Cloud Key Gen1 was recovered but is legacy; Dell Micro should not remain responsible for network management | Accepted |
+| 2026-06-07 | Use CPU type `host` for VM110 | MongoDB failed with illegal instruction under `x86-64-v2-AES`; passing host CPU features resolved the issue | Accepted |
