@@ -84,7 +84,7 @@ This document serves as the authoritative inventory of all hardware, network inf
 | RAM | 4GB |
 | Disk | 50GB |
 | IP | 10.146.91.99 |
-| OS | Ubuntu Server 26.04 LTS |
+| OS | Ubuntu Server |
 | Status | Operational |
 | User | charles |
 | SSH | active |
@@ -104,6 +104,29 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Role | UniFi Network Controller |
 | Status | Operational |
 | Notes | Runs UniFi Network Application. CPU type changed to `host` to support MongoDB. AP migrated from Dell Micro controller. Auto-start enabled. |
+
+## VM120 - docker-services-01
+
+| Attribute | Value |
+|---|---|
+| VM ID | 120 |
+| Name | docker-services-01 |
+| IP Address | 10.146.91.230 |
+| Host | cmr-srv-01 |
+| OS | Ubuntu Server |
+| Role | Docker Services Platform |
+| Status | Operational |
+| User | charles |
+| Notes | Hosts Docker Engine, Portainer, Homepage, Uptime Kuma, Vaultwarden and Nginx Proxy Manager. |
+
+### Hosted Services
+
+- Docker Engine
+- Portainer CE
+- Homepage
+- Uptime Kuma
+- Vaultwarden
+- Nginx Proxy Manager
 
 ### Hosted Services
 

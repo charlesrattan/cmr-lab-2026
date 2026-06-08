@@ -1,5 +1,39 @@
 ## 2026-06-07
 
+### VM120 Docker Services Platform
+
+- Created VM120 `docker-services-01`.
+- Assigned VM120 IP address `10.146.91.230`.
+- Installed Docker Engine.
+- Added user `charles` to the Docker group.
+- Deployed Portainer CE for Docker management.
+- Deployed Homepage as the CMR Lab operations dashboard.
+- Resolved Homepage host validation using `HOMEPAGE_ALLOWED_HOSTS`.
+- Deployed Uptime Kuma for service monitoring.
+- Added initial service monitors for Homepage, Portainer, Proxmox and UniFi.
+- Deployed Vaultwarden as a future password manager.
+- Confirmed Vaultwarden container health.
+- Identified Vaultwarden HTTPS requirement before production use.
+- Deployed Nginx Proxy Manager.
+- Created initial `.cmrlab.local` proxy host entries.
+- Configured temporary Windows hosts file mappings for lab service names.
+- Updated Homepage dashboard links and bookmarks.
+
+### Current Working Access
+
+- Homepage: `http://dashboard.cmrlab.local`
+- Uptime Kuma: `http://kuma.cmrlab.local`
+- Portainer: `https://10.146.91.230:9443`
+- Nginx Proxy Manager: `http://10.146.91.230:81`
+
+### Known Issues
+
+- Portainer reverse proxy access is not finalized; direct access is currently used.
+- Vaultwarden is installed but should not be used for real credentials until HTTPS is implemented.
+- Docker services are currently deployed with `docker run`; Docker Compose conversion is planned.
+
+## 2026-06-07
+
 ### UniFi Controller Migration
 
 - Created VM110 `unifi-controller-01` using Ubuntu Server 24.04.

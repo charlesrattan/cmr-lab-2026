@@ -37,7 +37,17 @@ Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 - [x] Enable VM auto-start after Proxmox reboot
 - [ ] Plan migration from MacBook server
 - [ ] Implement backups
-- [ ] Deploy Docker services
+- [x] Deploy Docker services
+- [x] Deploy Portainer on VM120
+- [x] Deploy Homepage dashboard on VM120
+- [x] Deploy Uptime Kuma on VM120
+- [x] Deploy Nginx Proxy Manager on VM120
+- [x] Deploy Vaultwarden container on VM120
+- [ ] Implement HTTPS strategy for Vaultwarden
+- [ ] Deploy Tailscale on VM120
+- [ ] Enable MagicDNS
+- [ ] Convert Docker services to Docker Compose
+- [ ] Finalize Homepage dashboard
 - [ ] Create UniFi controller backup from VM110
 - [ ] Document WiFi configuration
 - [ ] Test USG adoption in isolated mode

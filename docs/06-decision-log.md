@@ -20,3 +20,10 @@ This document records important decisions made during the CMR Lab 2026 rebuild.
 | 2026-06-06 | Use Proxmox as primary infrastructure platform | Cloud Key Gen1 successfully recovered but considered legacy hardware with limited upgrade path | Accepted |
 | 2026-06-07 | Host UniFi Network Controller on Proxmox VM110 | Cloud Key Gen1 was recovered but is legacy; Dell Micro should not remain responsible for network management | Accepted |
 | 2026-06-07 | Use CPU type `host` for VM110 | MongoDB failed with illegal instruction under `x86-64-v2-AES`; passing host CPU features resolved the issue | Accepted |
+| 2026-06-07 | Create VM120 as Docker services host | Separates daily-use applications from UniFi and core management services | Accepted |
+| 2026-06-07 | Use Homepage as the CMR Lab operations dashboard | Provides a central landing page for infrastructure, services and documentation | Accepted |
+| 2026-06-07 | Use Uptime Kuma for initial service monitoring | Lightweight monitoring provides immediate visibility into service availability | Accepted |
+| 2026-06-07 | Deploy Nginx Proxy Manager for reverse proxy learning and future service routing | Provides a manageable reverse proxy layer for self-hosted services | Accepted |
+| 2026-06-07 | Do not use the CMR Enterprise business domain for homelab services at this stage | Keeps business services separate from personal/lab infrastructure | Accepted |
+| 2026-06-07 | Use Tailscale as the preferred remote access and naming strategy | Provides secure access, MagicDNS and avoids port forwarding or premature public DNS use | Accepted |
+| 2026-06-07 | Defer OPNsense until the service layer is stable | Avoids adding routing, firewall, DNS, DHCP and VLAN complexity during Docker service stabilization | Accepted |

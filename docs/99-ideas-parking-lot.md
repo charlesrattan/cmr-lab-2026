@@ -5,12 +5,26 @@
 - Jellyfin
 - Home Automation
 - SIEM
-- Docker
-- Tailscale
-- Monitoring Dashboard
 - PBX
 - Cybersecurity Lab
 - Next-Generation Firewall Platform
+- OPNsense
+- Wazuh
+- Security Onion
+- Kubernetes
+- Local AI
+
+## Deferred Infrastructure Ideas
+
+- OPNsense firewall/router VM
+- VLAN segmentation
+- Local DNS server
+- Grafana and Prometheus monitoring stack
+- Wazuh SIEM
+- OpenVAS or Greenbone vulnerability scanning
+- Local AI experimentation
+- Home Assistant
+- Jellyfin migration
 
 ### VM110 MongoDB Issue
 

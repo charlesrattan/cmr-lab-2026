@@ -4,22 +4,24 @@
 |---|---:|---:|---|
 | Documentation | 3/5 | 5/5 | Repository structure exists and is improving |
 | Asset Inventory | 3/5 | 5/5 | Known assets listed, but OptiPlex inspection still pending |
-| Server Infrastructure | 1/5 | 4/5 | Current MacBook server is unstable as long-term platform |
-| Network Infrastructure | 1/5 | 4/5 | Current Linksys setup needs replacement with UniFi |
+| Server Infrastructure | 3/5 | 4/5 | Proxmox host operational with VM100, VM110, and VM120 |
+| Network Infrastructure | 2/5 | 4/5 | Linksys remains gateway; UniFi AP and controller are operational |
 | Wired Connectivity | 1/5 | 4/5 | Important devices should be wired where possible |
 | Naming Standards | 1/5 | 5/5 | Draft naming convention started |
-| Monitoring | 0/5 | 4/5 | Not yet implemented |
+| Monitoring | 2/5 | 4/5 | Uptime Kuma deployed for service monitoring; deeper metrics still pending |
 | Security Controls | 1/5 | 4/5 | Basic network exists, but segmentation and visibility are limited |
-| Backup and Recovery | 0/5 | 4/5 | Needs future planning |
+| Backup and Recovery | 1/5 | 4/5 | VM snapshots and UniFi backup started; broader backup strategy still pending |
 
 ## Immediate Maturity Focus
 
-The next maturity improvement is not adding new services. The next improvement is stabilising the foundation.
+The current maturity focus is service stabilization.
 
 Priority order:
 
-1. Recover OptiPlex 7010 hardware
-2. Establish `cmr-srv-01`
-3. Recover UniFi Security Gateway and Cloud Key
-4. Replace Linksys as the main lab gateway
-5. Rebuild services cleanly
+1. Stabilize VM120 Docker services.
+2. Convert Docker service deployment from `docker run` commands to Docker Compose.
+3. Deploy Tailscale and enable MagicDNS.
+4. Make Vaultwarden production-ready with HTTPS.
+5. Implement a backup strategy for Proxmox VMs and Docker service data.
+6. Continue service migration from the MacBook server.
+7. Plan OPNsense after the service layer is stable.

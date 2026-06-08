@@ -12,6 +12,25 @@ The CMR Lab rebuild will move away from the current unstable and Wi-Fi-dependent
 - Important devices are still dependent on Wi-Fi.
 - Several unused hardware assets are available but not yet fully tested.
 
+## Current Implemented Architecture
+
+As of 2026-06-07, CMR Lab has moved beyond foundation planning into an operational Proxmox and Docker services platform.
+
+```text
+ISP Router
+    |
+Linksys EA4500
+    |
+Lab Switch
+    |
+Dell OptiPlex 7010 SFF - cmr-srv-01
+    |
+Proxmox VE
+    |
+    |-- VM100 - ubuntu-mgmt-01
+    |-- VM110 - unifi-controller-01
+    |-- VM120 - docker-services-01
+
 ### Target State
 
 - Replace the Linksys router with the UniFi Security Gateway.
