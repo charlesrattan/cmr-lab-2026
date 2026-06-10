@@ -79,7 +79,7 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Attribute | Value |
 | --- | --- |
 | Name | ubuntu-mgmt-01 |
-| Role | Management VM |
+| Role | Management and Automation Platform |
 | vCPU | 2 |
 | RAM | 4GB |
 | Disk | 50GB |
@@ -127,16 +127,13 @@ This document serves as the authoritative inventory of all hardware, network inf
 - Uptime Kuma
 - Vaultwarden
 - Nginx Proxy Manager
-
-### Hosted Services
-
-* Jellyfin
-* Ollama
-* Grafana
-* cAdvisor
-* Node Exporter
-* Cockpit
-* Docker
+- Jellyfin
+- Ollama
+- Grafana
+- cAdvisor
+- Node Exporter
+- Cockpit
+- Docker
 
 ---
 
@@ -319,6 +316,10 @@ Priority 4
 - Remaining OptiPlex units were used as parts donors to recover the validated Dell OptiPlex 7010 SFF.
 - There are no longer three separate OptiPlex server candidates.
 - Current focus is to inventory recovered DDR3 RAM and confirm SSD health.
+
+## Update Notes
+
+| Notes | Runs Tailscale, Git, Ansible, QEMU Guest Agent, and passwordless SSH management for VM110 and VM120. Future role includes AdGuard Home and monitoring. |
 
 ## Total Assets Managed
 

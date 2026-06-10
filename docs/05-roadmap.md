@@ -36,7 +36,7 @@ Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 - [x] Migrate UniFi AP from Dell Micro controller to VM110
 - [x] Enable VM auto-start after Proxmox reboot
 - [ ] Plan migration from MacBook server
-- [ ] Implement backups
+- [x] Implement backups
 - [x] Deploy Docker services
 - [x] Deploy Portainer on VM120
 - [x] Deploy Homepage dashboard on VM120
@@ -44,14 +44,25 @@ Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 - [x] Deploy Nginx Proxy Manager on VM120
 - [x] Deploy Vaultwarden container on VM120
 - [ ] Implement HTTPS strategy for Vaultwarden
-- [ ] Deploy Tailscale on VM120
+- [x] Deploy Tailscale on VM120
 - [ ] Enable MagicDNS
-- [ ] Convert Docker services to Docker Compose
+- [x] Convert Docker services to Docker Compose
+- [x] Establish VM100 as management and automation platform
+- [x] Install Ansible on VM100
+- [x] Configure passwordless SSH from VM100 to VM110 and VM120
+- [x] Validate Ansible connectivity across lab VMs
+- [x] Configure weekly Proxmox backups for VM110 and VM120
 - [ ] Finalize Homepage dashboard
 - [ ] Create UniFi controller backup from VM110
 - [ ] Document WiFi configuration
 - [ ] Test USG adoption in isolated mode
 - [ ] Plan Dell Micro controller decommission cleanup
+- [ ] Create Ansible health-check playbook
+- [ ] Complete Ansible update playbook
+- [ ] Deploy AdGuard Home on VM100
+- [ ] Resolve Vaultwarden HTTPS
+- [ ] Deploy Jellyfin on VM120
+- [ ] Document backup restoration procedure
 
 ### Success Criteria
 

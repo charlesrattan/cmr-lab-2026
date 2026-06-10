@@ -18,26 +18,55 @@ The lab is being built from the ground up with an emphasis on documentation, rep
 
 ## Current Status
 
-Service Platform Build Phase
+Management, Docker, Backup, and Automation Baseline Complete
+
+### Current Core Systems
+
+| System | Hostname | IP Address | Role | Status |
+|---|---|---:|---|---|
+| Proxmox Host | cmr-srv-01 | 10.146.91.13 | Virtualization host | Operational |
+| VM100 | ubuntu-mgmt-01 | 10.146.91.99 | Management and automation | Operational |
+| VM110 | unifi-controller-01 | 10.146.91.172 | UniFi Network Controller | Operational |
+| VM120 | docker-services-01 | 10.146.91.230 | Docker services platform | Operational |
+
+### Current Services
+
+| Service | Platform | Purpose | Status |
+|---|---|---|---|
+| UniFi Network Application | VM110 | Wireless network management | Operational |
+| Docker Compose | VM120 | Container orchestration baseline | Operational |
+| Homepage | VM120 | Lab dashboard | Operational |
+| Portainer | VM120 | Docker management | Operational |
+| Uptime Kuma | VM120 | Basic monitoring | Operational |
+| Vaultwarden | VM120 | Password manager | Working, HTTPS pending |
+| Nginx Proxy Manager | VM120 | Reverse proxy | Operational |
+| Tailscale | VM100 / VM120 / devices | Remote access | Operational |
+| Ansible | VM100 | Lab automation | Started |
+
+### Current Priorities
+
+1. Complete Git documentation update.
+2. Complete Ansible health check and update playbooks.
+3. Deploy AdGuard Home on VM100 for internal DNS.
+4. Resolve Vaultwarden HTTPS.
+5. Deploy Jellyfin on VM120.
 
 ---
-
-## Current Phase
 
 Phase 2: Service Platform Stabilization
 
-The core Proxmox and UniFi foundation is operational. VM120 has been introduced as the Docker services host for daily-use and management applications.
+The core Proxmox, UniFi, Docker, backup, and management foundation is operational. VM100 now acts as the management and automation platform, VM110 remains dedicated to UniFi, and VM120 hosts Docker-based services.
 
 ---
 
-## Current Focus
+### Current Focus
 
-- Stabilizing VM120 Docker services
-- Building the Homepage operations dashboard
-- Monitoring core services with Uptime Kuma
-- Preparing Tailscale for secure remote access and MagicDNS
-- Making Vaultwarden production-ready with HTTPS
-- Documenting services, access methods, and known issues
+- Completing Git documentation updates
+- Building Ansible health check and update playbooks
+- Deploying AdGuard Home for internal DNS
+- Resolving Vaultwarden HTTPS
+- Planning Jellyfin deployment on VM120
+- Documenting backup and restore procedures
 
 ---
 

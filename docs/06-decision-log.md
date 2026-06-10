@@ -27,3 +27,8 @@ This document records important decisions made during the CMR Lab 2026 rebuild.
 | 2026-06-07 | Do not use the CMR Enterprise business domain for homelab services at this stage | Keeps business services separate from personal/lab infrastructure | Accepted |
 | 2026-06-07 | Use Tailscale as the preferred remote access and naming strategy | Provides secure access, MagicDNS and avoids port forwarding or premature public DNS use | Accepted |
 | 2026-06-07 | Defer OPNsense until the service layer is stable | Avoids adding routing, firewall, DNS, DHCP and VLAN complexity during Docker service stabilization | Accepted |
+| 2026-06-10 | Establish VM100 as the management and automation platform | Provides a dedicated control plane for Tailscale, Git, Ansible, future DNS and monitoring | Accepted |
+| 2026-06-10 | Keep VM110 dedicated to UniFi only | Protects the stability of the network controller by avoiding unrelated services | Accepted |
+| 2026-06-10 | Use VM120 as the Docker services platform | Keeps application services separate from management and network control | Accepted |
+| 2026-06-10 | Use Docker Compose as the source of truth for VM120 containers | Prevents manual container drift and makes backup/rebuild easier | Accepted |
+| 2026-06-10 | Configure weekly Proxmox backups for VM110 and VM120 | Protects the current production controller and services platform | Accepted |

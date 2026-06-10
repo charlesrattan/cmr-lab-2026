@@ -14,7 +14,7 @@ The CMR Lab rebuild will move away from the current unstable and Wi-Fi-dependent
 
 ## Current Implemented Architecture
 
-As of 2026-06-07, CMR Lab has moved beyond foundation planning into an operational Proxmox and Docker services platform.
+As of 2026-06-10, CMR Lab has an operational Proxmox, UniFi, Docker, backup, and management baseline.
 
 ```text
 ISP Router
@@ -28,8 +28,21 @@ Dell OptiPlex 7010 SFF - cmr-srv-01
 Proxmox VE
     |
     |-- VM100 - ubuntu-mgmt-01
+    |       |-- Tailscale
+    |       |-- Git
+    |       |-- Ansible
+    |       |-- Future DNS / monitoring
+    |
     |-- VM110 - unifi-controller-01
+    |       |-- UniFi Network Application
+    |
     |-- VM120 - docker-services-01
+            |-- Docker Compose
+            |-- Homepage
+            |-- Portainer
+            |-- Uptime Kuma
+            |-- Vaultwarden
+            |-- Nginx Proxy Manager
 
 ### Target State
 

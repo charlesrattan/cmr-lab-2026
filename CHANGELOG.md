@@ -1,5 +1,29 @@
 ## 2026-06-07
 
+## 2026-06-10 - Management, Docker, Backup, and Automation Baseline
+
+### Added
+- Established VM100 `ubuntu-mgmt-01` as the CMR Lab Management & Automation Platform.
+- Installed and validated Tailscale, Git, Ansible, and QEMU Guest Agent on VM100.
+- Configured passwordless SSH from VM100 to VM110 and VM120.
+- Created Ansible inventory for management, network, and services VMs.
+- Validated Ansible connectivity across VM100, VM110, and VM120.
+- Consolidated Docker services on VM120 under `/home/charles/docker/docker-compose.yml`.
+- Confirmed Homepage, Portainer, Uptime Kuma, Vaultwarden, and Nginx Proxy Manager as active Docker services.
+- Created Docker backup archive `docker-backup-20260610.tar.gz`.
+- Validated Proxmox backup of VM120 to `hdd-storage`.
+- Configured weekly scheduled Proxmox backups for VM110 and VM120.
+
+### Changed
+- Reclassified VM100 from general infrastructure VM to management and automation control plane.
+- Confirmed VM110 is reserved for UniFi Network Application only.
+- Confirmed VM120 is the Docker services platform for hosted applications.
+
+### Known Issues
+- Vaultwarden works but still requires HTTPS resolution.
+- Internal DNS remains incomplete; AdGuard Home is planned for VM100.
+- Ansible update playbook exists but is not fully operational across all VMs due to differing sudo credentials.
+
 ### VM120 Docker Services Platform
 
 - Created VM120 `docker-services-01`.

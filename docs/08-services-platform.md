@@ -74,13 +74,21 @@ The following `.cmrlab.local` names are currently mapped through the Windows hos
 
 ---
 
+## Docker Compose
+
+Docker services are now managed through:
+/home/charles/docker/docker-compose.yml
+
+---
+
 ## Known Issues
 
 | Issue | Current Status |
 |---|---|
 | Portainer reverse proxy access hangs | Direct access is used for now |
 | Vaultwarden requires HTTPS | Pending Tailscale/MagicDNS/HTTPS strategy |
-| Docker services are currently deployed with `docker run` | Future improvement: convert to Docker Compose |
+| Docker Compose baseline | Completed; `/home/charles/docker/docker-compose.yml` is now the source of truth |
+
 
 ---
 
