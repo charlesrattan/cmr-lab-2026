@@ -2,6 +2,24 @@
 
 ## 2026-06-10 - Management, Docker, Backup, and Automation Baseline
 
+### Ansible Health Check
+
+Implemented health-check.yml on VM100.
+
+Current checks:
+- Connectivity
+- Hostname
+- IP Address
+- Uptime
+- Disk Usage
+- Memory Usage
+- Reboot Requirement
+- UniFi Service Status
+- Docker Service Status
+
+Location:
+scripts/ansible/health-check.yml
+
 ### Added
 - Established VM100 `ubuntu-mgmt-01` as the CMR Lab Management & Automation Platform.
 - Installed and validated Tailscale, Git, Ansible, and QEMU Guest Agent on VM100.

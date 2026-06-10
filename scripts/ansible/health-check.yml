@@ -1,0 +1,74 @@
+---
+- name: CMR Lab Health Check
+  hosts: linux_servers
+  gather_facts: yes
+  tasks:
+
+    - name: Show hostname
+      ansible.builtin.debug:
+        msg: "Host: {{ inventory_hostname }}"
+
+    - name: Show IP address
+      ansible.builtin.debug:
+        msg: "IP: {{ ansible_default_ipv4.address }}"
+
+    - name: Show uptime
+      ansible.builtin.command: uptime
+      register: uptime_result
+      changed_when: false
+
+    - name: Display uptime
+      ansible.builtin.debug:
+        msg: "{{ uptime_result.stdout }}"
+
+    - name: Show disk usage
+      ansible.builtin.command: df -h /
+      register: disk_result
+      changed_when: false
+
+    - name: Display disk usage
+      ansible.builtin.debug:
+        msg: "{{ disk_result.stdout_lines }}"
+
+    - name: Show memory usage
+      ansible.builtin.command: free -h
+      register: memory_result
+      changed_when: false
+
+    - name: Display memory usage
+      ansible.builtin.debug:
+        msg: "{{ memory_result.stdout_lines }}"
+
+    - name: Check if reboot is required
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+
+    - name: Display reboot requirement
+      ansible.builtin.debug:
+        msg: "Reboot required: {{ reboot_required.stat.exists }}"
+
+    - name: Check UniFi service
+      ansible.builtin.command: systemctl is-active unifi
+      register: unifi_status
+      changed_when: false
+      failed_when: false
+      when: inventory_hostname == "unifi-controller-01"
+
+    - name: Display UniFi status
+      ansible.builtin.debug:
+        msg: "UniFi Service: {{ unifi_status.stdout }}"
+      when: inventory_hostname == "unifi-controller-01"
+
+    - name: Check Docker service
+      ansible.builtin.command: systemctl is-active docker
+      register: docker_status
+      changed_when: false
+      failed_when: false
+      when: inventory_hostname == "docker-services-01"
+
+    - name: Display Docker status
+      ansible.builtin.debug:
+        msg: "Docker Service: {{ docker_status.stdout }}"
+      when: inventory_hostname == "docker-services-01"
+    

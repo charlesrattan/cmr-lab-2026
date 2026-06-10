@@ -1,0 +1,17 @@
+---
+- name: Update all Linux servers
+  hosts: linux_servers
+  become: yes
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade installed packages
+      apt:
+        upgrade: safe
+
+    - name: Remove unused packages
+      apt:
+        autoremove: yes
