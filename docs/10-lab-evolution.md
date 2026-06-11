@@ -109,7 +109,7 @@ The lab moved from IP-based access and `.local` hostnames to centralized DNS usi
 
 CMR Lab is now entering an operations and governance phase.
 
-The priority is no longer simply adding services. The priority is understanding, documenting, stabilizing, monitoring, backing up, and operating the lab in a professional way.
+The priority is no longer simply adding services. The priority is understanding, documenting, stabilizing, monitoring, backing up and operating the lab in a professional way.
 
 ### Current Focus
 
@@ -126,7 +126,7 @@ The priority is no longer simply adding services. The priority is understanding,
 
 CMR Lab is now an enterprise infrastructure simulation platform used to develop practical skills in systems administration, networking, cybersecurity, automation, documentation, governance and operations.
 
-It also supports selected personal and family services where those services contribute to reliability, usefulness, and practical learning.
+It also supports selected personal and family services where those services contribute to reliability, usefulness and practical learning.
 
 ---
 
