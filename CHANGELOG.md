@@ -1,3 +1,48 @@
+# CMR Lab 2026 Changelog
+
+This document records significant infrastructure, operational, architectural and documentation changes made within CMR Lab.
+
+Entries are recorded chronologically and are intended to provide a historical record of the evolution of the environment.
+
+Superseded decisions and intermediate implementation steps may remain documented here even if later replaced by newer approaches.
+
+
+## 2026-06-11 - Documentation Refactor and Operations Phase Alignment
+
+### Added
+
+- Added `09-operations-runbook.md`.
+- Added `10-lab-evolution.md`.
+- Expanded repository governance documentation.
+- Documented operational procedures for routine administration.
+- Documented historical evolution of the lab from informal home technology environment to enterprise-style infrastructure simulation platform.
+
+### Changed
+
+- Refactored repository documentation to distinguish between:
+
+  - Historical information
+  - Current operational state
+  - Future plans
+- Updated lab charter to reflect the Operations and Governance phase.
+- Updated architecture documentation to separate original, current and target architectures.
+- Updated maturity assessment to reflect current operational reality.
+- Updated roadmap to focus on operational maturity before service expansion.
+- Updated decision log to function as an Architecture Decision Record (ADR) register.
+- Updated services documentation to function as an operational service catalog.
+- Updated hardware validation documentation into a historical validation record.
+
+### Project Impact
+
+- Repository transitioned from homelab build documentation to infrastructure operations documentation.
+- Documentation now reflects the current mission of the lab.
+- Repository structure aligned with portfolio and operational objectives.
+
+### Current Phase
+
+Operations and Governance
+
+
 ## 2026-06-11 - Internal DNS and Service Discovery Baseline
 
 ### Added

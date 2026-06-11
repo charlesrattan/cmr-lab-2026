@@ -2,13 +2,15 @@
 
 ## Status
 
-Draft
+Active
 
 ## Purpose
 
-This document serves as the authoritative inventory of all hardware, network infrastructure, compute resources, and utility devices that form part of CMR Lab 2026.
+This document is the authoritative inventory of all hardware, virtual machines, network infrastructure and utility devices that form part of CMR Lab 2026.
 
-**Version:** 1.0
+Historical inventories and project evolution are documented elsewhere. This document reflects the current state of the environment.
+
+**Version:** 2.0
 **Last Updated:** June 2026
 **Owner:** Charles Rattan
 
@@ -16,133 +18,51 @@ This document serves as the authoritative inventory of all hardware, network inf
 
 # 1. Network Infrastructure
 
-| Asset ID      | Device                | Model          | IP Address    | Status | Purpose                         |
-| ------------- | --------------------- | -------------- | ------------- | ------ | ------------------------------- |
-| CMR-LAB-GW-01 | Router                | Linksys EA4500 | 10.146.91.89  | Active | Internet Gateway, DHCP, Routing |
-| CMR-LAB-AP-01 | Wireless Access Point | UniFi AC Pro   | 10.146.91.153 | Active | Primary Wireless Network        |
+| Asset ID      | Device                | Model          | IP Address    | Status | Purpose                            |
+| ------------- | --------------------- | -------------- | ------------- | ------ | ---------------------------------- |
+| CMR-LAB-GW-01 | Router                | Linksys EA4500 | 10.146.91.89  | Active | Internet gateway, DHCP and routing |
+| CMR-LAB-AP-01 | Wireless Access Point | UniFi AC Pro   | 10.146.91.153 | Active | Primary wireless network           |
 
 ---
 
-# 2. Compute Infrastructure
+# 2. Physical Compute Assets
 
 ## CMR-LAB-CTRL-01
 
-| Attribute        | Value                                      |
-| ---------------- | ------------------------------------------ |
-| Device           | Dell OptiPlex Micro                        |
-| Hostname         | DESKTOP-K9O7VKE                            |
-| IP Address       | 10.146.91.161                              |
-| Operating System | Windows 11 Pro 25H2                        |
-| CPU              | Intel Core i5-8500T                        |
-| RAM              | 32 GB                                      |
-| Storage          | ~704 GB SSD                                |
-| Status           | Active                                     |
-| Role             | Primary Management Workstation / Family PC |
+| Attribute        | Value                                        |
+| ---------------- | -------------------------------------------- |
+| Device           | Dell OptiPlex Micro                          |
+| Hostname         | DESKTOP-K9O7VKE                              |
+| Operating System | Windows 11 Pro 25H2                          |
+| CPU              | Intel Core i5-8500T                          |
+| RAM              | 32 GB                                        |
+| Status           | Active                                       |
+| Role             | Primary management workstation and family PC |
 
 ---
 
-## CMR-LAB-SRV-02
-
-| Attribute        | Value                     |
-| ---------------- | ------------------------- |
-| Device           | MacBook Pro 2015          |
-| Hostname         | cmrlab                    |
-| IP Address       | 10.146.91.44              |
-| Operating System | Ubuntu Server 24.04.2 LTS |
-| CPU              | Intel Core i5-5257U       |
-| RAM              | 8 GB DDR3                 |
-| Storage          | 121 GB Internal SSD       |
-| Media Storage    | 1 TB External Drive       |
-| Status           | Active                    |
-| Role             | Primary Server            |
-
 ## CMR-LAB-SRV-01
 
-| Attribute | Value |
-|---|---|
-| Device | Dell OptiPlex 7010 SFF |
-| Hostname | cmr-srv-01.local |
-| IP Address | 10.146.91.13 |
-| Operating System | Proxmox VE 9.2.2 |
-| CPU | Intel Core i7-3770 @ 3.40 GHz |
-| Logical CPUs | 8 |
-| RAM | 19.42 GiB detected / 20 GB installed |
-| RAM Notes | 2 x 8 GB + 1 x 4 GB installed; one DIMM slot appears faulty |
-| Storage | PNY 500GB SATA SSD + WDC WD1002FBYS 1TB HDD |
-| Boot Mode | EFI |
-| Status | Operational |
-| Role | Primary Proxmox Hypervisor |
-| Notes | Installed headless. Web UI accessible at https://10.146.91.13:8006. Proxmox repositories corrected for no-subscription updates. |
+| Attribute        | Value                       |
+| ---------------- | --------------------------- |
+| Device           | Dell OptiPlex 7010 SFF      |
+| Hostname         | cmr-srv-01                  |
+| IP Address       | 10.146.91.13                |
+| Operating System | Proxmox VE                  |
+| CPU              | Intel Core i7-3770          |
+| Logical CPUs     | 8                           |
+| RAM              | 20 GB                       |
+| Storage          | 500 GB SSD + 1 TB HDD       |
+| Status           | Operational                 |
+| Role             | Primary virtualization host |
 
-## VM100
+### Hosted Virtual Machines
 
-| Attribute | Value |
-| --- | --- |
-| Name | ubuntu-mgmt-01 |
-| Role | Management and Automation Platform. AdGuard Home, Ansible, Git and Tailscale|
-| vCPU | 2 |
-| RAM | 4GB |
-| Disk | 50GB |
-| IP | 10.146.91.99 |
-| OS | Ubuntu Server |
-| Status | Operational |
-| User | charles |
-| SSH | active |
-
-### VM100 - DNS and Management Services
-
-| Service | Purpose | Status |
-|---|---|---|
-| AdGuard Home | Internal DNS, DNS rewrites, DNS logging, ad blocking capability | Operational |
-| Ansible | Lab automation and health checks | Operational |
-| Tailscale | Remote access | Operational |
-| Git | Repository/documentation workflow | Operational |
-
-## VM110 - unifi-controller-01
-
-| Attribute | Value |
-|---|---|
-| VM ID | 110 |
-| Name | unifi-controller-01 |
-| IP Address | 10.146.91.172 |
-| Host | cmr-srv-01 |
-| OS | Ubuntu Server 24.04 |
-| vCPU | 1 |
-| RAM | 2 GB |
-| Disk | 20 GB |
-| Role | UniFi Network Controller |
-| Status | Operational |
-| Notes | Runs UniFi Network Application. CPU type changed to `host` to support MongoDB. AP migrated from Dell Micro controller. Auto-start enabled. |
-
-## VM120 - docker-services-01
-
-| Attribute | Value |
-|---|---|
-| VM ID | 120 |
-| Name | docker-services-01 |
-| IP Address | 10.146.91.230 |
-| Host | cmr-srv-01 |
-| OS | Ubuntu Server |
-| Role | Docker Services Platform |
-| Status | Operational |
-| User | charles |
-| Notes | Hosts Docker Engine, Portainer, Homepage, Uptime Kuma, Vaultwarden and Nginx Proxy Manager. |
-
-### Hosted Services
-
-- Docker Engine
-- Portainer CE
-- Homepage
-- Uptime Kuma
-- Vaultwarden
-- Nginx Proxy Manager
-- Jellyfin
-- Ollama
-- Grafana
-- cAdvisor
-- Node Exporter
-- Cockpit
-- Docker
+| VM ID | Name                | Purpose                        |
+| ----- | ------------------- | ------------------------------ |
+| 100   | ubuntu-mgmt-01      | Management, DNS and automation |
+| 110   | unifi-controller-01 | UniFi Network Controller       |
+| 120   | docker-services-01  | Docker services platform       |
 
 ---
 
@@ -152,40 +72,97 @@ This document serves as the authoritative inventory of all hardware, network inf
 | ---------------- | ------------------------- |
 | Device           | Lenovo ThinkPad T440p     |
 | Hostname         | kali                      |
-| IP Address       | 10.146.91.242             |
-| Operating System | Kali Linux Rolling        |
-| CPU              | Intel Core i5-4200M       |
-| RAM              | 8 GB                      |
-| Storage          | 500 GB SSD                |
+| Operating System | Kali Linux                |
 | Status           | Active                    |
-| Role             | Security Testing Platform |
+| Role             | Security testing platform |
 
 ---
 
 ## CMR-LAB-UTIL-01
 
-| Attribute        | Value                       |
-| ---------------- | --------------------------- |
-| Device           | Lenovo ThinkPad             |
-| Hostname         | DESKTOP-LN4P1TS             |
-| IP Address       | 10.146.91.92                |
-| Operating System | Windows                     |
-| Status           | Active                      |
-| Role             | Utility / Spare Workstation |
+| Attribute        | Value                         |
+| ---------------- | ----------------------------- |
+| Device           | Lenovo ThinkPad               |
+| Operating System | Windows                       |
+| Status           | Active                        |
+| Role             | Utility and spare workstation |
 
 ---
 
-# 3. Utility Nodes
+# 3. Virtual Infrastructure
 
-## CMR-LAB-PI-01
+## VM100 - ubuntu-mgmt-01
+
+| Attribute  | Value                          |
+| ---------- | ------------------------------ |
+| VM ID      | 100                            |
+| IP Address | 10.146.91.99                   |
+| OS         | Ubuntu Server                  |
+| Role       | Management, DNS and automation |
+| Status     | Operational                    |
+
+### Hosted Services
+
+| Service      | Purpose                                    |
+| ------------ | ------------------------------------------ |
+| AdGuard Home | Internal DNS and service discovery         |
+| Ansible      | Automation and health checks               |
+| Tailscale    | Secure remote access                       |
+| Git          | Documentation and configuration management |
+
+---
+
+## VM110 - unifi-controller-01
 
 | Attribute  | Value                    |
 | ---------- | ------------------------ |
-| Device     | Raspberry Pi 3           |
-| Hostname   | Homebridge               |
-| IP Address | 10.146.91.181            |
-| Status     | Active                   |
-| Role       | Home Automation Platform |
+| VM ID      | 110                      |
+| IP Address | 10.146.91.172            |
+| OS         | Ubuntu Server            |
+| Role       | UniFi Network Controller |
+| Status     | Operational              |
+
+### Hosted Services
+
+| Service                   | Purpose                     |
+| ------------------------- | --------------------------- |
+| UniFi Network Application | Wireless network management |
+
+---
+
+## VM120 - docker-services-01
+
+| Attribute  | Value                    |
+| ---------- | ------------------------ |
+| VM ID      | 120                      |
+| IP Address | 10.146.91.230            |
+| OS         | Ubuntu Server            |
+| Role       | Docker services platform |
+| Status     | Operational              |
+
+### Hosted Services
+
+| Service             | Purpose                           |
+| ------------------- | --------------------------------- |
+| Docker Engine       | Container runtime                 |
+| Portainer           | Container management              |
+| Homepage            | Service dashboard                 |
+| Uptime Kuma         | Monitoring                        |
+| Vaultwarden         | Password management               |
+| Nginx Proxy Manager | Reverse proxy and service routing |
+
+---
+
+# 4. Utility Infrastructure
+
+## CMR-LAB-PI-01
+
+| Attribute | Value                    |
+| --------- | ------------------------ |
+| Device    | Raspberry Pi 3           |
+| Hostname  | Homebridge               |
+| Status    | Active                   |
+| Role      | Home automation platform |
 
 ### Hosted Services
 
@@ -199,147 +176,44 @@ This document serves as the authoritative inventory of all hardware, network inf
 | --------- | ------------------ |
 | Device    | Raspberry Pi 3     |
 | Status    | Offline            |
-| Role      | Spare Utility Node |
+| Role      | Spare utility node |
 
 ---
 
-# 4. Offline / Spare Infrastructure
+# 5. Spare and Offline Infrastructure
 
-## CMR-LAB-USG-01
-
-| Attribute | Value                   |
-| --------- | ----------------------- |
-| Device    | UniFi Security Gateway  |
-| Status    | Offline                 |
-| Role      | Spare Firewall / Router |
+| Asset ID       | Device                 | Status    | Intended Role                          |
+| -------------- | ---------------------- | --------- | -------------------------------------- |
+| CMR-LAB-USG-01 | UniFi Security Gateway | Offline   | Future firewall and gateway evaluation |
+| CMR-LAB-CK-01  | UniFi Cloud Key        | Offline   | Legacy UniFi controller platform       |
+| CMR-LAB-SW-01  | TP-Link TL-SF1008P     | Available | Utility PoE switch                     |
 
 ---
 
-## CMR-LAB-CK-01
+# 6. Asset Summary
 
-| Attribute | Value                  |
-| --------- | ---------------------- |
-| Device    | UniFi Cloud Key        |
-| Status    | Offline                |
-| Role      | Spare UniFi Controller |
+## Active Infrastructure
 
----
+| Category                | Count              |
+| ----------------------- | ------------------ |
+| Network Devices         | 2                  |
+| Physical Compute Assets | 4                  |
+| Virtual Machines        | 3                  |
+| Raspberry Pi Devices    | 1 Active / 1 Spare |
 
-## CMR-LAB-SW-01
+## Operational Service Platforms
 
-| Attribute | Value |
-| --------- | ----- |
-| Device | TP-Link TL-SF1008P |
-| Type | 8-Port PoE Switch |
-| Speed | Fast Ethernet / 100 Mbps |
-| Status | Online / Available |
-| Role | Lab utility switch for wired bedroom lab devices |
-| Notes | Not suitable as the long-term core lab switch because it is not Gigabit and is unmanaged |
----
-
-# 5. Current Logical Topology
-
-Internet
-│
-└── Linksys EA4500
-│
-├── UniFi AC Pro
-│
-├── Dell OptiPlex Micro
-│
-├── Ubuntu Server (MacBook Pro)
-│    ├── Jellyfin
-│    ├── Ollama
-│    ├── Grafana
-│    ├── Cockpit
-│    └── Docker
-│
-├── Raspberry Pi 3
-│    └── Homebridge
-│
-├── ThinkPad T440p
-│    └── Kali Linux
-│
-└── ThinkPad Windows
+| Platform | Purpose                        |
+| -------- | ------------------------------ |
+| VM100    | Management, DNS and automation |
+| VM110    | Network management             |
+| VM120    | Application services           |
 
 ---
 
-# 6. Future Hardware Roadmap
+# 7. Review History
 
-Priority 1
-
-* UPS
-* Rack/Cabinet
-* Structured Cabling
-* Managed Switch
-
-Priority 2
-
-* Primary Proxmox Server
-
-Priority 3
-
-* Storage Expansion
-
-Priority 4
-
-* Network Segmentation and Advanced Lab Services
-
----
-
-# 7. Asset Summary
-
-## Active Assets
-
-* Linksys EA4500
-* UniFi AC Pro
-* Dell OptiPlex Micro
-* MacBook Pro Ubuntu Server
-* Lenovo ThinkPad T440p (Kali)
-* Lenovo ThinkPad (Windows)
-* Raspberry Pi 3 (Homebridge)
-
-## Offline Assets
-
-* Raspberry Pi 3
-* UniFi Security Gateway
-* UniFi Cloud Key
-* Cisco 8-Port Switch
-
-## Hardware Assets Requiring Inspection
-
-| Asset | Current Status | Intended Role | Notes |
-|---|---|---|---|
-| Dell OptiPlex 7010 Unit 1 | Unknown / poor condition | Candidate server | Needs inspection |
-| Dell OptiPlex 7010 Unit 2 | Unknown / poor condition | Parts donor or candidate server | Needs inspection |
-| Dell OptiPlex 7010 Unit 3 | Unknown / poor condition | Parts donor or candidate server | Needs inspection |
-| MacBook Ubuntu Server | Active but unreliable | Temporary server | No battery, MagSafe unreliable |
-| UniFi Security Gateway | Offline | Target gateway | Needs testing |
-| UniFi Cloud Key | Offline | UniFi controller | Needs testing |
-| UniFi AC Pro | Available / in use | Wireless access point | To be managed through UniFi |
-| Linksys Router | Active | Current router | To be replaced eventually |
-| Cisco RV042G | Excluded | Not in current scope | Removed from rebuild plan |
-
-## Hardware Validation Notes
-
-- Remaining OptiPlex units were used as parts donors to recover the validated Dell OptiPlex 7010 SFF.
-- There are no longer three separate OptiPlex server candidates.
-- Current focus is to inventory recovered DDR3 RAM and confirm SSD health.
-
-## Update Notes
-
-| Notes | Runs Tailscale, Git, Ansible, QEMU Guest Agent, and passwordless SSH management for VM110 and VM120. Future role includes AdGuard Home and monitoring. |
-
-## Total Assets Managed
-
-Active: 7
-
-Offline/Spare: 4
-
-Total: 11
-
-## Last Review
-
-| Date | Reviewer | Notes |
-|--------|--------|--------|
-| 2026-06-03 | Charles Rattan | Initial asset register created |
+| Date       | Reviewer       | Notes                                                               |
+| ---------- | -------------- | ------------------------------------------------------------------- |
+| 2026-06-03 | Charles Rattan | Initial asset register created                                      |
+| 2026-06-11 | Charles Rattan | Refactored to align with current architecture and operational state |

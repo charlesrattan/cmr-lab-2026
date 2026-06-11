@@ -1,123 +1,163 @@
 # CMR Lab 2026
 
-## Purpose
+## Overview
 
-CMR Lab 2026 is my personal home laboratory for developing practical skills in:
+CMR Lab 2026 is a documented journey from an informal home technology setup to a structured enterprise-style infrastructure simulation platform.
 
-- Systems administration
-- Networking
-- Cybersecurity
-- ICT governance
-- Automation
-- Infrastructure documentation
-- Self-hosted services
+The project focuses on developing practical skills in infrastructure operations, networking, cybersecurity, automation, governance and documentation while applying the same principles used in professional ICT environments.
 
-The lab is being built from the ground up with an emphasis on documentation, repeatability, professional practices, and practical daily use.
+Rather than simply deploying services, the goal is to understand how infrastructure evolves, how decisions are made, how systems are documented and how operational maturity is achieved over time.
+
+The lab also serves as:
+
+* A learning platform for enterprise technologies
+* A testing environment for infrastructure and operational practices
+* A professional portfolio demonstrating practical ICT skills
+* A platform for selected personal and family services
+
+The full evolution of the project is documented in:
+
+```text
+docs/10-lab-evolution.md
+```
 
 ---
 
-## Current Status
+# Purpose
 
-Operations and Stabilization Phase
+CMR Lab exists to develop practical capability in:
+
+* Systems Administration
+* Networking
+* Cybersecurity
+* ICT Governance
+* Automation
+* Infrastructure Documentation
+* Virtualization
+* Service Management
+* Monitoring and Operations
+* Self-Hosted Services
+
+The emphasis is on repeatability, documentation, operational discipline, and long-term maintainability rather than simply deploying technology.
+
+---
+
+# Current Status
+
+## Operations and Stabilization Phase
 
 CMR Lab has evolved from a basic homelab rebuild into an enterprise-style infrastructure simulation platform.
 
-The current focus is no longer adding new services quickly. The focus is now stability, documentation, automation, monitoring, backup validation, and operational maturity.
+The current focus is no longer adding services rapidly. The focus is now:
 
-### Current Core Systems
+* Stability
+* Documentation
+* Automation
+* Monitoring
+* Backup validation
+* Recovery procedures
+* Operational maturity
 
-| System | Hostname | IP Address | Role | Status |
-|---|---|---:|---|---|
-| Proxmox Host | cmr-srv-01 | 10.146.91.13 | Virtualization host | Operational |
-| VM100 | ubuntu-mgmt-01 | 10.146.91.99 | Management, automation, DNS | Operational |
-| VM110 | unifi-controller-01 | 10.146.91.172 | UniFi Network Controller | Operational |
-| VM120 | docker-services-01 | 10.146.91.230 | Docker services platform | Operational |
+---
 
-### Current Services
+# Current Core Systems
 
-| Service | Platform | Purpose | Status |
-|---|---|---|---|
-| AdGuard Home | VM100 | Internal DNS and service discovery | Operational |
-| Ansible | VM100 | Lab automation and health checks | Operational |
-| Tailscale | VM100 / devices | Remote access | Operational |
-| UniFi Network Application | VM110 | Wireless network management | Operational |
-| Docker Compose | VM120 | Container orchestration baseline | Operational |
-| Homepage | VM120 | Lab dashboard | Operational |
-| Portainer | VM120 | Docker management | Operational |
-| Uptime Kuma | VM120 | Basic monitoring | Operational |
-| Vaultwarden | VM120 | Password manager | Working, HTTPS pending |
-| Nginx Proxy Manager | VM120 | Reverse proxy | Operational |
+| System       | Hostname            | Role                          | Status      |
+| ------------ | ------------------- | ----------------------------- | ----------- |
+| Proxmox Host | cmr-srv-01          | Virtualization platform       | Operational |
+| VM100        | ubuntu-mgmt-01      | Management, automation, DNS   | Operational |
+| VM110        | unifi-controller-01 | Network management            | Operational |
+| VM120        | docker-services-01  | Application services platform | Operational |
 
-### Current Priorities
+---
 
-1. Clean up and align documentation with the current lab state.
-2. Create an operations runbook.
-3. Resolve the Ansible sudo/become issue in `update-all.yml`.
-4. Define the Vaultwarden HTTPS strategy.
+# Current Services
+
+| Service                   | Platform          | Purpose                            | Status                      |
+| ------------------------- | ----------------- | ---------------------------------- | --------------------------- |
+| AdGuard Home              | VM100             | Internal DNS and service discovery | Operational                 |
+| Ansible                   | VM100             | Automation and health checks       | Operational                 |
+| Tailscale                 | VM100 / endpoints | Secure remote access               | Operational                 |
+| UniFi Network Application | VM110             | Wireless network management        | Operational                 |
+| Docker Compose            | VM120             | Container orchestration            | Operational                 |
+| Homepage                  | VM120             | Service dashboard                  | Operational                 |
+| Portainer                 | VM120             | Docker management                  | Operational                 |
+| Uptime Kuma               | VM120             | Monitoring                         | Operational                 |
+| Vaultwarden               | VM120             | Password management                | Operational (HTTPS pending) |
+| Nginx Proxy Manager       | VM120             | Reverse proxy and service routing  | Operational                 |
+
+---
+
+# Current Priorities
+
+1. Align all documentation with the current state of the lab.
+2. Expand the Operations Runbook.
+3. Resolve the Ansible privileged update workflow.
+4. Define and implement an HTTPS strategy for internal services.
 5. Validate backup and restore procedures.
-6. Decide whether AdGuard should become the default DNS server for the full home network.
+6. Determine whether AdGuard Home should become the default DNS platform for the entire home network.
 
 ---
 
-## Current Core Infrastructure
+# Repository Structure
 
-| Component | Role | Status |
-|---|---|---|
-| Dell OptiPlex 7010 SFF | Primary Proxmox host | Operational |
-| Proxmox VE | Virtualization platform | Operational |
-| VM100 ubuntu-mgmt-01 | Management VM | Operational |
-| VM110 unifi-controller-01 | UniFi Network Controller | Operational |
-| VM120 docker-services-01 | Docker services host | Operational |
-| UniFi AC Pro | Primary wireless access point | Operational |
-
----
-
-## Current Services
-
-| Service | Location | Status |
-|---|---|---|
-| UniFi Network Controller | VM110 | Operational |
-| Docker Engine | VM120 | Operational |
-| Portainer | VM120 | Operational |
-| Homepage | VM120 | Operational |
-| Uptime Kuma | VM120 | Operational |
-| Nginx Proxy Manager | VM120 | Operational |
-| Vaultwarden | VM120 | Installed, pending HTTPS readiness |
+| File                           | Purpose                                           |
+| ------------------------------ | ------------------------------------------------- |
+| docs/00-baseline-inventory.md  | Original inventory and starting point             |
+| docs/01-lab-charter.md         | Vision, mission, principles, and success criteria |
+| docs/02-asset-register.md      | Infrastructure and asset register                 |
+| docs/03-target-architecture.md | Architecture evolution and current design         |
+| docs/04-lab-maturity.md        | Maturity assessment and tracking                  |
+| docs/05-roadmap.md             | Completed milestones and future priorities        |
+| docs/06-decision-log.md        | Key architecture and implementation decisions     |
+| docs/07-hardware-validation.md | Hardware testing and validation results           |
+| docs/08-services-platform.md   | Services platform documentation                   |
+| docs/09-operations-runbook.md  | Operational procedures and maintenance            |
+| docs/10-lab-evolution.md       | Project history and evolution                     |
+| docs/99-ideas-parking-lot.md   | Future ideas and deferred concepts                |
 
 ---
 
-## Repository Structure
+# Project Evolution
 
-| File | Purpose |
-|---|---|
-| `docs/00-baseline-inventory.md` | Initial known hardware inventory |
-| `docs/01-lab-charter.md` | Lab vision, objectives, principles, and success criteria |
-| `docs/02-asset-register.md` | Authoritative asset and infrastructure register |
-| `docs/03-target-architecture.md` | Current and target architecture |
-| `docs/04-lab-maturity.md` | Maturity model and improvement tracking |
-| `docs/05-roadmap.md` | Project roadmap and phased tasks |
-| `docs/06-decision-log.md` | Architecture and implementation decisions |
-| `docs/07-hardware-validation.md` | Hardware validation and test results |
-| `docs/08-services-platform.md` | Docker services platform and application register |
-| `docs/99-ideas-parking-lot.md` | Future ideas and non-current scope items |
+The project has progressed through several major phases:
 
----
+| Phase   | Focus                                     |
+| ------- | ----------------------------------------- |
+| Phase 0 | Informal home technology setup            |
+| Phase 1 | Hardware recovery and rebuild             |
+| Phase 2 | Proxmox virtualization foundation         |
+| Phase 3 | Docker services platform                  |
+| Phase 4 | Automation and operational health checks  |
+| Phase 5 | Internal DNS and service discovery        |
+| Phase 6 | Operations and governance (current phase) |
 
-## Project Evolution
-
-The lab has evolved through several phases:
-
-1. Informal home technology setup
-2. Hardware recovery and rebuild
-3. Proxmox virtualization foundation
-4. Docker services platform
-5. Automation and health checks
-6. Internal DNS and service discovery
-7. Current operations and governance phase
-
-The full project history is documented in:
+The complete history of the project, including major decisions and lessons learned, is documented in:
 docs/10-lab-evolution.md
+```
 
-## Owner
+---
+
+# Guiding Principles
+
+* Stability before complexity
+* Documentation before expansion
+* Recovery before experimentation
+* Automation where it improves reliability
+* Security as a requirement, not an afterthought
+* Clear separation of system responsibilities
+* Learn by building, but preserve what was learned
+
+---
+
+# Note
+
+This repository currently serves as both an operational record and a learning portfolio.
+
+As the project matures, operational documentation containing infrastructure-specific details may be separated from public-facing documentation intended for knowledge sharing, professional development and portfolio presentation.
+
+---
+
+# Owner
 
 Charles Rattan

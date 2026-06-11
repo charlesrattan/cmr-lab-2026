@@ -2,142 +2,181 @@
 
 ## Purpose
 
-This document records the current CMR Lab services platform running on VM120.
+This document records the application services platform running on VM120 `docker-services-01`.
 
-The goal of this platform is to provide practical daily-use services, service monitoring, container management, and a foundation for future self-hosted applications.
+The purpose of this platform is to provide:
 
----
+* Service hosting
+* Container management
+* Service monitoring
+* Internal service routing
+* Password management
+* Operational visibility
 
-## Platform Host
-
-| Attribute | Value |
-|---|---|
-| VM ID | 120 |
-| Name | docker-services-01 |
-| IP Address | 10.146.91.230 |
-| Host | cmr-srv-01 |
-| OS | Ubuntu Server |
-| Role | Docker services host |
-| Status | Operational |
+This document serves as the operational service catalog for CMR Lab.
 
 ---
 
-## Installed Platform Components
+# Platform Host
 
-| Component | Purpose | Status |
-|---|---|---|
-| Docker Engine | Container runtime | Operational |
-| Portainer CE | Docker web management | Operational |
-| Homepage | Lab operations dashboard | Operational |
-| Uptime Kuma | Service monitoring | Operational |
-| Nginx Proxy Manager | Reverse proxy testing and future service routing | Operational |
-| Vaultwarden | Password manager | Installed, pending HTTPS readiness |
-
----
-
-## Active Containers
-
-| Container | Image | Port Mapping | Persistent Data |
-|---|---|---|---|
-| portainer | portainer/portainer-ce:latest | 9443:9443, 9000:9000 | Docker volume: portainer_data |
-| homepage | ghcr.io/gethomepage/homepage:latest | 3000:3000 | ~/docker/homepage/config |
-| uptime-kuma | louislam/uptime-kuma:latest | 3001:3001 | ~/docker/uptime-kuma |
-| vaultwarden | vaultwarden/server:latest | 8080:80 | ~/docker/vaultwarden |
-| nginx-proxy-manager | jc21/nginx-proxy-manager:latest | 80:80, 81:81, 443:443 | ~/docker/nginx-proxy-manager |
+| Attribute        | Value                    |
+| ---------------- | ------------------------ |
+| VM ID            | 120                      |
+| Name             | docker-services-01       |
+| IP Address       | 10.146.91.230            |
+| Host             | cmr-srv-01               |
+| Operating System | Ubuntu Server            |
+| Role             | Docker services platform |
+| Status           | Operational              |
 
 ---
 
-## Current Access URLs
+# Platform Responsibilities
 
-| Service | URL | Status |
-|---|---|---|
-| Homepage | `http://dashboard.cmrlab.internal` | Working |
-| Uptime Kuma | `http://kuma.cmrlab.internal` | Working |
-| Portainer | `https://portainer.cmrlab.internal` | Working |
-| Nginx Proxy Manager | `http://10.146.91.230:81` | Working |
-| Vaultwarden | `http://vault.cmrlab.internal` | Working, HTTPS pending |
-| AdGuard Home | `http://adguard.cmrlab.internal` | Working |
-| UniFi Network Application | `https://unifi.cmrlab.internal:8443` | Working |
-| Proxmox | `https://proxmox.cmrlab.internal:8006` | Working |
+VM120 is responsible for hosting user-facing and operational services.
 
----
+The platform does not host:
 
-## Temporary Hostname Mapping
+* Infrastructure management
+* DNS services
+* Network management
 
-The following `.cmrlab.local` names are currently mapped through the Windows hosts file on the Dell main PC.
-
-| Hostname | Target |
-|---|---|
-| dashboard.cmrlab.local | 10.146.91.230 |
-| kuma.cmrlab.local | 10.146.91.230 |
-| portainer.cmrlab.local | 10.146.91.230 |
-| vault.cmrlab.local | 10.146.91.230 |
-| proxmox.cmrlab.local | 10.146.91.13 |
-| unifi.cmrlab.local | 10.146.91.172 |
+These functions are delegated to dedicated platforms elsewhere in the environment.
 
 ---
 
-## Internal DNS and Service Discovery
+# Installed Platform Components
 
-AdGuard Home is deployed on VM100 `ubuntu-mgmt-01` and provides centralized DNS for CMR Lab.
-
-| Item | Value |
-|---|---|
-| DNS Server | `10.146.91.99` |
-| Web UI | `http://adguard.cmrlab.internal` |
-| Upstream DNS | Quad9 DNS-over-HTTPS |
-| Upstream URL | `https://dns10.quad9.net/dns-query` |
-| Internal Domain | `cmrlab.internal` |
-
-### DNS Rewrites
-
-| Hostname | Target |
-|---|---|
-| `proxmox.cmrlab.internal` | `10.146.91.13` |
-| `unifi.cmrlab.internal` | `10.146.91.172` |
-| `dashboard.cmrlab.internal` | `10.146.91.230` |
-| `vault.cmrlab.internal` | `10.146.91.230` |
-| `kuma.cmrlab.internal` | `10.146.91.230` |
-| `portainer.cmrlab.internal` | `10.146.91.230` |
-| `adguard.cmrlab.internal` | `10.146.91.99` |
-
-### Nginx Proxy Manager Hosts
-
-| Hostname | Destination | Status |
-|---|---|---|
-| `dashboard.cmrlab.internal` | Homepage on VM120 | Working |
-| `vault.cmrlab.internal` | Vaultwarden on VM120 | Working |
-| `kuma.cmrlab.internal` | Uptime Kuma on VM120 | Working |
-| `portainer.cmrlab.internal` | Portainer on VM120 | Working |
-| `adguard.cmrlab.internal` | AdGuard Home on VM100 | Working |
-
-### Notes
-- Homepage required `dashboard.cmrlab.internal` to be added to `HOMEPAGE_ALLOWED_HOSTS`.
-- Portainer requires HTTPS upstream to port `9443`.
-- Vaultwarden HTTPS is still pending.
-- Proxmox and UniFi are reachable using `.internal` names with their native ports.
+| Component           | Purpose                            | Status      |
+| ------------------- | ---------------------------------- | ----------- |
+| Docker Engine       | Container runtime                  | Operational |
+| Portainer CE        | Container management               | Operational |
+| Homepage            | Operations dashboard               | Operational |
+| Uptime Kuma         | Monitoring and availability checks | Operational |
+| Nginx Proxy Manager | Reverse proxy and service routing  | Operational |
+| Vaultwarden         | Password management                | Operational |
 
 ---
 
-## Docker Compose
+# Active Containers
 
-Docker services are now managed through:
+| Container           | Image                        | Purpose              |
+| ------------------- | ---------------------------- | -------------------- |
+| portainer           | portainer/portainer-ce       | Container management |
+| homepage            | ghcr.io/gethomepage/homepage | Operations dashboard |
+| uptime-kuma         | louislam/uptime-kuma         | Monitoring           |
+| vaultwarden         | vaultwarden/server           | Password management  |
+| nginx-proxy-manager | jc21/nginx-proxy-manager     | Reverse proxy        |
+
+---
+
+# Service Access Catalog
+
+| Service                   | URL                                    | Status      |
+| ------------------------- | -------------------------------------- | ----------- |
+| Homepage                  | `http://dashboard.cmrlab.internal`     | Operational |
+| Uptime Kuma               | `http://kuma.cmrlab.internal`          | Operational |
+| Portainer                 | `https://portainer.cmrlab.internal`    | Operational |
+| Vaultwarden               | `http://vault.cmrlab.internal`         | Operational |
+| Nginx Proxy Manager       | `http://10.146.91.230:81`              | Operational |
+| AdGuard Home              | `http://adguard.cmrlab.internal`       | Operational |
+| UniFi Network Application | `https://unifi.cmrlab.internal:8443`   | Operational |
+| Proxmox                   | `https://proxmox.cmrlab.internal:8006` | Operational |
+
+---
+
+# Internal Service Discovery
+
+CMR Lab uses the `cmrlab.internal` namespace for internal service discovery.
+
+### Service Records
+
+| Hostname                  | Destination               |
+| ------------------------- | ------------------------- |
+| dashboard.cmrlab.internal | Homepage                  |
+| vault.cmrlab.internal     | Vaultwarden               |
+| kuma.cmrlab.internal      | Uptime Kuma               |
+| portainer.cmrlab.internal | Portainer                 |
+| adguard.cmrlab.internal   | AdGuard Home              |
+| unifi.cmrlab.internal     | UniFi Network Application |
+| proxmox.cmrlab.internal   | Proxmox                   |
+
+---
+
+# Reverse Proxy Configuration
+
+Nginx Proxy Manager provides the standard service access layer.
+
+### Configured Hosts
+
+| Hostname                  | Destination  | Status      |
+| ------------------------- | ------------ | ----------- |
+| dashboard.cmrlab.internal | Homepage     | Operational |
+| vault.cmrlab.internal     | Vaultwarden  | Operational |
+| kuma.cmrlab.internal      | Uptime Kuma  | Operational |
+| portainer.cmrlab.internal | Portainer    | Operational |
+| adguard.cmrlab.internal   | AdGuard Home | Operational |
+
+---
+
+# Service Dependencies
+
+| Service                 | Depends On                         |
+| ----------------------- | ---------------------------------- |
+| Homepage                | Docker Engine                      |
+| Portainer               | Docker Engine                      |
+| Uptime Kuma             | Docker Engine                      |
+| Vaultwarden             | Docker Engine, Nginx Proxy Manager |
+| Nginx Proxy Manager     | Docker Engine                      |
+| Internal Service Access | AdGuard Home, Nginx Proxy Manager  |
+
+---
+
+# Docker Compose Management
+
+All services are managed through Docker Compose.
+
+### Source of Truth
+
+```text
 /home/charles/docker/docker-compose.yml
+```
+
+Manual container creation should be avoided to prevent configuration drift.
 
 ---
 
-## Known Issues
+# Known Issues
 
-| Issue | Current Status |
-|---|---|
-| Portainer reverse proxy access hangs | Direct access is used for now |
-| Vaultwarden requires HTTPS | Pending Tailscale/MagicDNS/HTTPS strategy |
-| Docker Compose baseline | Completed; `/home/charles/docker/docker-compose.yml` is now the source of truth |
-
+| Issue                                        | Status             |
+| -------------------------------------------- | ------------------ |
+| Vaultwarden HTTPS implementation             | Pending            |
+| Ansible-based container lifecycle management | Future enhancement |
 
 ---
 
-## Notes
+# Operational Notes
 
-- Vaultwarden should not be used for real credentials until HTTPS is implemented.
-- Tailscale has been selected as the preferred remote access and naming strategy.
+* Homepage requires `dashboard.cmrlab.internal` to be included in `HOMEPAGE_ALLOWED_HOSTS`.
+* Portainer reverse proxy access requires HTTPS to port `9443`.
+* Vaultwarden should not be used for production credentials until HTTPS is implemented.
+* Service access should use DNS names rather than direct IP addresses wherever possible.
+
+---
+
+# Current Platform Status
+
+Status: Operational
+
+The platform provides a stable application hosting environment and serves as the primary service delivery layer within CMR Lab.
+
+Future services should only be introduced after they are documented, recoverable and aligned with the objectives of the lab.
+
+---
+
+# Review History
+
+| Date       | Reviewer       | Notes                                           |
+| ---------- | -------------- | ----------------------------------------------- |
+| 2026-06-07 | Charles Rattan | Initial services platform documentation created |
+| 2026-06-11 | Charles Rattan | Refactored into operational service catalog     |

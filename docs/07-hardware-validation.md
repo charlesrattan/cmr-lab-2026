@@ -1,89 +1,170 @@
 # Hardware Validation
 
-## Objective
+## Purpose
 
-Determine which existing hardware is suitable for future use in CMR Lab 2026.
+This document records the hardware validation activities performed during the CMR Lab rebuild.
+
+Its purpose is to document how hardware was assessed, what decisions resulted from that assessment and which systems were ultimately selected for operational use.
+
+This document serves as a historical validation record rather than a current inventory.
+
+The current inventory of active infrastructure is maintained in:
+
+```text
+docs/02-asset-register.md
+```
 
 ---
 
-## Devices Pending Validation
+# Validation Objective
 
-### Dell OptiPlex Units
+The objective of the hardware validation phase was to determine which available equipment could reliably support the long-term goals of CMR Lab.
 
-- [x] Unit 1 inspected
-- [x] Unit 2 inspected
-- [x] Unit 3 inspected
+The validation process focused on:
 
-## Dell OptiPlex 7010 SFF Validation
+* Hardware functionality
+* Stability
+* Upgrade potential
+* Suitability for virtualization
+* Suitability for infrastructure workloads
+* Availability of replacement parts
 
-| Check | Result |
-|---|---|
-| POST | Passed |
-| BIOS Access | Passed |
-| CPU Identified | Intel Core i7-3770 @ 3.40 GHz |
-| DIMM Slots | 4 present |
-| RAM | 4 GB DDR3 currently installed |
-| SSD | 500 GB SSD detected |
-| HDD | 500 GB HDD installed |
-| Dell Diagnostics | Passed |
-| Final Status | Validated as primary Proxmox candidate |
+---
 
-## Parts Donor Update
+# Primary Hardware Evaluation
 
-The remaining OptiPlex units were salvaged to get the validated unit operational. They should now be treated as parts donors rather than separate server candidates.
+## Dell OptiPlex 7010 SFF
 
-### UniFi Security Gateway
+This platform became the primary infrastructure candidate following successful validation.
 
-- [ ] Powers on
-- [ ] Factory reset completed
-- [ ] Accessible
+### Validation Results
 
-### UniFi Cloud Key
+| Check              | Result                           |
+| ------------------ | -------------------------------- |
+| POST               | Passed                           |
+| BIOS Access        | Passed                           |
+| CPU Detection      | Passed                           |
+| Storage Detection  | Passed                           |
+| Memory Detection   | Passed                           |
+| Dell Diagnostics   | Passed                           |
+| Hardware Stability | Passed                           |
+| Final Outcome      | Selected as primary Proxmox host |
 
-- [ ] Powers on
-- [ ] Accessible
+### Hardware Configuration
 
-### Cisco Switch
-- [ ] Model identified
-- [ ] Tested
+| Component         | Value                         |
+| ----------------- | ----------------------------- |
+| CPU               | Intel Core i7-3770 @ 3.40 GHz |
+| RAM               | 20 GB DDR3                    |
+| Primary Storage   | 500 GB SSD                    |
+| Secondary Storage | 1 TB HDD                      |
+| Boot Mode         | EFI                           |
 
-## Server Build Completion
+### Notes
 
-| Item | Result |
-|---|---|
-| Platform | Dell OptiPlex 7010 SFF |
-| CPU | Intel Core i7-3770 @ 3.40 GHz |
-| RAM | 20 GB DDR3 confirmed |
-| RAM Notes | 2 x 8 GB + 1 x 4 GB installed; one DIMM slot appears faulty |
-| Primary Storage | 500 GB SSD |
-| Secondary Storage | 1 TB HDD |
-| Network | Connected to wired lab switch |
-| Final Build Status | Ready for Proxmox installation |
+One DIMM slot appears to be faulty. The issue does not currently impact operational use and the platform remains stable.
 
-## Wired Lab Network Validation
+---
 
-| Device | Connection Status |
-|---|---|
-| Dell Micro Main PC | Connected |
-| TP-Link TL-SF1008P | Online |
-| UniFi Cloud Key Gen1 | Connected |
-| UniFi Security Gateway | Connected for testing |
-| Dell OptiPlex 7010 Server | Connected |
+# OptiPlex Recovery Outcome
 
-## Proxmox Installation Validation
+Multiple OptiPlex units were inspected during the validation process.
 
-| Check | Result |
-|---|---|
-| Proxmox Version | Proxmox VE 9.2.2 |
-| Hostname | cmr-srv-01 |
-| Management IP | 10.146.91.13 |
-| Web UI | Accessible |
-| Login Realm | Linux PAM |
-| CPU Detected | Intel Core i7-3770, 8 logical CPUs |
-| Memory Detected | 19.42 GiB |
-| Boot Mode | EFI |
-| SSD SMART Status | Passed |
-| HDD SMART Status | Passed |
-| Repository Update | No-subscription repository configured |
-| Post-update Reboot | Successful |
-| Headless Operation | Confirmed |
+### Outcome
+
+| Device Group                     | Result                      |
+| -------------------------------- | --------------------------- |
+| Best-condition OptiPlex 7010 SFF | Selected for production use |
+| Remaining OptiPlex units         | Converted to parts donors   |
+
+This approach maximized usable hardware while minimizing additional expenditure.
+
+---
+
+# Wired Infrastructure Validation
+
+The rebuild introduced a wired lab network to improve reliability and reduce dependence on wireless connectivity.
+
+### Validation Results
+
+| Device                          | Status                |
+| ------------------------------- | --------------------- |
+| Dell OptiPlex 7010 Proxmox Host | Connected             |
+| Dell OptiPlex Micro Workstation | Connected             |
+| TP-Link TL-SF1008P Switch       | Operational           |
+| UniFi Security Gateway          | Connected for testing |
+| UniFi Cloud Key Gen1            | Connected for testing |
+
+### Outcome
+
+The wired lab network was successfully established and became the foundation for subsequent virtualization and service deployment activities.
+
+---
+
+# Proxmox Validation
+
+Following hardware validation, Proxmox VE was deployed and validated on the selected platform.
+
+### Validation Results
+
+| Check                    | Result     |
+| ------------------------ | ---------- |
+| Proxmox Installation     | Successful |
+| Web Interface Access     | Successful |
+| Hostname Configuration   | Successful |
+| Repository Configuration | Successful |
+| Updates Applied          | Successful |
+| Reboot Validation        | Successful |
+| Headless Operation       | Confirmed  |
+| SSD Health               | Passed     |
+| HDD Health               | Passed     |
+
+### Platform Details
+
+| Item          | Value              |
+| ------------- | ------------------ |
+| Hostname      | cmr-srv-01         |
+| Platform      | Proxmox VE         |
+| Management IP | 10.146.91.13       |
+| CPU           | Intel Core i7-3770 |
+| Logical CPUs  | 8                  |
+| Memory        | 20 GB Installed    |
+
+### Outcome
+
+The platform was successfully validated as the primary virtualization host for CMR Lab.
+
+---
+
+# Validation Lessons Learned
+
+The validation phase produced several important lessons:
+
+* Existing hardware should be evaluated before replacement is considered.
+* Documentation should begin before major implementation work.
+* Hardware validation reduces architectural uncertainty.
+* A small number of stable systems provides more value than a large number of partially functional systems.
+* Recoverability and maintainability are more important than raw hardware quantity.
+
+---
+
+# Final Validation Outcome
+
+| Area                              | Outcome     |
+| --------------------------------- | ----------- |
+| Hardware Recovery                 | Successful  |
+| Wired Lab Deployment              | Successful  |
+| Proxmox Deployment                | Successful  |
+| Virtualization Readiness          | Achieved    |
+| Foundation for Service Deployment | Established |
+
+The hardware validation phase successfully transitioned CMR Lab from planning and inventory activities into infrastructure deployment and operational development.
+
+---
+
+# Review History
+
+| Date       | Reviewer       | Notes                                        |
+| ---------- | -------------- | -------------------------------------------- |
+| 2026-06-03 | Charles Rattan | Initial validation record created            |
+| 2026-06-11 | Charles Rattan | Refactored into historical validation record |
