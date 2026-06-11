@@ -18,14 +18,18 @@ The lab is being built from the ground up with an emphasis on documentation, rep
 
 ## Current Status
 
-Management, Docker, Backup, and Automation Baseline Complete
+Operations and Stabilization Phase
+
+CMR Lab has evolved from a basic homelab rebuild into an enterprise-style infrastructure simulation platform.
+
+The current focus is no longer adding new services quickly. The focus is now stability, documentation, automation, monitoring, backup validation, and operational maturity.
 
 ### Current Core Systems
 
 | System | Hostname | IP Address | Role | Status |
 |---|---|---:|---|---|
 | Proxmox Host | cmr-srv-01 | 10.146.91.13 | Virtualization host | Operational |
-| VM100 | ubuntu-mgmt-01 | 10.146.91.99 | Management and automation | Operational |
+| VM100 | ubuntu-mgmt-01 | 10.146.91.99 | Management, automation, DNS | Operational |
 | VM110 | unifi-controller-01 | 10.146.91.172 | UniFi Network Controller | Operational |
 | VM120 | docker-services-01 | 10.146.91.230 | Docker services platform | Operational |
 
@@ -33,6 +37,9 @@ Management, Docker, Backup, and Automation Baseline Complete
 
 | Service | Platform | Purpose | Status |
 |---|---|---|---|
+| AdGuard Home | VM100 | Internal DNS and service discovery | Operational |
+| Ansible | VM100 | Lab automation and health checks | Operational |
+| Tailscale | VM100 / devices | Remote access | Operational |
 | UniFi Network Application | VM110 | Wireless network management | Operational |
 | Docker Compose | VM120 | Container orchestration baseline | Operational |
 | Homepage | VM120 | Lab dashboard | Operational |
@@ -40,33 +47,15 @@ Management, Docker, Backup, and Automation Baseline Complete
 | Uptime Kuma | VM120 | Basic monitoring | Operational |
 | Vaultwarden | VM120 | Password manager | Working, HTTPS pending |
 | Nginx Proxy Manager | VM120 | Reverse proxy | Operational |
-| Tailscale | VM100 / VM120 / devices | Remote access | Operational |
-| Ansible | VM100 | Lab automation | Started |
 
 ### Current Priorities
 
-1. Complete Git documentation update.
-2. Complete Ansible health check and update playbooks.
-3. Deploy AdGuard Home on VM100 for internal DNS.
-4. Resolve Vaultwarden HTTPS.
-5. Deploy Jellyfin on VM120.
-
----
-
-Phase 2: Service Platform Stabilization
-
-The core Proxmox, UniFi, Docker, backup, and management foundation is operational. VM100 now acts as the management and automation platform, VM110 remains dedicated to UniFi, and VM120 hosts Docker-based services.
-
----
-
-### Current Focus
-
-- Completing Git documentation updates
-- Building Ansible health check and update playbooks
-- Deploying AdGuard Home for internal DNS
-- Resolving Vaultwarden HTTPS
-- Planning Jellyfin deployment on VM120
-- Documenting backup and restore procedures
+1. Clean up and align documentation with the current lab state.
+2. Create an operations runbook.
+3. Resolve the Ansible sudo/become issue in `update-all.yml`.
+4. Define the Vaultwarden HTTPS strategy.
+5. Validate backup and restore procedures.
+6. Decide whether AdGuard should become the default DNS server for the full home network.
 
 ---
 
@@ -113,6 +102,21 @@ The core Proxmox, UniFi, Docker, backup, and management foundation is operationa
 | `docs/99-ideas-parking-lot.md` | Future ideas and non-current scope items |
 
 ---
+
+## Project Evolution
+
+The lab has evolved through several phases:
+
+1. Informal home technology setup
+2. Hardware recovery and rebuild
+3. Proxmox virtualization foundation
+4. Docker services platform
+5. Automation and health checks
+6. Internal DNS and service discovery
+7. Current operations and governance phase
+
+The full project history is documented in:
+docs/10-lab-evolution.md
 
 ## Owner
 

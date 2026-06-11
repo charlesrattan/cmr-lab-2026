@@ -1,27 +1,37 @@
-# CMR Lab 2026 - Target Architecture
+# CMR Lab 2026 - Architecture
 
-## Confirmed Architecture Direction
+## Purpose
 
-The CMR Lab rebuild will move away from the current unstable and Wi-Fi-dependent setup toward a more structured, wired and documented infrastructure.
+This document separates the original architecture direction, the current implemented architecture and the future target architecture.
 
-### Current State
+The goal is to preserve the evolution of CMR Lab while making the current operating state clear.
 
-- ISP router provides internet access.
-- Linksys router currently handles the main home/lab network.
-- Ubuntu server currently runs on an old MacBook.
-- Important devices are still dependent on Wi-Fi.
-- Several unused hardware assets are available but not yet fully tested.
+## Original Architecture Direction
+
+The original rebuild direction was to move away from an unstable, Wi-Fi-dependent setup toward a more structured and documented home lab.
+
+At that stage, the lab included:
+
+- ISP router
+- Linksys router
+- UniFi AC Pro access point
+- Ubuntu server running on an old MacBook
+- Several unused or partially tested devices
+- Limited documentation
+- No centralized DNS
+- No clear workload separation
+
+This original direction remains important because it shows the starting point of the project.
 
 ## Current Implemented Architecture
 
-As of 2026-06-10, CMR Lab has an operational Proxmox, UniFi, Docker, backup, and management baseline.
-
+As of June 2026, CMR Lab has an operational Proxmox, Docker, automation, monitoring, reverse proxy and internal DNS baseline.
 
 ISP Router
     |
 Linksys EA4500
     |
-Lab Switch
+Lab Network
     |
 Dell OptiPlex 7010 SFF - cmr-srv-01
     |
@@ -31,7 +41,7 @@ Proxmox VE
     |       |-- Tailscale
     |       |-- Git
     |       |-- Ansible
-    |       |-- Future DNS / monitoring
+    |       |-- AdGuard Home
     |
     |-- VM110 - unifi-controller-01
     |       |-- UniFi Network Application
@@ -44,23 +54,31 @@ Proxmox VE
             |-- Vaultwarden
             |-- Nginx Proxy Manager
 
-### Target State
+## Future Target Architecture
 
-- Replace the Linksys router with the UniFi Security Gateway.
-- Use the UniFi Cloud Key to manage UniFi devices.
-- Continue using the UniFi AC Pro access point for wireless access.
-- Recover one Dell OptiPlex 7010 to become the primary lab server.
-- Move core services away from the MacBook and onto the OptiPlex server.
-- Wire important infrastructure devices where possible instead of relying on Wi-Fi.
+The future architecture should focus on operational maturity before additional service expansion.
 
-| Device Type          | Naming Format | Example      |
-| -------------------- | ------------- | ------------ |
-| Gateway              | cmr-gw-##     | cmr-gw-01    |
-| Access Point         | cmr-ap-##     | cmr-ap-01    |
-| Server               | cmr-srv-##    | cmr-srv-01   |
-| Admin Workstation    | cmr-admin-##  | cmr-admin-01 |
-| Security Workstation | cmr-kali-##   | cmr-kali-01  |
-| Raspberry Pi         | cmr-pi-##     | cmr-pi-01    |
+### Near-Term Priorities
+
+- Complete documentation refactor
+- Create operations runbook
+- Resolve Ansible privileged update workflow
+- Define HTTPS strategy for internal services
+- Validate backup and restore procedures
+- Decide whether AdGuard becomes the default DNS server for the full home network
+
+### Future Services
+
+Future services may include:
+
+- Jellyfin
+- Home Assistant
+- Grafana
+- Prometheus
+- Wazuh
+- Local AI experimentation
+
+These should only be added after the current platform is documented, recoverable and stable.
 
 
 ### Target Network Layout

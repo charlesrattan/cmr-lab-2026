@@ -51,11 +51,14 @@ The goal of this platform is to provide practical daily-use services, service mo
 
 | Service | URL | Status |
 |---|---|---|
-| Homepage | http://dashboard.cmrlab.local | Working |
-| Uptime Kuma | http://kuma.cmrlab.local | Working |
-| Portainer | https://10.146.91.230:9443 | Working |
-| Nginx Proxy Manager | http://10.146.91.230:81 | Working |
-| Vaultwarden | http://vault.cmrlab.local | Installed, not production-ready |
+| Homepage | `http://dashboard.cmrlab.internal` | Working |
+| Uptime Kuma | `http://kuma.cmrlab.internal` | Working |
+| Portainer | `https://portainer.cmrlab.internal` | Working |
+| Nginx Proxy Manager | `http://10.146.91.230:81` | Working |
+| Vaultwarden | `http://vault.cmrlab.internal` | Working, HTTPS pending |
+| AdGuard Home | `http://adguard.cmrlab.internal` | Working |
+| UniFi Network Application | `https://unifi.cmrlab.internal:8443` | Working |
+| Proxmox | `https://proxmox.cmrlab.internal:8006` | Working |
 
 ---
 
