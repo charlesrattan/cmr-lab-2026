@@ -59,7 +59,15 @@ Recover one Dell OptiPlex 7010 and prepare it to become the primary lab server.
 - [ ] Plan Dell Micro controller decommission cleanup
 - [ ] Create Ansible health-check playbook
 - [ ] Complete Ansible update playbook
-- [ ] Deploy AdGuard Home on VM100
+- [ ] Resolve Ansible sudo/become issue in `update-all.yml`
+- [x] Deploy AdGuard Home on VM100
+- [x] Create internal DNS namespace
+- [x] Migrate from `.local` to `.internal`
+- [x] Integrate DNS rewrites with Nginx Proxy Manager
+- [x] Validate core lab services using internal DNS names
+- [x] Snapshot VM100 after AdGuard deployment
+- [x] Snapshot VM120 after DNS/proxy integration
+- [ ] Create restore procedure for DNS and Docker services
 - [ ] Resolve Vaultwarden HTTPS
 - [ ] Deploy Jellyfin on VM120
 - [ ] Document backup restoration procedure

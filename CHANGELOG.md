@@ -1,4 +1,29 @@
-## 2026-06-07
+## 2026-06-11 - Internal DNS and Service Discovery Baseline
+
+### Added
+- Installed AdGuard Home on VM100 `ubuntu-mgmt-01`.
+- Migrated DNS port 53 from `systemd-resolved` stub listener to AdGuard Home.
+- Configured Quad9 DNS-over-HTTPS upstream: `https://dns10.quad9.net/dns-query`.
+- Created internal DNS namespace: `cmrlab.internal`.
+- Added DNS rewrites for core lab services.
+- Integrated Nginx Proxy Manager with the new `.internal` namespace.
+- Updated Homepage allowed hosts to include `dashboard.cmrlab.internal`.
+- Validated internal service access from Windows workstation.
+- Created Proxmox snapshots for VM100 and VM120 after successful DNS and proxy validation.
+
+### Validated URLs
+- `http://dashboard.cmrlab.internal`
+- `http://vault.cmrlab.internal`
+- `http://kuma.cmrlab.internal`
+- `https://portainer.cmrlab.internal`
+- `http://adguard.cmrlab.internal`
+- `https://unifi.cmrlab.internal:8443`
+- `https://proxmox.cmrlab.internal:8006`
+
+### Known Issues
+- HTTPS certificates are not yet implemented for internal services.
+- Vaultwarden currently works over HTTP through NPM.
+- `update-all.yml` sudo/become issue remains unresolved.
 
 ## 2026-06-10 - Management, Docker, Backup, and Automation Baseline
 

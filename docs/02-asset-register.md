@@ -79,7 +79,7 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Attribute | Value |
 | --- | --- |
 | Name | ubuntu-mgmt-01 |
-| Role | Management and Automation Platform |
+| Role | Management and Automation Platform. AdGuard Home, Ansible, Git and Tailscale|
 | vCPU | 2 |
 | RAM | 4GB |
 | Disk | 50GB |
@@ -88,6 +88,15 @@ This document serves as the authoritative inventory of all hardware, network inf
 | Status | Operational |
 | User | charles |
 | SSH | active |
+
+### VM100 - DNS and Management Services
+
+| Service | Purpose | Status |
+|---|---|---|
+| AdGuard Home | Internal DNS, DNS rewrites, DNS logging, ad blocking capability | Operational |
+| Ansible | Lab automation and health checks | Operational |
+| Tailscale | Remote access | Operational |
+| Git | Repository/documentation workflow | Operational |
 
 ## VM110 - unifi-controller-01
 

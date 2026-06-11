@@ -74,6 +74,48 @@ The following `.cmrlab.local` names are currently mapped through the Windows hos
 
 ---
 
+## Internal DNS and Service Discovery
+
+AdGuard Home is deployed on VM100 `ubuntu-mgmt-01` and provides centralized DNS for CMR Lab.
+
+| Item | Value |
+|---|---|
+| DNS Server | `10.146.91.99` |
+| Web UI | `http://adguard.cmrlab.internal` |
+| Upstream DNS | Quad9 DNS-over-HTTPS |
+| Upstream URL | `https://dns10.quad9.net/dns-query` |
+| Internal Domain | `cmrlab.internal` |
+
+### DNS Rewrites
+
+| Hostname | Target |
+|---|---|
+| `proxmox.cmrlab.internal` | `10.146.91.13` |
+| `unifi.cmrlab.internal` | `10.146.91.172` |
+| `dashboard.cmrlab.internal` | `10.146.91.230` |
+| `vault.cmrlab.internal` | `10.146.91.230` |
+| `kuma.cmrlab.internal` | `10.146.91.230` |
+| `portainer.cmrlab.internal` | `10.146.91.230` |
+| `adguard.cmrlab.internal` | `10.146.91.99` |
+
+### Nginx Proxy Manager Hosts
+
+| Hostname | Destination | Status |
+|---|---|---|
+| `dashboard.cmrlab.internal` | Homepage on VM120 | Working |
+| `vault.cmrlab.internal` | Vaultwarden on VM120 | Working |
+| `kuma.cmrlab.internal` | Uptime Kuma on VM120 | Working |
+| `portainer.cmrlab.internal` | Portainer on VM120 | Working |
+| `adguard.cmrlab.internal` | AdGuard Home on VM100 | Working |
+
+### Notes
+- Homepage required `dashboard.cmrlab.internal` to be added to `HOMEPAGE_ALLOWED_HOSTS`.
+- Portainer requires HTTPS upstream to port `9443`.
+- Vaultwarden HTTPS is still pending.
+- Proxmox and UniFi are reachable using `.internal` names with their native ports.
+
+---
+
 ## Docker Compose
 
 Docker services are now managed through:

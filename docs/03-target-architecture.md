@@ -16,7 +16,7 @@ The CMR Lab rebuild will move away from the current unstable and Wi-Fi-dependent
 
 As of 2026-06-10, CMR Lab has an operational Proxmox, UniFi, Docker, backup, and management baseline.
 
-```text
+
 ISP Router
     |
 Linksys EA4500
@@ -65,7 +65,7 @@ Proxmox VE
 
 ### Target Network Layout
 
-```text
+
 ISP Router
     |
 UniFi Security Gateway
@@ -119,5 +119,32 @@ Create a documented, secure, and scalable home laboratory supporting:
 - MFA
 - Backups
 - Vulnerability Management
+
+## Internal DNS Architecture
+
+CMR Lab now uses AdGuard Home on VM100 `ubuntu-mgmt-01` as the internal DNS platform.
+
+| Component | Value |
+|---|---|
+| DNS Server | AdGuard Home |
+| Host | VM100 `ubuntu-mgmt-01` |
+| IP Address | `10.146.91.99` |
+| Upstream DNS | Quad9 DNS-over-HTTPS |
+| Upstream URL | `https://dns10.quad9.net/dns-query` |
+| Internal Namespace | `cmrlab.internal` |
+
+The previous `.local` naming approach is being retired because `.local` is reserved for multicast DNS and can conflict with Apple, Linux, Home Assistant, and service discovery systems.
+
+### DNS Service Catalog
+
+| Name | Target |
+|---|---|
+| `proxmox.cmrlab.internal` | `10.146.91.13` |
+| `unifi.cmrlab.internal` | `10.146.91.172` |
+| `dashboard.cmrlab.internal` | `10.146.91.230` |
+| `vault.cmrlab.internal` | `10.146.91.230` |
+| `kuma.cmrlab.internal` | `10.146.91.230` |
+| `portainer.cmrlab.internal` | `10.146.91.230` |
+| `adguard.cmrlab.internal` | `10.146.91.99` |
 
 Status: Draft
