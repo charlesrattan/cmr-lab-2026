@@ -134,7 +134,6 @@ The project has progressed through several major phases:
 
 The complete history of the project, including major decisions and lessons learned, is documented in:
 docs/10-lab-evolution.md
-```
 
 ---
 
