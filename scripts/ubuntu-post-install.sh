@@ -36,21 +36,21 @@ sudo apt upgrade -y
 
 echo "[3/8] Installing baseline utilities..."
 
-sudo apt install -y 
-curl 
-wget 
-git 
-nano 
-vim 
-htop 
-btop 
-net-tools 
-unzip 
-zip 
-dnsutils 
-traceroute 
-software-properties-common 
-ca-certificates 
+sudo apt install -y \
+curl \
+wget \
+git \
+nano \
+vim \
+htop \
+btop \
+net-tools \
+unzip \
+zip \
+dnsutils \
+traceroute \
+software-properties-common \
+ca-certificates \
 apt-transport-https
 
 # -----------------------------------------------------

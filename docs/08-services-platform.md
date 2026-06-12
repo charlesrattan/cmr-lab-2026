@@ -74,9 +74,9 @@ These functions are delegated to dedicated platforms elsewhere in the environmen
 
 | Service                   | URL                                      | Status      |
 | ------------------------- | ---------------------------------------- | ----------- |
-| Homepage                  | `http://dashboard.cmrlab.internal'       | Operational |
+| Homepage                  | `http://dashboard.cmrlab.internal`       | Operational |
 | Uptime Kuma               | `http://kuma.cmrlab.internal`            | Operational |
-| Portainer                 | `https://portainer.cmrlab.internal:9443' | Operational |
+| Portainer                 | `https://portainer.cmrlab.internal:9443` | Operational |
 | Vaultwarden               | `https://vault.cmrlab.internal`          | Operational |
 | Nginx Proxy Manager       | `http://npm.cmrlab.internal:81`          | Operational |
 | AdGuard Home              | `http://adguard.cmrlab.internal`         | Operational |
