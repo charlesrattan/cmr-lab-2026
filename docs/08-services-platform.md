@@ -72,16 +72,16 @@ These functions are delegated to dedicated platforms elsewhere in the environmen
 
 # Service Access Catalog
 
-| Service                   | URL                                    | Status      |
-| ------------------------- | -------------------------------------- | ----------- |
-| Homepage                  | `http://dashboard.cmrlab.internal`     | Operational |
-| Uptime Kuma               | `http://kuma.cmrlab.internal`          | Operational |
-| Portainer                 | `https://portainer.cmrlab.internal`    | Operational |
-| Vaultwarden               | `http://vault.cmrlab.internal`         | Operational |
-| Nginx Proxy Manager       | `http://10.146.91.230:81`              | Operational |
-| AdGuard Home              | `http://adguard.cmrlab.internal`       | Operational |
-| UniFi Network Application | `https://unifi.cmrlab.internal:8443`   | Operational |
-| Proxmox                   | `https://proxmox.cmrlab.internal:8006` | Operational |
+| Service                   | URL                                      | Status      |
+| ------------------------- | ---------------------------------------- | ----------- |
+| Homepage                  | `http://dashboard.cmrlab.internal'       | Operational |
+| Uptime Kuma               | `http://kuma.cmrlab.internal`            | Operational |
+| Portainer                 | `https://portainer.cmrlab.internal:9443' | Operational |
+| Vaultwarden               | `https://vault.cmrlab.internal`          | Operational |
+| Nginx Proxy Manager       | `http://npm.cmrlab.internal:81`          | Operational |
+| AdGuard Home              | `http://adguard.cmrlab.internal`         | Operational |
+| UniFi Network Application | `https://unifi.cmrlab.internal:8443`     | Operational |
+| Proxmox                   | `https://proxmox.cmrlab.internal:8006`   | Operational |
 
 ---
 
@@ -100,6 +100,7 @@ CMR Lab uses the `cmrlab.internal` namespace for internal service discovery.
 | adguard.cmrlab.internal   | AdGuard Home              |
 | unifi.cmrlab.internal     | UniFi Network Application |
 | proxmox.cmrlab.internal   | Proxmox                   |
+| npm.cmrlab.internal       | Nginx Proxy Manager       |
 
 ---
 
@@ -109,13 +110,14 @@ Nginx Proxy Manager provides the standard service access layer.
 
 ### Configured Hosts
 
-| Hostname                  | Destination  | Status      |
-| ------------------------- | ------------ | ----------- |
-| dashboard.cmrlab.internal | Homepage     | Operational |
-| vault.cmrlab.internal     | Vaultwarden  | Operational |
-| kuma.cmrlab.internal      | Uptime Kuma  | Operational |
-| portainer.cmrlab.internal | Portainer    | Operational |
-| adguard.cmrlab.internal   | AdGuard Home | Operational |
+| Hostname                  | Destination         | Status      |
+| ------------------------- | ------------------- | ----------- |
+| dashboard.cmrlab.internal | Homepage            | Operational |
+| vault.cmrlab.internal     | Vaultwarden         | Operational |
+| kuma.cmrlab.internal      | Uptime Kuma         | Operational |
+| portainer.cmrlab.internal | Portainer           | Operational |
+| adguard.cmrlab.internal   | AdGuard Home        | Operational |
+| npm.cmrlab.internal       | Nginx Proxy Manager | Operational |
 
 ---
 
@@ -150,7 +152,7 @@ Manual container creation should be avoided to prevent configuration drift.
 
 | Issue                                        | Status             |
 | -------------------------------------------- | ------------------ |
-| Vaultwarden HTTPS implementation             | Pending            |
+| Internal CA trust deployment to all devices  | In Progress        |
 | Ansible-based container lifecycle management | Future enhancement |
 
 ---
@@ -159,7 +161,9 @@ Manual container creation should be avoided to prevent configuration drift.
 
 * Homepage requires `dashboard.cmrlab.internal` to be included in `HOMEPAGE_ALLOWED_HOSTS`.
 * Portainer reverse proxy access requires HTTPS to port `9443`.
-* Vaultwarden should not be used for production credentials until HTTPS is implemented.
+* Vaultwarden is operational over HTTPS using a certificate issued by the CMR Lab Root CA.
+* Chrome and iPhone clients have been successfully validated.
+* Native password managers remain enabled during the validation period.
 * Service access should use DNS names rather than direct IP addresses wherever possible.
 
 ---

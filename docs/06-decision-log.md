@@ -43,6 +43,12 @@ This document serves as a lightweight Architecture Decision Record (ADR) registe
 | 2026-06-11 | Prioritize operational maturity before service expansion                        | Stability, documentation and recoverability provide more value than additional services          | Accepted |
 | 2026-06-11 | Treat the lab as an enterprise infrastructure simulation platform               | Aligns the project with professional development, governance and operational learning objectives | Accepted |
 | 2026-06-11 | Treat documentation as a deliverable rather than a by-product                   | Documentation quality directly supports maintainability, recovery and portfolio value            | Accepted |
+| 2026-06-12 | Adopt `cmrlab.internal` as the authoritative namespace for local and remote access | Eliminates dependence on service-specific Tailscale URLs and provides consistent service discovery | Accepted |
+| 2026-06-12 | Enable Tailscale subnet routing on VM100 for `10.146.91.0/24` | Allows remote clients to access internal resources using native LAN addressing and DNS records | Accepted |
+| 2026-06-12 | Implement an internal Certificate Authority on VM100 | Enables TLS for internal services that cannot obtain public certificates | Accepted |
+| 2026-06-12 | Issue internal TLS certificate for `vault.cmrlab.internal` | Required to provide HTTPS secure context support for Vaultwarden | Accepted |
+| 2026-06-12 | Promote Vaultwarden to active production use | Core infrastructure requirements including DNS, remote access and HTTPS were successfully validated | Accepted |
+
 
 ---
 

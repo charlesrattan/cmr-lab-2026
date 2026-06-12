@@ -83,19 +83,19 @@ The current focus is no longer adding services rapidly. The focus is now:
 | Homepage                  | VM120             | Service dashboard                  | Operational                 |
 | Portainer                 | VM120             | Docker management                  | Operational                 |
 | Uptime Kuma               | VM120             | Monitoring                         | Operational                 |
-| Vaultwarden               | VM120             | Password management                | Operational (HTTPS pending) |
+| Vaultwarden               | VM120             | Password management                | Operational                 |
 | Nginx Proxy Manager       | VM120             | Reverse proxy and service routing  | Operational                 |
 
 ---
 
 # Current Priorities
 
-1. Align all documentation with the current state of the lab.
-2. Expand the Operations Runbook.
-3. Resolve the Ansible privileged update workflow.
-4. Define and implement an HTTPS strategy for internal services.
-5. Validate backup and restore procedures.
-6. Determine whether AdGuard Home should become the default DNS platform for the entire home network.
+1. Resolve the Ansible privileged update workflow.
+2. Validate backup and restore procedures.
+3. Deploy trust for the CMR Lab Root CA across all client devices.
+4. Expand internal TLS coverage to core services.
+5. Continue operational maturity improvements.
+6. Monitor Vaultwarden adoption and validation period.
 
 ---
 
@@ -122,15 +122,16 @@ The current focus is no longer adding services rapidly. The focus is now:
 
 The project has progressed through several major phases:
 
-| Phase   | Focus                                     |
-| ------- | ----------------------------------------- |
-| Phase 0 | Informal home technology setup            |
-| Phase 1 | Hardware recovery and rebuild             |
-| Phase 2 | Proxmox virtualization foundation         |
-| Phase 3 | Docker services platform                  |
-| Phase 4 | Automation and operational health checks  |
-| Phase 5 | Internal DNS and service discovery        |
-| Phase 6 | Operations and governance (current phase) |
+| Phase   | Focus                                        |
+| ------- | -------------------------------------------- |
+| Phase 0 | Informal home technology setup               |
+| Phase 1 | Hardware recovery and rebuild                |
+| Phase 2 | Proxmox virtualization foundation            |
+| Phase 3 | Docker services platform                     |
+| Phase 4 | Automation and operational health checks     |
+| Phase 5 | Internal DNS and service discovery           |
+| Phase 6 | Remote access, PKI and service consolidation |
+| Phase 7 | Operations and governance (current phase)    |
 
 The complete history of the project, including major decisions and lessons learned, is documented in:
 docs/10-lab-evolution.md

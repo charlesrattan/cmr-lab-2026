@@ -6,6 +6,32 @@ Entries are recorded chronologically and are intended to provide a historical re
 
 Superseded decisions and intermediate implementation steps may remain documented here even if later replaced by newer approaches.
 
+## 2026-06-12 - Stable Namespace, Internal PKI and Vaultwarden Production Use
+
+### Added
+- Enabled Tailscale subnet routing on VM100 `ubuntu-mgmt-01` for `10.146.91.0/24`.
+- Integrated AdGuard Home with Tailscale DNS clients.
+- Standardized local and remote service access through `cmrlab.internal`.
+- Enhanced Homepage with Docker integration and live container status.
+- Added Homepage resource, search and datetime widgets.
+- Created the CMR Lab internal Root Certificate Authority.
+- Issued a TLS certificate for `vault.cmrlab.internal`.
+- Configured Vaultwarden HTTPS through Nginx Proxy Manager.
+- Installed and validated Vaultwarden/Bitwarden clients on Chrome and iPhone.
+- Imported passwords from Chrome Password Manager.
+- Imported passwords from Apple Passwords.
+
+### Changed
+- Homepage service links were updated to use stable `cmrlab.internal` hostnames.
+- Remote access now uses Tailscale subnet routing instead of service-specific Tailscale URLs.
+- Vaultwarden moved from lab testing to active production use.
+
+### Validated
+- `cmrlab.internal` service access works locally and remotely.
+- Vaultwarden HTTPS secure context warning is resolved.
+- Chrome extension sync is working.
+- iPhone Bitwarden app sync is working.
+- Vaultwarden imports from Chrome and iPhone completed successfully.
 
 ## 2026-06-11 - Documentation Refactor and Operations Phase Alignment
 

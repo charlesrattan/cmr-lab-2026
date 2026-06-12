@@ -189,6 +189,38 @@ Naming is infrastructure.
 
 ---
 
+# Phase 6 - Remote Access, Internal PKI and Service Consolidation
+
+With internal DNS established, the next challenge was providing a consistent user experience regardless of location.
+
+The objective was to eliminate the distinction between local and remote service access while improving security and usability.
+
+### Key Outcomes
+
+* Tailscale subnet routing enabled on VM100.
+* Remote clients gained access to the internal lab subnet.
+* `cmrlab.internal` became the authoritative namespace for both local and remote access.
+* Homepage migrated from Tailscale-specific URLs to internal DNS names.
+* Internal Certificate Authority (CA) established.
+* First internal TLS certificate issued for `vault.cmrlab.internal`.
+* Vaultwarden HTTPS implemented through Nginx Proxy Manager.
+* Vaultwarden adopted for active password management.
+* Chrome and iPhone Vaultwarden clients deployed and validated.
+
+### Why It Mattered
+
+Infrastructure services became location-independent.
+
+Users no longer needed to remember different URLs for local and remote access.
+
+The introduction of internal PKI also established a foundation for future TLS deployments across the environment.
+
+### Key Lesson
+
+Service discovery, remote access and certificate management are most effective when designed as a unified system.
+
+---
+
 # Major Inflection Points
 
 Several decisions fundamentally changed the direction of the project.
@@ -234,15 +266,16 @@ This phase aligns the project more closely with real-world infrastructure operat
 
 The mission of the project has evolved significantly.
 
-| Stage                | Primary Goal                 |
-| -------------------- | ---------------------------- |
-| Initial Environment  | Make technology useful       |
-| Rebuild Phase        | Stabilize infrastructure     |
-| Virtualization Phase | Modernize the platform       |
-| Services Phase       | Deliver practical services   |
-| Automation Phase     | Reduce manual administration |
-| DNS Phase            | Simplify service discovery   |
-| Current Phase        | Improve operational maturity |
+| Stage                         | Primary Goal                          |
+| ----------------------------- | ------------------------------------- |
+| Initial Environment           | Make technology useful                |
+| Rebuild Phase                 | Stabilize infrastructure              |
+| Virtualization Phase          | Modernize the platform                |
+| Services Phase                | Deliver practical services            |
+| Automation Phase              | Reduce manual administration          |
+| DNS Phase                     | Simplify service discovery            |
+| Remote Access and PKI Phase   | Unify access and improve security     |
+| Current Phase                 | Improve operational maturity          |
 
 The project has evolved from a homelab into an enterprise infrastructure simulation platform.
 

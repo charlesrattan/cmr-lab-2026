@@ -25,16 +25,16 @@ Architecture, design decisions, project history and future plans are documented 
 
 # Core Service Access
 
-| Service                   | URL                                  |
-| ------------------------- | ------------------------------------ |
-| Proxmox                   | https://proxmox.cmrlab.internal:8006 |
-| UniFi Network Application | https://unifi.cmrlab.internal:8443   |
-| Homepage Dashboard        | http://dashboard.cmrlab.internal     |
-| Vaultwarden               | http://vault.cmrlab.internal         |
-| Uptime Kuma               | http://kuma.cmrlab.internal          |
-| Portainer                 | https://portainer.cmrlab.internal    |
-| AdGuard Home              | http://adguard.cmrlab.internal       |
-| Nginx Proxy Manager       | http://10.146.91.230:81              |
+| Service                   | URL                                    |
+| ------------------------- | -------------------------------------- |
+| Proxmox                   | https://proxmox.cmrlab.internal:8006   |
+| UniFi Network Application | https://unifi.cmrlab.internal:8443     |
+| Homepage Dashboard        | http://dashboard.cmrlab.internal       |
+| Vaultwarden               | https://vault.cmrlab.internal          |
+| Uptime Kuma               | http://kuma.cmrlab.internal            |
+| Portainer                 | https://portainer.cmrlab.internal:9443 |
+| AdGuard Home              | http://adguard.cmrlab.internal         |
+| Nginx Proxy Manager       | http://npm.cmrlab.internal:81          |
 
 ---
 
@@ -52,9 +52,7 @@ Repository responsibilities include:
 
 Repository location:
 
-```text
 cmr-lab-2026/
-```
 
 ---
 
@@ -62,19 +60,15 @@ cmr-lab-2026/
 
 Operational automation is maintained under:
 
-```text
 scripts/
-```
 
 Current structure:
 
-```text
 scripts/
 ├── ansible/
 │   ├── health-check.yml
 │   └── update-all.yml
 └── ubuntu-post-install.sh
-```
 
 ---
 
@@ -97,10 +91,8 @@ Current checks:
 
 Execute:
 
-```bash
 cd ~/cmr-lab-2026/scripts/ansible
 ansible-playbook health-check.yml
-```
 
 ---
 
@@ -120,10 +112,8 @@ Ansible sudo/become workflow requires refinement.
 
 Execute:
 
-```bash
 cd ~/cmr-lab-2026/scripts/ansible
 ansible-playbook update-all.yml
-```
 
 ---
 
@@ -165,10 +155,8 @@ Confirm:
 
 From VM100:
 
-```bash
 cd ~/cmr-lab-2026/scripts/ansible
 ansible-playbook health-check.yml
-```
 
 Review output for:
 
@@ -219,62 +207,54 @@ Confirm:
 
 ## Check Containers
 
-```bash
 docker ps
-```
-
----
 
 ## Restart Containers
 
-```bash
 cd ~/docker
 docker compose restart
-```
 
 ---
 
 ## Recreate Containers
 
-```bash
 cd ~/docker
 docker compose up -d
-```
 
 ---
 
 ## View Logs
 
-```bash
 docker logs homepage
 docker logs portainer
 docker logs uptime-kuma
 docker logs vaultwarden
-```
 
 ---
 
 # DNS Operations
 
+# Remote Access Operations
+
+## Verify Tailscale Status
+
+sudo tailscale status
+
 ## Verify AdGuard Home
 
-```bash
 sudo systemctl status AdGuardHome
-```
 
 ---
 
 ## Test DNS Resolution
 
-```bash
 nslookup dashboard.cmrlab.internal 10.146.91.99
-```
 
-Expected result:
 
-```text
+## Expected result:
+
 10.146.91.230
-```
+
 
 ---
 
@@ -282,17 +262,13 @@ Expected result:
 
 ## Verify Service
 
-```bash
 sudo systemctl status unifi
-```
 
 ---
 
 ## Restart Service
 
-```bash
 sudo systemctl restart unifi
-```
 
 ---
 
@@ -304,6 +280,19 @@ Confirm:
 * AP adopted
 * Clients connected
 * No uplink warnings
+
+---
+
+# Internal PKI Operations
+
+## Root CA Location
+
+/home/charles/ca
+
+## critical Files
+
+cmrlab-root-ca.crt
+cmrlab-root-ca.key
 
 ---
 
@@ -334,11 +323,11 @@ Always:
 
 # Known Issues
 
-| Issue                               | Status       |
-| ----------------------------------- | ------------ |
-| Vaultwarden HTTPS implementation    | Pending      |
-| update-all.yml sudo/become handling | Pending      |
-| Network-wide AdGuard deployment     | Under review |
+| Issue                               | Status           |
+| ----------------------------------- | ---------------- |
+| update-all.yml sudo/become handling     | Pending      |
+| Internal CA trust deployment to devices | In Progress  |
+| Backup restoration validation           | Pending      |
 
 ---
 
