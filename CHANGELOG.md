@@ -6,6 +6,49 @@ Entries are recorded chronologically and are intended to provide a historical re
 
 Superseded decisions and intermediate implementation steps may remain documented here even if later replaced by newer approaches.
 
+## 2026-06-14 - Media Platform Validation and Incident Response
+
+### Added
+
+* Deployed Jellyfin media platform.
+* Deployed qBittorrent, Sonarr, Radarr, Prowlarr and Jellyseerr.
+* Integrated media services with Homepage.
+* Added media services to Uptime Kuma monitoring.
+* Added Nginx Proxy Manager proxy hosts for media services.
+* Created dedicated media storage structure:
+
+  * /media/downloads
+  * /media/movies
+  * /media/tv
+
+### Changed
+
+* Expanded VM120 root filesystem from approximately 18 GB to 37 GB.
+* Applied bandwidth limits to qBittorrent to reduce household network impact.
+* Validated Jellyseerr → Radarr → Prowlarr → qBittorrent workflow.
+
+### Fixed
+
+* Resolved Jellyfin startup failures caused by insufficient free space.
+* Restored remote access functionality by correcting VM100 subnet router configuration.
+* Enabled persistent IPv4 forwarding on ubuntu-mgmt-01.
+
+### Incident Response
+
+* Investigated overnight service disruptions affecting the entire lab.
+* Identified Proxmox host network interface failure.
+* Observed repeated Intel e1000e NETDEV WATCHDOG transmit queue timeout events.
+* Confirmed outage was not caused by Jellyfin or Arr stack services.
+* Restored connectivity through controlled Proxmox host reboot.
+
+### Snapshots
+
+Created:
+
+* VM100 post_incident_2026_06_14
+* VM110 post_incident_2026_06_14
+* VM120 post_incident_2026_06_14
+
 ## 2026-06-12 - Stable Namespace, Internal PKI and Vaultwarden Production Use
 
 ### Added

@@ -134,6 +134,184 @@ Nginx Proxy Manager provides the standard service access layer.
 
 ---
 
+## Media Platform Stack
+
+### Purpose
+
+Provide centralized media management, acquisition and streaming capabilities for the lab.
+
+### Host
+
+VM120 - docker-services-01
+
+### Storage Layout
+
+/media
+
+Subdirectories:
+
+* /media/downloads
+* /media/movies
+* /media/tv
+
+### Services
+
+#### Jellyfin
+
+Role:
+
+Media server.
+
+Ports:
+
+* 8096/tcp
+
+Libraries:
+
+* Movies
+* TV Shows
+
+Status:
+
+Operational.
+
+---
+
+#### qBittorrent
+
+Role:
+
+Download client.
+
+Ports:
+
+* 8081/tcp
+* 6881/tcp
+* 6881/udp
+
+Categories:
+
+* movies
+* tv
+
+Operational Controls:
+
+Temporary bandwidth limits applied to reduce household network impact.
+
+---
+
+#### Sonarr
+
+Role:
+
+Television series automation.
+
+Connected Services:
+
+* Prowlarr
+* qBittorrent
+
+Root Folder:
+
+/tv
+
+---
+
+#### Radarr
+
+Role:
+
+Movie automation.
+
+Connected Services:
+
+* Prowlarr
+* qBittorrent
+
+Root Folder:
+
+/movies
+
+---
+
+#### Prowlarr
+
+Role:
+
+Indexer management platform.
+
+Connected Applications:
+
+* Sonarr
+* Radarr
+
+Status:
+
+Operational.
+
+---
+
+#### Jellyseerr
+
+Role:
+
+Media request portal.
+
+Connected Services:
+
+* Jellyfin
+* Sonarr
+* Radarr
+
+DNS:
+
+jellyseerr.cmrlab.internal
+
+Status:
+
+Operational.
+
+### Validation
+
+Successfully validated:
+
+Jellyseerr
+→ Radarr
+→ Prowlarr
+→ qBittorrent
+
+Workflow confirmed operational.
+
+### Storage Expansion Event
+
+Date:
+
+2026-06-14
+
+Issue:
+
+Jellyfin failed due to insufficient free space on VM120 root filesystem.
+
+Original Size:
+
+18.47 GB
+
+Corrective Action:
+
+Expanded Ubuntu LVM root filesystem using:
+
+sudo lvextend -l +100%FREE -r /dev/ubuntu-vg/ubuntu-lv
+
+Result:
+
+36.95 GB available root filesystem.
+
+Status:
+
+Resolved.
+
+---
+
 # Docker Compose Management
 
 All services are managed through Docker Compose.

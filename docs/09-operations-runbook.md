@@ -343,6 +343,142 @@ Always:
 
 ---
 
+## Incident Response Procedures
+
+### Proxmox Host Unreachable
+
+Use this procedure when Proxmox and all VMs appear unavailable.
+
+#### Symptoms
+
+* Proxmox IP does not respond.
+* VM100, VM110 and VM120 do not respond.
+* Internal DNS fails.
+* Services using `.cmrlab.internal` are unavailable.
+* Internet may appear broken if client DNS is set to AdGuard.
+
+#### Initial Checks
+
+From Windows workstation:
+
+ping 10.146.91.13
+ping 10.146.91.99
+ping 10.146.91.172
+ping 10.146.91.230
+
+Check workstation network:
+
+ipconfig /all
+arp -a
+
+Confirm:
+
+* Workstation is on 10.146.91.0/24.
+* Gateway 10.146.91.89 is reachable.
+* UniFi AP 10.146.91.153 is reachable.
+
+#### Console Checks
+
+If Proxmox is unreachable but the LAN is healthy, connect monitor and keyboard to `cmr-srv-01`.
+
+Look for:
+
+NETDEV WATCHDOG
+e1000e
+transmit queue timed out
+
+
+Check NIC and host state:
+
+ip -br link
+ip -s link show nic0
+uptime
+journalctl -k | grep -i e1000e | tail -50
+
+
+#### Recovery
+
+If host is responsive but network remains unavailable:
+
+reboot
+
+
+After reboot:
+
+qm list
+
+Confirm VM100, VM110 and VM120 are running.
+
+#### Evidence Collection
+
+After recovery:
+
+journalctl -b -1 | grep -i "NETDEV WATCHDOG" | head -20
+journalctl -b -1 | grep -i "NETDEV WATCHDOG" | tail -20
+journalctl -b -1 | grep -i -E "shutdown|reboot|stopall|qmshutdown|qmstart|e1000e" | tail -100
+
+---
+
+### Tailscale Remote Access Failure
+
+Use this procedure when Tailscale clients can reach Tailscale IPs but cannot reach internal LAN services or `.cmrlab.internal` names.
+
+#### Known Working Test
+
+From phone or remote client:
+
+http://100.85.11.22:3000
+
+This tests direct Tailscale access to VM120.
+
+#### LAN Service Test
+
+From phone or remote client:
+
+http://dashboard.cmrlab.internal
+
+This requires both DNS resolution and subnet routing.
+
+#### VM100 Checks
+
+On VM100:
+
+sudo tailscale status
+sysctl net.ipv4.ip_forward
+
+If Tailscale reports:
+
+Subnet routing is enabled, but IP forwarding is disabled
+
+or if:
+
+net.ipv4.ip_forward = 0
+
+enable forwarding:
+
+sudo sysctl -w net.ipv4.ip_forward=1
+
+Make persistent:
+
+echo "net.ipv4.ip_forward=1" | sudo tee /etc/sysctl.d/99-cmrlab-tailscale-router.conf
+sudo sysctl --system
+
+Validate:
+
+sysctl net.ipv4.ip_forward
+sudo tailscale status
+
+#### Validation
+
+From phone with Tailscale enabled:
+
+http://dashboard.cmrlab.internal
+
+
+Expected result:
+
+Homepage loads.
+
 # Current Status
 
 Current Phase:

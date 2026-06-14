@@ -12,42 +12,44 @@ This document serves as a lightweight Architecture Decision Record (ADR) registe
 
 # Decision Register
 
-| Date       | Decision                                                                        | Reason                                                                                           | Outcome  |
-| ---------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | -------- |
-| 2026-06-03 | Use GitHub as the source of truth for lab documentation                         | Provides version control, portability and professional documentation practices                   | Accepted |
-| 2026-06-03 | Use VS Code as the primary editor                                               | Supports Markdown, Git integration, scripting and future infrastructure-as-code work             | Accepted |
-| 2026-06-03 | Use Git for version control                                                     | Encourages professional workflow habits and preserves documentation history                      | Accepted |
-| 2026-06-03 | Require evidence-based architecture decisions                                   | Hardware and platforms must be validated before receiving permanent roles                        | Accepted |
-| 2026-06-04 | Designate the recovered Dell OptiPlex 7010 SFF as the primary Proxmox candidate | Hardware validation confirmed suitability for virtualization workloads                           | Accepted |
-| 2026-06-05 | Transition from hardware validation to Proxmox deployment                       | Core hardware platform successfully validated                                                    | Accepted |
-| 2026-06-06 | Deploy Proxmox VE on `cmr-srv-01`                                               | Provides virtualization, workload separation and future scalability                              | Accepted |
-| 2026-06-06 | Use Proxmox as the primary infrastructure platform                              | Legacy controller hardware no longer aligned with long-term goals                                | Accepted |
-| 2026-06-07 | Host UniFi Network Application on VM110                                         | Separates network management from workstation platforms                                          | Accepted |
-| 2026-06-07 | Use CPU type `host` for VM110                                                   | Required to resolve MongoDB compatibility issues                                                 | Accepted |
-| 2026-06-07 | Create VM120 as the dedicated Docker services platform                          | Provides workload separation and operational clarity                                             | Accepted |
-| 2026-06-07 | Use Homepage as the operations dashboard                                        | Provides centralized visibility of infrastructure and services                                   | Accepted |
-| 2026-06-07 | Use Uptime Kuma for initial monitoring                                          | Lightweight monitoring provided immediate operational visibility                                 | Accepted |
-| 2026-06-07 | Deploy Nginx Proxy Manager                                                      | Simplifies internal service routing and reverse proxy management                                 | Accepted |
-| 2026-06-07 | Keep CMR Enterprise infrastructure separate from homelab infrastructure         | Reduces operational risk and prevents dependency between environments                            | Accepted |
-| 2026-06-07 | Use Tailscale as the preferred remote access platform                           | Secure access without exposing services to the public internet                                   | Accepted |
-| 2026-06-07 | Defer OPNsense implementation                                                   | Service stability and documentation were higher priorities than network redesign                 | Accepted |
-| 2026-06-10 | Establish VM100 as the management and automation platform                       | Creates a dedicated control plane for management functions                                       | Accepted |
-| 2026-06-10 | Keep VM110 dedicated to UniFi services                                          | Protects network management stability                                                            | Accepted |
-| 2026-06-10 | Use VM120 as the application services platform                                  | Separates user services from management and network control functions                            | Accepted |
-| 2026-06-10 | Use Docker Compose as the source of truth for container deployment              | Reduces configuration drift and improves recoverability                                          | Accepted |
-| 2026-06-10 | Configure weekly Proxmox backups                                                | Establishes baseline recovery capability                                                         | Accepted |
-| 2026-06-11 | Deploy AdGuard Home on VM100                                                    | Centralizes DNS management and service discovery                                                 | Accepted |
-| 2026-06-11 | Adopt `cmrlab.internal` as the internal namespace                               | Avoids conflicts associated with `.local` and multicast DNS                                      | Accepted |
-| 2026-06-11 | Use Nginx Proxy Manager as the standard internal service access layer           | Simplifies service discovery and improves usability                                              | Accepted |
-| 2026-06-11 | Create post-deployment recovery snapshots                                       | Establishes rollback points before future infrastructure changes                                 | Accepted |
-| 2026-06-11 | Prioritize operational maturity before service expansion                        | Stability, documentation and recoverability provide more value than additional services          | Accepted |
-| 2026-06-11 | Treat the lab as an enterprise infrastructure simulation platform               | Aligns the project with professional development, governance and operational learning objectives | Accepted |
-| 2026-06-11 | Treat documentation as a deliverable rather than a by-product                   | Documentation quality directly supports maintainability, recovery and portfolio value            | Accepted |
-| 2026-06-12 | Adopt `cmrlab.internal` as the authoritative namespace for local and remote access | Eliminates dependence on service-specific Tailscale URLs and provides consistent service discovery | Accepted |
-| 2026-06-12 | Enable Tailscale subnet routing on VM100 for `10.146.91.0/24` | Allows remote clients to access internal resources using native LAN addressing and DNS records | Accepted |
-| 2026-06-12 | Implement an internal Certificate Authority on VM100 | Enables TLS for internal services that cannot obtain public certificates | Accepted |
-| 2026-06-12 | Issue internal TLS certificate for `vault.cmrlab.internal` | Required to provide HTTPS secure context support for Vaultwarden | Accepted |
-| 2026-06-12 | Promote Vaultwarden to active production use | Core infrastructure requirements including DNS, remote access and HTTPS were successfully validated | Accepted |
+| Date       | Decision                                                                           | Reason                                                                                              | Outcome  |
+| ---------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |--------- |
+| 2026-06-03 | Use GitHub as the source of truth for lab documentation                            | Provides version control, portability and professional documentation practices                      | Accepted |
+| 2026-06-03 | Use VS Code as the primary editor                                                  | Supports Markdown, Git integration, scripting and future infrastructure-as-code work                | Accepted |
+| 2026-06-03 | Use Git for version control                                                        | Encourages professional workflow habits and preserves documentation history                         | Accepted |
+| 2026-06-03 | Require evidence-based architecture decisions                                      | Hardware and platforms must be validated before receiving permanent roles                           | Accepted |
+| 2026-06-04 | Dell OptiPlex 7010 SFF designated primary Proxmox candidate                        | Hardware validation confirmed suitability for virtualization workloads                              | Accepted |
+| 2026-06-05 | Transition from hardware validation to Proxmox deployment                          | Core hardware platform successfully validated                                                       | Accepted |
+| 2026-06-06 | Deploy Proxmox VE on `cmr-srv-01`                                                  | Provides virtualization, workload separation and future scalability                                 | Accepted |
+| 2026-06-06 | Use Proxmox as the primary infrastructure platform                                 | Legacy controller hardware no longer aligned with long-term goals                                   | Accepted |
+| 2026-06-07 | Host UniFi Network Application on VM110                                            | Separates network management from workstation platforms                                             | Accepted |
+| 2026-06-07 | Use CPU type `host` for VM110                                                      | Required to resolve MongoDB compatibility issues                                                    | Accepted |
+| 2026-06-07 | Create VM120 as the dedicated Docker services platform                             | Provides workload separation and operational clarity                                                | Accepted |
+| 2026-06-07 | Use Homepage as the operations dashboard                                           | Provides centralized visibility of infrastructure and services                                      | Accepted |
+| 2026-06-07 | Use Uptime Kuma for initial monitoring                                             | Lightweight monitoring provided immediate operational visibility                                    | Accepted |
+| 2026-06-07 | Deploy Nginx Proxy Manager                                                         | Simplifies internal service routing and reverse proxy management                                    | Accepted |
+| 2026-06-07 | Keep CMR Enterprise infrastructure separate from homelab infrastructure            | Reduces operational risk and prevents dependency between environments                               | Accepted |
+| 2026-06-07 | Use Tailscale as the preferred remote access platform                              | Secure access without exposing services to the public internet                                      | Accepted |
+| 2026-06-07 | Defer OPNsense implementation                                                      | Service stability and documentation were higher priorities than network redesign                    | Accepted |
+| 2026-06-10 | Establish VM100 as the management and automation platform                          | Creates a dedicated control plane for management functions                                          | Accepted |
+| 2026-06-10 | Keep VM110 dedicated to UniFi services                                             | Protects network management stability                                                               | Accepted |
+| 2026-06-10 | Use VM120 as the application services platform                                     | Separates user services from management and network control functions                               | Accepted |
+| 2026-06-10 | Use Docker Compose as the source of truth for container deployment                 | Reduces configuration drift and improves recoverability                                             | Accepted |
+| 2026-06-10 | Configure weekly Proxmox backups                                                   | Establishes baseline recovery capability                                                            | Accepted |
+| 2026-06-11 | Deploy AdGuard Home on VM100                                                       | Centralizes DNS management and service discovery                                                    | Accepted |
+| 2026-06-11 | Adopt `cmrlab.internal` as the internal namespace                                  | Avoids conflicts associated with `.local` and multicast DNS                                         | Accepted |
+| 2026-06-11 | Use Nginx Proxy Manager as the standard internal service access layer              | Simplifies service discovery and improves usability                                                 | Accepted |
+| 2026-06-11 | Create post-deployment recovery snapshots                                          | Establishes rollback points before future infrastructure changes                                    | Accepted |
+| 2026-06-11 | Prioritize operational maturity before service expansion                           | Stability, documentation and recoverability provide more value than additional services             | Accepted |
+| 2026-06-11 | Treat the lab as an enterprise infrastructure simulation platform                  | Aligns the project with professional development, governance and operational learning objectives    | Accepted |
+| 2026-06-11 | Treat documentation as a deliverable rather than a by-product                      | Documentation quality directly supports maintainability, recovery and portfolio value               | Accepted |
+| 2026-06-12 | Adopt `cmrlab.internal` as the authoritative namespace for local and remote access | Eliminates dependence on service-specific Tailscale URLs and provides consistent service discovery  | Accepted |
+| 2026-06-12 | Enable Tailscale subnet routing on VM100 for `10.146.91.0/24`                      | Allows remote clients to access internal resources using native LAN addressing and DNS records      | Accepted |
+| 2026-06-12 | Implement an internal Certificate Authority on VM100                               | Enables TLS for internal services that cannot obtain public certificates                            | Accepted |
+| 2026-06-12 | Issue internal TLS certificate for `vault.cmrlab.internal`                         | Required to provide HTTPS secure context support for Vaultwarden                                    | Accepted |
+| 2026-06-12 | Promote Vaultwarden to active production use                                       | Core infrastructure requirements including DNS, remote access and HTTPS were successfully validated | Accepted |
+| 2026-06-14 | Deploy Jellyfin and Arr stack on VM120                                             | Media platform requirements aligned with lab objectives and operational maturity goals              | Accepted |
+| 2026-06-14 | Require VM auto-start for production workloads	                                  |VM120 remained offline after host recovery, delaying restoration of critical services	            | Accepted |
 
 
 ---
