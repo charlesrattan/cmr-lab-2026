@@ -1,99 +1,55 @@
-# 11 - Incidents
+# CMR Lab Incident and Troubleshooting History
 
-This document records significant operational incidents, root cause investigations, corrective actions and lessons learned within CMR Lab.
+## Purpose
 
----
+This document preserves selected **resolved or historically bounded** incidents that provided meaningful engineering lessons. It records observations and conclusions without publishing current administrative endpoints, sensitive recovery procedures or live security weaknesses.
 
-# INC-2026-001 - Proxmox Host Network Interface Lockup
+For active incident handling, access-control decisions and environment-specific recovery steps, use restricted operational documentation. The [Operations Runbook](09-operations-runbook.md) explains the public process framework.
 
-## Summary
+## INC-2026-001 — Core host connectivity interruption
 
-During the early hours of 2026-06-14, multiple services within the lab became unavailable. Initial symptoms suggested DNS instability and media platform issues following deployment of the Jellyfin and Arr stack. Investigation determined that the root cause was a Proxmox host network interface failure affecting connectivity to all virtual machines.
+**Date:** 14 June 2026  
+**Classification:** Infrastructure connectivity  
+**Historical status:** Service restored; observation retained
 
-## Impact
+During an overnight outage, multiple internal applications became unreachable. The timing initially drew attention to recently introduced media services. Evidence collected from the primary Proxmox host instead showed repeated Linux network-driver watchdog timeouts.
 
-Affected Services:
+A controlled restart restored host connectivity. Virtual-machine and application availability was then checked separately. The record supports a network-interface/driver problem as the immediate observed mechanism; it does not establish a definitive physical component diagnosis.
 
-* AdGuard Home
-* Homepage
-* Vaultwarden
-* Jellyfin
-* Sonarr
-* Radarr
-* Prowlarr
-* Jellyseerr
-* UniFi Controller
-* Uptime Kuma
+**Lessons:** Check common upstream dependencies before assigning blame to a recently deployed service. Retain timestamped system messages, validate the effect of recovery and review which workloads need independent start-up checks.
 
-User Impact:
+## INC-2026-002 — Media application storage constraint
 
-* Internal DNS unavailable
-* Internal service URLs inaccessible
-* Remote management unavailable
-* Media platform unavailable
+**Date:** June 2026  
+**Classification:** Capacity and application availability  
+**Historical status:** Resolved in the original deployment
 
-## Timeline
+A media application could not start reliably when its underlying virtual-machine filesystem lacked adequate free capacity. Storage allocation was revised and the application returned to operation.
 
-### 2026-06-14 00:45
+**Lessons:** Differentiate virtual disk size, guest filesystem size and application data capacity. Verify usable storage at each layer after an expansion. Capacity is an operating concern, not merely a provisioning decision.
 
-First observed kernel error:
+## INC-2026-003 — Network link negotiation on a repurposed node
 
-NETDEV WATCHDOG transmit queue timeout.
+**Period:** September 2026  
+**Classification:** Hardware interoperability  
+**Historical status:** Alternative connection validated
 
-### 2026-06-14 04:41
+A repurposed Proxmox laptop had unexpectedly poor Ethernet negotiation. Investigation compared link behaviour through the internal interface and an external network adapter. The external connection established a stable Gigabit link.
 
-Continuous watchdog events observed.
+**Lessons:** Link negotiation must be measured rather than assumed from nominal port specifications. A low-cost adapter may be a practical workaround where replacing otherwise useful hardware is unnecessary.
 
-### 2026-06-14 Morning
+## INC-2026-004 — Gateway evaluation interrupted
 
-Workstation lost internet access when configured to use AdGuard DNS.
+**Period:** September 2026  
+**Classification:** Network equipment evaluation  
+**Historical status:** Trial discontinued
 
-Temporary restoration achieved by changing DNS from 10.146.91.99 to router DNS.
+An exploratory gateway deployment showed unstable behaviour and was removed from the production path. The existing router remained the household gateway.
 
-### 2026-06-14 09:34
+**Lessons:** Maintain a rollback path for network changes, especially when the lab shares connectivity with everyday services. Treat trial equipment as experimental until operational behaviour is demonstrated over time.
 
-Controlled reboot of Proxmox host initiated.
+## Incident-record method
 
-### 2026-06-14 09:35
+Each future public account should capture the period, observable symptoms, scope of impact, evidence, recovery outcome and lessons learned. Avoid publishing live addressing, access paths, sensitive diagnostic outputs or unresolved weaknesses. Root causes should be labelled as confirmed only when evidence supports that conclusion.
 
-Host connectivity restored.
-
-### 2026-06-14 09:40
-
-VM120 manually started after reboot.
-
-## Root Cause
-
-Proxmox host onboard network adapter:
-
-Intel 82579LM Gigabit Network Connection
-
-Driver:
-
-e1000e
-
-Observed Errors:
-
-NETDEV WATCHDOG transmit queue timed out
-
-The network interface entered a degraded state resulting in loss of network connectivity while the host remained operational.
-
-## Resolution
-
-* Rebooted Proxmox host.
-* Validated VM recovery.
-* Confirmed restoration of network connectivity.
-* Confirmed restoration of DNS services.
-* Implemented additional monitoring requirements.
-
-## Corrective Actions
-
-Planned:
-
-* Add ICMP monitoring for Proxmox host and critical VMs.
-* Monitor for recurrence of e1000e watchdog events.
-* Evaluate dedicated PCIe Intel network adapter if issue recurs.
-
-## Status
-
-Closed - Monitoring
+For the wider timeline, see [Lab Evolution](10-lab-evolution.md).

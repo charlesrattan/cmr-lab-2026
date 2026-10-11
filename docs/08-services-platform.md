@@ -161,3 +161,4 @@ The purpose of the platform is not to maximise the number of containers. It is t
 - [Operations Runbook](09-operations-runbook.md) — operational practices and recovery procedures
 - [Decision Log](06-decision-log.md) — reasons behind important technical choices
 - [Lab Evolution](10-lab-evolution.md) — history of the environment
+- [Observability](14-observability.md) — monitoring systems and their interpretation

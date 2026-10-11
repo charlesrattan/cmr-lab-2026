@@ -2,105 +2,56 @@
 
 ## Purpose
 
-This document provides a periodic assessment of the maturity of CMR Lab across infrastructure, operations, security, documentation and governance domains.
+Maturity is the extent to which a capability can be operated, explained, verified and improved—not merely whether its software is installed. This assessment is a qualitative snapshot of the CMR Lab project as documented in **October 2026**.
 
-The goal is not perfection. The goal is to measure progress, identify weaknesses and guide future priorities.
+The original June 2026 assessment used a five-point scoring scale. Those numbers remain part of the repository's history, but repeating or incrementing them without a consistent test rubric would imply a precision that the evidence does not support.
 
-Scoring is based on a five-level maturity scale:
+## Evidence model
 
-| Score | Description      |
-| ----- | ---------------- |
-| 1     | Initial / Ad Hoc |
-| 2     | Developing       |
-| 3     | Defined          |
-| 4     | Managed          |
-| 5     | Optimized        |
+| Evidence level | Meaning |
+| --- | --- |
+| Introduced | The technology or procedure was deployed or first configured |
+| Observed | Its behaviour was inspected through logs, metrics, a client or a test |
+| Validated for a defined task | A specified operation produced the expected result |
+| Repeatable | The method and expected results are documented well enough to repeat |
+| Recovery validated | A defined restoration or failure exercise was performed and assessed |
 
----
+These levels describe evidence about **specific activities**, not a universal grade attached to an entire technology.
 
-# Current Maturity Assessment
+## Capability assessment
 
-| Area                      | Current Score | Target Score | Notes                                                                       |
-| ------------------------- | ------------: | -----------: | --------------------------------------------------------------------------- |
-| Documentation             |             4 |            5 | Core documentation structure established and undergoing refactor            |
-| Asset Management          |             4 |            5 | Asset register established and aligned with current infrastructure          |
-| Virtualization            |             4 |            5 | Proxmox platform stable and workload separation implemented                 |
-| Network Infrastructure    |             3 |            4 | UniFi management operational but gateway modernization remains under review |
-| Naming Standards          |             4 |            5 | Consistent naming conventions largely established                           |
-| DNS and Service Discovery |             4 |            5 | AdGuard Home operational with centralized internal DNS                      |
-| Monitoring                |             3 |            4 | Uptime Kuma operational; deeper infrastructure metrics not yet implemented  |
-| Automation                |             3 |            4 | Ansible health checks operational; maintenance automation still evolving    |
-| Security Controls         |             2 |            4 | Basic controls exist but segmentation and visibility remain limited         |
-| Backup and Recovery       |             3 |            5 | Backups validated; restore procedures still require formal documentation    |
-| Operations and Governance |             3 |            5 | Decision logging, roadmap and runbook introduced but still maturing         |
+| Capability | Demonstrated evidence | Further learning direction |
+| --- | --- | --- |
+| Hardware and virtualisation | Three-node Proxmox VE environment and separate Hyper-V experiment range established | Capacity interpretation, host lifecycle and reproducible builds |
+| Network operations | Managed switching and wireless services administered; gateway trials evaluated | Controlled change evaluation and measured networking improvements |
+| Internal DNS | Primary/secondary resolver architecture and failover behaviour tested | Maintain repeatable resolver verification |
+| Remote connectivity | Dedicated Raspberry Pi utility with Tailscale-based access | Document validation methods for authorised remote workflows |
+| Application hosting | Multiple Docker Compose projects and household services deployed; selected workflows tested | Extend application-level functional checks and operations guidance |
+| Observability | Prometheus/Grafana, Uptime Kuma, cAdvisor and network-device metrics introduced | Improve dashboard usefulness and correlate different evidence sources |
+| Security monitoring | Wazuh telemetry observed from an independent Hyper-V cyber-range | Conduct and document complete experiment cycles |
+| Automation | Ansible health-check examples and Ubuntu baseline script created | Validate and refine automation for defined, non-disruptive tasks |
+| Documentation | Current-state inventory, architecture, service descriptions and chronology maintained in Git | Keep evidence linked to decisions and reviewed changes |
+| Recovery engineering | Scheduled backup practices and configuration archives established | Design and document reproducible restoration exercises |
 
----
+The table deliberately does not translate an installed component into a blanket claim of resilience, detection coverage or end-to-end validation.
 
-# Strengths
+## Learning priorities
 
-The lab currently demonstrates strong progress in:
+The next maturity improvements should be practical and measurable:
 
-* Virtualization
-* Documentation
-* Internal DNS
-* Service organization
-* Operational separation of responsibilities
-* Infrastructure inventory management
-* Change documentation
+1. Choose specific operating questions that monitoring panels should answer.
+2. Turn one cyber-range scenario into an evidence-based test, observation and retest report.
+3. Define bounded recovery exercises and record expected versus observed behaviour.
+4. Maintain consistent deployment and change records.
+5. Refine automation only after the manual procedure is understood.
 
-The environment has moved beyond an experimental homelab and now operates as a structured infrastructure platform.
+## Assessment history
 
----
+| Period | Approach |
+| --- | --- |
+| June 2026 | Initial five-point scoring exercise and operations-phase orientation |
+| October 2026 | Evidence-oriented qualitative review reflecting the expanded infrastructure |
 
-# Areas Requiring Improvement
+Future assessments may reintroduce numerical scoring if criteria, measurement sources and repeatability requirements are defined in advance.
 
-The most significant opportunities for improvement are:
-
-1. Security maturity
-2. Backup and recovery validation
-3. Operational procedures
-4. Automation maturity
-5. Monitoring depth
-
-These areas will provide more value than introducing additional services.
-
----
-
-# Current Maturity Focus
-
-## Operations and Governance Phase
-
-The current focus is improving operational maturity rather than expanding functionality.
-
-Priority order:
-
-1. Complete documentation refactor
-2. Expand operations runbook
-3. Resolve Ansible privileged update workflow
-4. Validate backup restoration procedures
-5. Define HTTPS strategy for internal services
-6. Review DNS strategy for the wider home network
-
----
-
-# Long-Term Maturity Targets
-
-By December 2026, CMR Lab should demonstrate:
-
-* Fully documented infrastructure
-* Defined operational procedures
-* Validated backup and recovery workflows
-* Consistent automation for routine maintenance
-* Centralized service discovery
-* Secure remote access
-* Mature change documentation
-* Reliable personal and family services
-* Public-facing documentation suitable for portfolio use
-
----
-
-# Assessment History
-
-| Date       | Overall Assessment              | Notes                                                                              |
-| ---------- | ------------------------------- | ---------------------------------------------------------------------------------- |
-| 2026-06-11 | Operations and Governance Phase | Documentation refactor initiated and operational maturity became the primary focus |
+See the [Roadmap](05-roadmap.md) and [Lab Evolution](10-lab-evolution.md).

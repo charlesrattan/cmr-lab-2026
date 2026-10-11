@@ -1,106 +1,55 @@
-# CMR Lab 2026 - Lab Charter
+# CMR Lab Charter
 
 ## Vision
 
-CMR Lab 2026 is an enterprise infrastructure simulation platform used to develop practical skills in systems administration, networking, cybersecurity, automation, infrastructure documentation, governance and operations.
+CMR Lab is a practical, home-based engineering environment for learning how infrastructure is designed, operated, observed, secured and improved. It uses available equipment to provide real services and a controlled space for experiments.
 
-The lab also supports selected personal and family services where those services contribute to reliability, usefulness and practical learning.
+The project applies professional engineering disciplines without assuming that a small home lab has the resources or assurance of an enterprise production environment.
 
-## Mission Statement
+## Mission
 
-Develop enterprise-grade infrastructure, operations, automation, security, governance and documentation skills through the design, operation and continuous improvement of a practical home-based technology environment.
+Build and maintain an understandable infrastructure platform while developing practical skills in:
 
-## Primary Mission
+- Linux and Windows administration
+- Networking, DNS and managed wireless infrastructure
+- Proxmox VE, Hyper-V and virtual-machine operations
+- Docker and self-hosted services
+- Metrics, logs and security telemetry
+- Automation and repeatable configuration
+- Incident investigation and recovery exercises
+- Documentation, decisions and change management
+- Responsible security testing in designated lab systems
 
-The primary mission of CMR Lab is to simulate, operate, document and continuously improve a small enterprise-style infrastructure environment.
+## Two responsibilities
 
-The lab is intended to develop practical capability in:
+**Everyday utility.** Selected services support the household and therefore need deliberate care when changes are planned. This includes network utilities, home automation, service access and other ongoing applications.
 
-* Infrastructure operations
-* Network management
-* Linux administration
-* Virtualization
-* Docker and self-hosted services
-* Monitoring and observability
-* Backup and recovery
-* Automation
-* DNS and service discovery
-* Security practices
-* Documentation and governance
-* Change management and operational discipline
+**Experimentation.** The lab supports technical exercises that may be temporary, intentionally misconfigured or rebuilt. These belong in clearly scoped test systems and should not compromise normal household operations.
 
-The focus is not simply deploying technology. The focus is understanding how infrastructure is designed, operated, maintained, documented and improved over time.
+## Working principles
 
-## Secondary Mission
+1. **Evidence over appearances.** Separate installation, configuration, observed operation, functional validation and recovery testing.
+2. **Use resources deliberately.** Reuse hardware where feasible and acknowledge capacity constraints.
+3. **Document the reason for a choice.** Decisions, alternatives and lessons matter more than the number of deployed tools.
+4. **Preserve history without confusing it with current state.** Update living references and retain dated evolution records.
+5. **Protect normal services.** The importance of household infrastructure is part of the design, not an afterthought.
+6. **Keep security experiments controlled.** Authorised tests stay within intentionally designated environments.
+7. **Publish with care.** An engineering portfolio can demonstrate genuine work without disclosing sensitive operational configuration.
 
-The secondary mission is to provide reliable personal and family services where appropriate.
+## Evidence of progress
 
-These may include:
+A milestone is stronger when it includes a defined objective, implementation, test or observation, outcome and any remaining qualification. A working dashboard is different from a validated monitoring process; a generated backup is different from a tested restoration; a cyber-range with telemetry is different from a complete attack-and-defence exercise.
 
-* Password management
-* Media services
-* Remote access
-* Home automation
-* Local dashboards
-* Monitoring and alerting
+## Records and responsibilities
 
-Personal services should not compromise the stability, security or learning value of the lab.
+| Record | Role |
+| --- | --- |
+| [Asset Register](02-asset-register.md) | Maintain the current inventory |
+| [Architecture](03-architecture.md) | Explain current platform relationships |
+| [Roadmap](05-roadmap.md) | Distinguish established milestones and intended work |
+| [Decision Log](06-decision-log.md) | Record the reasons for major changes |
+| [Lab Evolution](10-lab-evolution.md) | Preserve chronology and lessons |
+| [Incidents](11-incidents.md) | Retain publishable incident case studies |
+| [Documentation Approach](12-documentation-approach.md) | Explain evidence standards and public/private boundaries |
 
-## Portfolio Mission
-
-The lab also serves as a professional portfolio project.
-
-The public-facing value of the lab is not simply the services being hosted.
-
-The value is the documented process of planning, building, correcting, stabilizing, securing, automating and operating infrastructure in a professional manner.
-
-The repository is intended to demonstrate not only technical capability but also decision-making, documentation practices, governance thinking, operational discipline and continuous improvement.
-
-## Evolution of Purpose
-
-| Phase                | Purpose                                                                  |
-| -------------------- | ------------------------------------------------------------------------ |
-| Initial Setup        | Learn Git, Linux, networking and homelab fundamentals                    |
-| Rebuild Phase        | Stabilize hardware, recover usable equipment and establish documentation |
-| Virtualization Phase | Move services onto Proxmox and separate workloads by role                |
-| Services Phase       | Deploy practical self-hosted services using Docker                       |
-| Automation Phase     | Introduce Ansible and operational health checks                          |
-| DNS Phase            | Implement centralized internal DNS and service discovery                 |
-| Current Phase        | Stabilization, governance, documentation and operations                  |
-
-## Guiding Principles
-
-* Stability before complexity
-* Documentation before expansion
-* Recovery before experimentation
-* Automation where it improves reliability
-* Security as a requirement, not an afterthought
-* Clear separation of responsibilities between systems
-* Learn by building but preserve what was learned
-* Document decisions as well as outcomes
-* Treat the lab as an operational environment rather than a collection of experiments
-
-## Success Criteria
-
-By December 2026, CMR Lab should demonstrate:
-
-* A stable virtualization environment
-* Clear service ownership by VM or platform
-* Centralized internal DNS
-* Working monitoring and health checks
-* Documented backup and restore procedures
-* Basic automation for maintenance tasks
-* Secure remote access
-* A clear operations runbook
-* A documented history of architectural decisions and lessons learned
-* Documentation understandable to someone following a similar learning journey
-* Selected reliable personal and family services
-* Public-facing documentation suitable for professional portfolio use
-
-## Current Status
-
-Operations and Governance Phase
-
-The current priority is to improve operational maturity through documentation, automation, monitoring, recovery planning and controlled service expansion.
-
-New services should only be introduced when they support the mission of the lab and do not reduce overall stability or maintainability.
+The lab succeeds when its operator can explain the environment, demonstrate how it works, understand its limitations and make informed improvements.

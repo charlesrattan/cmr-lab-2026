@@ -70,6 +70,18 @@ The focus is on making the existing environment better understood, easier to mai
 
 The project treats installation, successful operation and validated recovery as different milestones. Documentation should make those distinctions visible.
 
+## Project timeline
+
+| Period | Major development |
+| --- | --- |
+| **June 2026** | Hardware recovery, the original Proxmox host, management and Docker VMs, UniFi migration, DNS, internal PKI and early service operations |
+| **July 2026** | Local MkDocs handbook work and a clearer separation of operational and public documentation |
+| **August 2026** | Dedicated Raspberry Pi network utilities, DNS synchronisation and Proxmox expansion |
+| **September 2026** | Monitoring, Home Assistant, Wazuh and the independent Hyper-V cyber-range; further network and hardware experiments |
+| **October 2026** | Verified inventory and repository reconciliation, with clearer distinctions between deployed systems, demonstrated results and future work |
+
+Read the [Lab Evolution](docs/10-lab-evolution.md) for the fuller narrative and the [Changelog](CHANGELOG.md) for dated implementation milestones. The [Decision Log](docs/06-decision-log.md) explains why significant design choices were made.
+
 ## Explore the documentation
 
 | Document | What it covers |
@@ -80,6 +92,13 @@ The project treats installation, successful operation and validated recovery as 
 | [Lab Charter](docs/01-lab-charter.md) | Purpose, principles and intended learning outcomes |
 | [Baseline Inventory](docs/00-baseline-inventory.md) | Equipment available when the project began |
 | [Lab Evolution](docs/10-lab-evolution.md) | The project's development and lessons over time |
+| [Roadmap](docs/05-roadmap.md) | Established milestones and ongoing experiments |
+| [Decision Log](docs/06-decision-log.md) | Why major engineering choices were made |
+| [Incidents](docs/11-incidents.md) | Historical investigation and troubleshooting lessons |
+| [Operations Runbook](docs/09-operations-runbook.md) | Reusable operational methods and evidence handling |
+| [Hyper-V Cyber-Range](docs/13-cyber-range.md) | Windows/Linux test environment, observations and experimental method |
+| [Observability](docs/14-observability.md) | Metrics, availability checks and security-event interpretation |
+| [Documentation Approach](docs/12-documentation-approach.md) | Document scope, evidence vocabulary and publication boundaries |
 
 The current-state documents are updated as the lab changes. Historical records preserve earlier approaches and decisions rather than presenting them as the current configuration.
 

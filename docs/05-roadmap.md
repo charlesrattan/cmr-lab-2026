@@ -1,145 +1,46 @@
-# CMR Lab 2026 Roadmap
+# CMR Lab Roadmap
 
 ## Purpose
 
-This roadmap documents the evolution of CMR Lab from an informal home technology environment to a structured enterprise-style infrastructure simulation platform.
+The roadmap distinguishes milestones already demonstrated in CMR Lab from work under development and longer-term ambitions. The [Architecture](03-architecture.md) and [Asset Register](02-asset-register.md) describe the current implementation; [Lab Evolution](10-lab-evolution.md) provides the chronology.
 
-It records completed milestones, defines the current phase of work and establishes future priorities.
+The guiding objective is to develop practical infrastructure, security and operational judgement using equipment already available, without allowing experimentation to undermine services needed by the household.
 
-The roadmap is intended to provide direction while ensuring that new services do not outpace documentation, operational maturity or recoverability.
+## Milestones
 
----
+| Period | Milestone | Evidence and outcome |
+| --- | --- | --- |
+| June 2026 | Inventory and hardware validation | Original equipment assessed and primary Proxmox host selected |
+| June 2026 | Core virtualisation and services | Management, UniFi and Docker workloads separated into virtual machines |
+| June 2026 | Internal service delivery | Dashboard, container management, service monitoring, password vault, reverse proxy and media applications deployed |
+| June 2026 | Initial automation and remote access | Ansible health-check work, Tailscale connectivity, DNS naming and an internal certificate authority established |
+| July 2026 | Operational documentation workspace | A separate, local MkDocs documentation environment created for working notes |
+| August 2026 | Network utility separation | Primary and secondary AdGuard resolvers and dedicated Raspberry Pi remote-access utility established |
+| August–September 2026 | Expanded virtualisation | Two repurposed ThinkPads incorporated as additional Proxmox nodes |
+| September 2026 | Observability and security monitoring | Prometheus, Grafana, Home Assistant and Wazuh workloads deployed across the expanded environment |
+| September 2026 | Independent cyber-range | Hyper-V Windows domain, endpoint, Kali workstation and controlled gateway established; initial telemetry observed |
+| October 2026 | Documentation reconciliation | Asset Register, Architecture, Services Platform and README updated against verified evidence |
 
-# Strategic Goal
+Milestone dates are based on project records and lab conversations; a month or range is used where the exact completion day was not established. Deployment means a system was established, not that every possible use case or recovery scenario was tested.
 
-Create a stable, documented and maintainable infrastructure platform that develops practical skills in:
+## Current direction: operate, observe and verify
 
-* Systems administration
-* Networking
-* Cybersecurity
-* Automation
-* Governance
-* Documentation
-* Operations
+| Workstream | Current direction |
+| --- | --- |
+| Infrastructure | Maintain the deployed Proxmox and Hyper-V environments and improve workload visibility |
+| Network services | Preserve dependable household connectivity while evaluating future gateway options |
+| Monitoring | Refine dashboards, metrics interpretation and event investigation |
+| Cyber-range | Complete repeatable test → observe → harden → retest exercises and document evidence |
+| Recovery | Improve documented recovery exercises and confidence in restoration procedures |
+| Automation | Revisit existing Ansible examples and add tested maintenance workflows selectively |
+| Documentation | Keep current-state references, chronological records and private operations material aligned |
 
-while supporting selected personal and family services where appropriate.
+## Longer-term exploration
 
----
+Local AI experimentation, deeper network segmentation, improved resilience and new security tooling remain possible directions rather than committed deployments. Expansion is driven by learning or operational value, available resources and a clear method for measuring results.
 
-# Completed Milestones
+## Success criteria
 
-| Phase   | Milestone                                                                      | Status   |
-| ------- | ------------------------------------------------------------------------------ | -------- |
-| Phase 0 | Baseline inventory and project initiation                                      | Complete |
-| Phase 1 | Hardware recovery and OptiPlex validation                                      | Complete |
-| Phase 2 | Proxmox deployment on `cmr-srv-01`                                             | Complete |
-| Phase 3 | UniFi Controller migration to VM110                                            | Complete |
-| Phase 4 | Docker services platform deployment on VM120                                   | Complete |
-| Phase 5 | Homepage, Portainer, Uptime Kuma, Vaultwarden and Nginx Proxy Manager deployed | Complete |
-| Phase 6 | VM100 established as management and automation platform                        | Complete |
-| Phase 7 | AdGuard Home deployed and `cmrlab.internal` namespace implemented              | Complete |
+Progress is assessed through evidence: a reproducible procedure, an observation, a tested outcome, a documented decision or a measurable improvement. Simply installing more applications is not sufficient.
 
----
-
-# Current Phase
-
-## Operations and Governance
-
-The lab has successfully established a virtualization, automation, monitoring and service discovery baseline.
-
-The current phase focuses on improving operational maturity.
-
-The objective is to ensure the platform is:
-
-* Understandable
-* Maintainable
-* Recoverable
-* Documented
-* Repeatable
-
-before significant new services are introduced.
-
-### Current Priorities
-
-| Priority | Task                                                     | Status      |
-| -------: | -------------------------------------------------------- | ----------- |
-|        1 | Complete documentation refactor and repository alignment | In Progress |
-|        2 | Expand and formalize operations runbook                  | In Progress |
-|        3 | Resolve Ansible privileged update workflow               | Pending     |
-|        4 | Define HTTPS strategy for internal services              | Pending     |
-|        5 | Validate backup and restoration procedures               | Pending     |
-|        6 | Review home network DNS strategy and AdGuard adoption    | Pending     |
-
-### Success Criteria for Current Phase
-
-The Operations and Governance phase will be considered complete when:
-
-* Documentation accurately reflects the environment
-* Operational procedures are documented
-* Backup and restore processes are validated
-* Routine maintenance tasks are automated where practical
-* Internal services are consistently accessible
-* Architectural decisions are properly documented
-
----
-
-# Future Phase
-
-## Service Expansion
-
-Once the Operations and Governance phase is complete, the lab may expand in a controlled manner.
-
-Potential future services include:
-
-* Jellyfin
-* Home Assistant
-* Grafana
-* Prometheus
-* Wazuh
-* Local AI experimentation
-
-New services should only be introduced when they provide learning value, operational value or support the mission of the lab.
-
----
-
-# Future Phase
-
-## Infrastructure Maturity
-
-Future infrastructure improvements may include:
-
-* Gateway modernization
-* Network segmentation
-* VLAN implementation
-* Managed switching
-* Enhanced monitoring and observability
-* Expanded backup capabilities
-* Improved security controls
-
-These improvements should focus on operational quality rather than complexity for its own sake.
-
----
-
-# Long-Term Vision
-
-By December 2026, CMR Lab should demonstrate:
-
-* Stable virtualization infrastructure
-* Centralized service discovery
-* Reliable monitoring and alerting
-* Documented operational procedures
-* Validated backup and recovery workflows
-* Practical automation
-* Secure remote access
-* Professional-quality documentation
-* A clearly documented infrastructure journey suitable for portfolio presentation
-
----
-
-# Roadmap Status
-
-Current Phase: Operations and Governance
-
-Overall Direction: Stabilize → Document → Automate → Expand
-
-The lab has successfully transitioned from a rebuild project into an operational infrastructure platform. Future growth should be guided by maturity rather than service count.
+See the [Maturity Assessment](04-lab-maturity.md) for an evidence-based view of capabilities and the [Decision Log](06-decision-log.md) for the rationale behind major changes.

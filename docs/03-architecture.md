@@ -144,3 +144,5 @@ These are development directions, not additional components of the implemented a
 - [Services Platform](08-services-platform.md) — hosted applications and services
 - [Operations Runbook](09-operations-runbook.md) — operational practices and recovery procedures
 - [Lab Evolution](10-lab-evolution.md) — historical development of the environment
+- [Hyper-V Cyber-Range](13-cyber-range.md) — test environment and evidence method
+- [Observability](14-observability.md) — metrics, availability and security telemetry
