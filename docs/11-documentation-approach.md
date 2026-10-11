@@ -32,7 +32,7 @@ A successful installation is not an uptime guarantee. A working dashboard is not
 
 Use an exact date when a dated log or record supports it. Otherwise use a month or date range. Identify proposed work as proposed, and distinguish observations from interpretation. Where the original evidence is incomplete, omit invented detail.
 
-The [Lab Evolution](10-lab-evolution.md), [Decision Log](06-decision-log.md), [Changelog](../CHANGELOG.md) and [Incidents](11-incidents.md) provide complementary historical views.
+The [Lab Evolution](09-lab-evolution.md), [Decision Log](06-decision-log.md), [Changelog](../CHANGELOG.md) and [Incidents](10-incidents.md) provide complementary historical views.
 
 ## Publication boundary
 

@@ -107,5 +107,5 @@ Original evidence may contain sensitive information. Raw event payloads, domain 
 
 - [Architecture](03-architecture.md)
 - [Maturity Assessment](04-lab-maturity.md)
-- [Observability and Security Monitoring](14-observability.md)
-- [Documentation Approach](12-documentation-approach.md)
+- [Observability and Security Monitoring](13-observability.md)
+- [Documentation Approach](11-documentation-approach.md)
