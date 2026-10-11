@@ -34,7 +34,7 @@ A media application could not start reliably when its underlying virtual-machine
 **Classification:** Hardware interoperability  
 **Historical status:** Alternative connection validated
 
-A repurposed Proxmox laptop had unexpectedly poor Ethernet negotiation. Investigation compared link behaviour through the internal interface and an external network adapter. The external connection established a stable Gigabit link.
+SOC1, the Lenovo T440p, negotiated at approximately **10 Mb/s** using its built-in Intel Ethernet path. Interface and bridge behaviour were compared with an external USB Gigabit adapter using the Realtek RTL8153 family and Linux `r8152` driver. After the bridge was associated with the external interface, the host operated at a validated **1 Gb/s** negotiated link. The test supports the workaround, but not a conclusive physical diagnosis of the original NIC or connector.
 
 **Lessons:** Link negotiation must be measured rather than assumed from nominal port specifications. A low-cost adapter may be a practical workaround where replacing otherwise useful hardware is unnecessary.
 

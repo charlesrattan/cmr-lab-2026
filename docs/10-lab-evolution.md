@@ -70,14 +70,6 @@ The T450 underwent a reinstall/recovery exercise. Before rebuilding it, importan
 
 These events illustrated the difference between restoring access to one machine and restoring its correct place in a distributed management system.
 
-### 29–30 August: Stable workload assignments
-
-By 29 August, SOC1 was hosting VM130 (`monitoring-01`) and VM140 (`home-assistant-01`) with automatic guest startup configured. A subsequent SOC1 reboot confirmed that cluster quorum was maintained and both VMs returned to a running state. SOC2 was prepared for the separate Wazuh security-monitoring role rather than hosting the entire security testing range.
-
-The original shorthand names **SOC1** and **SOC2** therefore became hardware identifiers, not strict descriptions of every running workload.
-
-**Lesson:** A cluster's most valuable learning opportunities include compatibility, workload placement, recovery and verification—not simply its node count.
-
 ## August 2026 — Network utility separation
 
 ### Primary and secondary DNS
@@ -90,31 +82,31 @@ This separated a core network utility from the main virtualisation host while re
 
 A second Raspberry Pi took on Tailscale network-access responsibilities. This revised an earlier design in which remote access depended on the management VM. It was a pragmatic separation of concerns, not a claim of automatic application high availability.
 
-### Extending existing compute
-
-Two repurposed ThinkPads were incorporated into the Proxmox environment. The new cluster made it possible to host more specialised workloads and learn cluster administration, although the laptops' available capacity constrained where those workloads could run.
-
-**Lesson:** Independence, redundancy and automated failover are distinct architectural properties.
-
 ### 16–18 August: Observability becomes measurable
 
 Prometheus, Node Exporter and Grafana were running on `monitoring-01`. On 16 August the monitoring inventory comprised **nine hosts**, spanning the core Proxmox machine, both Lenovo nodes, infrastructure VMs and two Raspberry Pi utilities. Prometheus targets and host measurements were checked; initial Grafana views addressed cluster state, virtual machines, storage and backup coverage. The distinction between a working metric pipeline and a mature dashboard remained important.
 
-By 18 August, AdGuard configuration synchronisation had also been established from the Raspberry Pi primary to the management VM secondary on a recurring schedule. Resolver consistency and later failover observations were separate validation steps.
+By 18 August, AdGuard configuration synchronisation had also been established from the Raspberry Pi primary to the management VM secondary on a **two-hour schedule**. Resolver consistency and later failover observations were separate validation steps.
 
-## September 2026 — Observability and an independent cyber-range
+### 29–30 August: Stable workload assignments
 
-### Monitoring and security telemetry
+By 29 August, SOC1 was hosting VM130 (`monitoring-01`) and VM140 (`home-assistant-01`) with automatic guest startup configured. A subsequent SOC1 reboot confirmed that cluster quorum was maintained and both VMs returned to a running state. SOC2 was prepared for the separate Wazuh security-monitoring role rather than hosting the entire security testing range.
 
-The expanded Proxmox nodes came to host Prometheus/Grafana monitoring, Home Assistant and Wazuh. Managed-switch metrics and host monitoring broadened observability. Home Assistant became an everyday household service, integrated with existing smart-home systems.
+The original shorthand names **SOC1** and **SOC2** therefore became hardware identifiers, not strict descriptions of every running workload.
+
+**Lesson:** A cluster's most valuable learning opportunities include compatibility, workload placement, recovery and verification—not simply its node count.
+
+## September 2026 — Security monitoring and an independent cyber-range
+
+### Household automation and security monitoring
+
+Prometheus/Grafana had already been deployed in August. As the second stage of the infrastructure evolved, Home Assistant became an everyday household service on SOC1 and Wazuh handled security event collection on SOC2. Managed-switch and host measurements broadened the operational picture.
 
 The initial idea of dedicating entire laptops to offensive and defensive experimentation was revised. Monitoring and household services had real resource requirements that mattered more than the original labels attached to the machines.
 
 ### A separate Hyper-V experiment environment
 
-The Windows engineering workstation had spare capacity and provided a more suitable place to build a contained cyber-range. Hyper-V hosted a Windows domain controller, a Windows client, Kali Linux and a controlled gateway. Wazuh began receiving relevant security events, including endpoint telemetry.
-
-The goal is a documented cycle of **test → observe → document → harden → retest**. Establishing domain services and telemetry was the foundation for that cycle, not evidence of a completed attack-and-defence study.
+The workstation's spare capacity offered a more suitable home for controlled Windows/Linux experiments than either of the resource-constrained SOC laptops. The required test cycle remained **test → observe → document → harden → retest**, but the September work established its supporting systems and initial telemetry rather than completing that full cycle.
 
 ### 18–26 September: Windows security experimentation
 

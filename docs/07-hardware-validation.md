@@ -47,7 +47,7 @@ A separate Dell OptiPlex Micro workstation subsequently supported Hyper-V experi
 | SOC1 | Lenovo ThinkPad T440p | Proxmox installation, host management and cluster participation verified; later reboot confirmed VM130 and VM140 auto-start | Operations/monitoring node |
 | SOC2 | Lenovo ThinkPad T450 | Initial Proxmox installation required a firmware setting adjustment relating to VT-d; August rebuild followed by cluster rejoin | Security-monitoring node |
 
-After the initial August cluster creation, SOC2 was rebuilt rather than restoring old cluster-managed files wholesale. On **15 August 2026**, the three-node Proxmox cluster was confirmed quorate again. This was an operational validation of restored membership, not a test of shared-storage high availability.
+The initial cluster build ran Proxmox VE 9.2.x. Following the original installation, SOC2 was rebuilt rather than restoring old cluster-managed files wholesale. On **15 August 2026**, the three-node Proxmox cluster was confirmed quorate again. This was an operational validation of restored membership, not a test of shared-storage high availability.
 
 Both laptops were initially considered for dedicated offensive and defensive work. Workload assignments later followed available memory, storage and household-service requirements instead of their original names.
 

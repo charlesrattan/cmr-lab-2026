@@ -72,7 +72,7 @@ cAdvisor supplies container metrics to the observability environment; it is a su
 
 ## Evolution of application hosting
 
-The June Docker VM initially consolidated Homepage, Portainer, Uptime Kuma, Vaultwarden and Nginx Proxy Manager. The original deployment also established the need for predictable persistent storage and secure contexts for applications such as Vaultwarden.
+The June Docker VM initially consolidated Homepage, Portainer, Uptime Kuma, Vaultwarden and Nginx Proxy Manager. The original deployment also established the need for predictable persistent storage and secure contexts for applications such as Vaultwarden. Later internal HTTPS validation confirmed the password vault worked in a secure context on tested clients.
 
 On 14 June, the media stack expanded with Jellyfin and the request, indexer, media-management and download tools. A storage-capacity problem required a VM filesystem adjustment. A defined Jellyseerr-to-download workflow was observed working after initial setup.
 

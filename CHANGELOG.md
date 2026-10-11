@@ -8,6 +8,21 @@ Significant changes are recorded newest first. Earlier entries remain historical
 - Retired the privacy-reduced public operations runbook; sensitive operating procedures remain in the separate private handbook.
 - Updated document links and retained a public, non-sensitive engineering history without creating additional documentation categories.
 
+## 2026-10-11 — Documentation reconciliation and publication controls
+
+- Reconciled the public Asset Register, Architecture, Services Platform and README with observed deployments.
+- Renamed the architecture document to describe the implemented rather than a target design.
+- Added a dated June–October evolution narrative and updated roadmap, decision records and incident summaries.
+- Reviewed public documentation for operational details better held in restricted internal records.
+- Separated the external engineering reference from the existing local MkDocs operational workspace.
+
+## 2026-10 — Verified service and recovery inventory
+
+- Verified the current Proxmox workload distribution and the active Docker application set.
+- Confirmed ongoing network-utility configuration archives produced through an automated schedule.
+- Reviewed backup practices and distinguished archive creation from restoration evidence.
+- Continued to treat unfinished monitoring and cyber-range exercises as ongoing work rather than completed demonstrations.
+
 ## 2026-09-26 — Controlled cyber-range gateway
 
 - Added a dual-homed Linux gateway design to the separate Hyper-V range.
@@ -30,6 +45,14 @@ Significant changes are recorded newest first. Earlier entries remain historical
 - USG WAN automatic addressing behaved inconsistently; static addressing temporarily restored service before a separate apparent hardware/power failure ended the trial on 14 September.
 - SOC1's internal wired link negotiated at approximately 10 Mb/s. An RTL8153-family USB interface with the Linux r8152 driver restored a validated 1 Gb/s link.
 
+## 2026-09 — Proxmox expansion, monitoring and cyber-range
+
+- Added two repurposed laptop nodes to the Proxmox environment and assigned monitoring, home automation and security-monitoring workloads according to capacity.
+- Implemented Prometheus/Grafana monitoring and Wazuh event collection.
+- Built a separate Hyper-V experiment range with Windows domain services, a Windows client, Kali and a controlled gateway; initial endpoint telemetry was observed.
+- Validated an alternative Ethernet adapter on a node after a link-negotiation problem.
+- Completed exploratory gateway tests without replacing the active household router.
+
 ## 2026-08-29 to 2026-08-30 — SOC1 startup validation
 
 - Verified VM130 (`monitoring-01`) and VM140 (`home-assistant-01`) on SOC1 with VM autostart enabled.
@@ -51,29 +74,6 @@ Significant changes are recorded newest first. Earlier entries remain historical
 
 - Built the Lenovo T440p/T450 Proxmox nodes; T450 installation required changing a VT-d firmware setting.
 - Established the three-node cluster, checked host-level networking and administration and performed storage/SMART checks.
-
-## 2026-10-11 — Documentation reconciliation and publication controls
-
-- Reconciled the public Asset Register, Architecture, Services Platform and README with observed deployments.
-- Renamed the architecture document to describe the implemented rather than a target design.
-- Added a dated June–October evolution narrative and updated roadmap, decision records and incident summaries.
-- Reviewed public documentation for operational details better held in restricted internal records.
-- Separated the external engineering reference from the existing local MkDocs operational workspace.
-
-## 2026-10 — Verified service and recovery inventory
-
-- Verified the current Proxmox workload distribution and the active Docker application set.
-- Confirmed ongoing network-utility configuration archives produced through an automated schedule.
-- Reviewed backup practices and distinguished archive creation from restoration evidence.
-- Continued to treat unfinished monitoring and cyber-range exercises as ongoing work rather than completed demonstrations.
-
-## 2026-09 — Proxmox expansion, monitoring and cyber-range
-
-- Added two repurposed laptop nodes to the Proxmox environment and assigned monitoring, home automation and security-monitoring workloads according to capacity.
-- Implemented Prometheus/Grafana monitoring and Wazuh event collection.
-- Built a separate Hyper-V experiment range with Windows domain services, a Windows client, Kali and a controlled gateway; initial endpoint telemetry was observed.
-- Validated an alternative Ethernet adapter on a node after a link-negotiation problem.
-- Completed exploratory gateway tests without replacing the active household router.
 
 ## 2026-08 — Dedicated network utilities
 
