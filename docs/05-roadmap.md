@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The roadmap distinguishes milestones already demonstrated in CMR Lab from work under development and longer-term ambitions. The [Architecture](03-architecture.md) and [Asset Register](02-asset-register.md) describe the current implementation; [Lab Evolution](10-lab-evolution.md) provides the chronology.
+The roadmap distinguishes milestones already demonstrated in CMR Lab from work under development and longer-term ambitions. The [Architecture](03-architecture.md) and [Asset Register](02-asset-register.md) describe the current implementation; [Lab Evolution](09-lab-evolution.md) provides the chronology.
 
 The guiding objective is to develop practical infrastructure, security and operational judgement using equipment already available, without allowing experimentation to undermine services needed by the household.
 

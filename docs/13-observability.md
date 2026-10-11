@@ -100,5 +100,5 @@ Future work focuses on reliable dashboard interpretation, measurable alert-quali
 
 - [Architecture](03-architecture.md)
 - [Services Platform](08-services-platform.md)
-- [Hyper-V Cyber-Range](13-cyber-range.md)
-- [Incidents](11-incidents.md)
+- [Hyper-V Cyber-Range](12-cyber-range.md)
+- [Incidents](10-incidents.md)

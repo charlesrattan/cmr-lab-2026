@@ -4,7 +4,7 @@
 
 This document preserves selected **resolved or historically bounded** incidents that provided meaningful engineering lessons. It records observations and conclusions without publishing current administrative endpoints, sensitive recovery procedures or live security weaknesses.
 
-Active incident handling, access-control decisions and environment-specific recovery steps belong in restricted operational documentation. The [Documentation Approach](12-documentation-approach.md) explains the publication boundary and evidence standards.
+Active incident handling, access-control decisions and environment-specific recovery steps belong in restricted operational documentation. The [Documentation Approach](11-documentation-approach.md) explains the publication boundary and evidence standards.
 
 ## INC-2026-001 — Core host connectivity interruption
 
@@ -66,4 +66,4 @@ The Lenovo T450 security node was rebuilt after prior configuration capture. Ins
 
 Each future public account should capture the period, observable symptoms, scope of impact, evidence, recovery outcome and lessons learned. Avoid publishing live addressing, access paths, sensitive diagnostic outputs or unresolved weaknesses. Root causes should be labelled as confirmed only when evidence supports that conclusion.
 
-For the wider timeline, see [Lab Evolution](10-lab-evolution.md).
+For the wider timeline, see [Lab Evolution](09-lab-evolution.md).

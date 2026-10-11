@@ -73,4 +73,4 @@ A reproducible diagnosis would compare `ethtool` link negotiation, `ip -br link`
 - [Baseline Inventory](00-baseline-inventory.md)
 - [Asset Register](02-asset-register.md)
 - [Architecture](03-architecture.md)
-- [Incidents](11-incidents.md)
+- [Incidents](10-incidents.md)

@@ -82,7 +82,7 @@ The project treats installation, successful operation and validated recovery as 
 | **19–26 September 2026** | Built the separate Hyper-V Windows/Linux range and observed AD, firewall and Wazuh telemetry behaviour |
 | **October 2026** | Verified inventory and repository reconciliation, with clearer distinctions between deployed systems, demonstrated results and future work |
 
-Read the [Lab Evolution](docs/10-lab-evolution.md) for the fuller narrative and the [Changelog](CHANGELOG.md) for dated implementation milestones. The [Decision Log](docs/06-decision-log.md) explains why significant design choices were made.
+Read the [Lab Evolution](docs/09-lab-evolution.md) for the fuller narrative and the [Changelog](CHANGELOG.md) for dated implementation milestones. The [Decision Log](docs/06-decision-log.md) explains why significant design choices were made.
 
 ## Explore the documentation
 
@@ -93,13 +93,13 @@ Read the [Lab Evolution](docs/10-lab-evolution.md) for the fuller narrative and 
 | [Services Platform](docs/08-services-platform.md) | Deployed applications, Docker services and their relationships |
 | [Lab Charter](docs/01-lab-charter.md) | Purpose, principles and intended learning outcomes |
 | [Baseline Inventory](docs/00-baseline-inventory.md) | Equipment available when the project began |
-| [Lab Evolution](docs/10-lab-evolution.md) | The project's development and lessons over time |
+| [Lab Evolution](docs/09-lab-evolution.md) | The project's development and lessons over time |
 | [Roadmap](docs/05-roadmap.md) | Established milestones and ongoing experiments |
 | [Decision Log](docs/06-decision-log.md) | Why major engineering choices were made |
-| [Incidents](docs/11-incidents.md) | Historical investigation and troubleshooting lessons |
-| [Hyper-V Cyber-Range](docs/13-cyber-range.md) | Windows/Linux test environment, observations and experimental method |
-| [Observability](docs/14-observability.md) | Metrics, availability checks and security-event interpretation |
-| [Documentation Approach](docs/12-documentation-approach.md) | Document scope, evidence vocabulary and publication boundaries |
+| [Incidents](docs/10-incidents.md) | Historical investigation and troubleshooting lessons |
+| [Hyper-V Cyber-Range](docs/12-cyber-range.md) | Windows/Linux test environment, observations and experimental method |
+| [Observability](docs/13-observability.md) | Metrics, availability checks and security-event interpretation |
+| [Documentation Approach](docs/11-documentation-approach.md) | Document scope, evidence vocabulary and publication boundaries |
 
 The current-state documents are updated as the lab changes. Historical records preserve earlier approaches and decisions rather than presenting them as the current configuration.
 

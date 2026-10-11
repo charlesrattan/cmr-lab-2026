@@ -48,7 +48,7 @@ Jellyfin and supporting media applications were added and an early request-to-do
 
 The media VM also underwent a storage adjustment after a capacity-related application problem.
 
-**Lesson:** Temporal coincidence is not root-cause evidence. Examine infrastructure dependencies before blaming the newest application. See [Incidents](11-incidents.md).
+**Lesson:** Temporal coincidence is not root-cause evidence. Examine infrastructure dependencies before blaming the newest application. See [Incidents](10-incidents.md).
 
 ## July 2026 — Documentation as an operational tool
 
@@ -135,7 +135,7 @@ The public documentation was reorganised around distinct questions:
 | [Services Platform](08-services-platform.md) | What applications are hosted and what do they do? |
 | [Decision Log](06-decision-log.md) | Why were choices made? |
 | [Roadmap](05-roadmap.md) | What is demonstrated and what remains ahead? |
-| [Incidents](11-incidents.md) | What failed, what was observed and what was learned? |
+| [Incidents](10-incidents.md) | What failed, what was observed and what was learned? |
 | This document | How did the project reach its present form? |
 
 Chronology is retained without confusing old plans with live configurations. Sensitive operational details are kept outside the public record. In October the generic public runbook was retired rather than continuing to maintain an incomplete set of sensitive operating procedures in a public repository.

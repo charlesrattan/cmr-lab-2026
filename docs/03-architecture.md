@@ -6,7 +6,7 @@ CMR Lab is a self-hosted engineering environment that combines household service
 
 The environment is organised around a three-node **Proxmox VE cluster** for infrastructure and operational workloads, supplemented by a separate **Microsoft Hyper-V cyber-range**. Selected services run outside the virtualisation hosts where that separation serves a practical purpose.
 
-This document describes the implemented architectural relationships and the responsibilities of the major platforms. The [Asset Register](02-asset-register.md) provides the current equipment and workload inventory. Architectural decisions and changes over time are recorded in the [Decision Log](06-decision-log.md) and [Lab Evolution](10-lab-evolution.md).
+This document describes the implemented architectural relationships and the responsibilities of the major platforms. The [Asset Register](02-asset-register.md) provides the current equipment and workload inventory. Architectural decisions and changes over time are recorded in the [Decision Log](06-decision-log.md) and [Lab Evolution](09-lab-evolution.md).
 
 ## Design principles
 
@@ -140,9 +140,9 @@ September work demonstrated Wazuh security event ingestion from the separate Hyp
 
 CMR Lab uses a combination of virtual-machine backup procedures, recurring configuration archives for network utility devices, infrastructure monitoring and Git-based technical documentation.
 
-Recovery processes and evidence of validation are maintained as operational work rather than presumed to follow automatically from the existence of backups. Environment-specific restoration procedures are maintained in restricted internal documentation. [Incidents](11-incidents.md) provides selected public investigation and recovery observations.
+Recovery processes and evidence of validation are maintained as operational work rather than presumed to follow automatically from the existence of backups. Environment-specific restoration procedures are maintained in restricted internal documentation. [Incidents](10-incidents.md) provides selected public investigation and recovery observations.
 
-Architecture, inventory and historical records have different responsibilities. This document describes how the deployed systems fit together; it is revised when those relationships change. The historical reasons for a change are preserved in the [Decision Log](06-decision-log.md) and [Lab Evolution](10-lab-evolution.md).
+Architecture, inventory and historical records have different responsibilities. This document describes how the deployed systems fit together; it is revised when those relationships change. The historical reasons for a change are preserved in the [Decision Log](06-decision-log.md) and [Lab Evolution](09-lab-evolution.md).
 
 ## Architectural direction
 
@@ -162,7 +162,7 @@ These are development directions, not additional components of the implemented a
 - [Baseline Inventory](00-baseline-inventory.md) — initial equipment and starting conditions
 - [Decision Log](06-decision-log.md) — reasons behind significant engineering decisions
 - [Services Platform](08-services-platform.md) — hosted applications and services
-- [Incidents](11-incidents.md) — investigated failures and lessons learned
-- [Lab Evolution](10-lab-evolution.md) — historical development of the environment
-- [Hyper-V Cyber-Range](13-cyber-range.md) — test environment and evidence method
-- [Observability](14-observability.md) — metrics, availability and security telemetry
+- [Incidents](10-incidents.md) — investigated failures and lessons learned
+- [Lab Evolution](09-lab-evolution.md) — historical development of the environment
+- [Hyper-V Cyber-Range](12-cyber-range.md) — test environment and evidence method
+- [Observability](13-observability.md) — metrics, availability and security telemetry

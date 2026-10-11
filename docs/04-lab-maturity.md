@@ -67,4 +67,4 @@ The next maturity improvements should be practical and measurable:
 
 Future assessments may reintroduce numerical scoring if criteria, measurement sources and repeatability requirements are defined in advance.
 
-See the [Roadmap](05-roadmap.md) and [Lab Evolution](10-lab-evolution.md).
+See the [Roadmap](05-roadmap.md) and [Lab Evolution](09-lab-evolution.md).

@@ -97,4 +97,4 @@ A UniFi gateway is under consideration as a future replacement for the current r
 - [Architecture](03-architecture.md) — the design and responsibilities of the major platforms
 - [Hardware Validation](07-hardware-validation.md) — original hardware evaluation and validation work
 - [Services Platform](08-services-platform.md) — application and container deployment details
-- [Lab Evolution](10-lab-evolution.md) — how the environment has developed
+- [Lab Evolution](09-lab-evolution.md) — how the environment has developed
