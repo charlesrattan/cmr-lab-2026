@@ -2,6 +2,56 @@
 
 Significant changes are recorded newest first. Earlier entries remain historical evidence, not instructions for the current configuration. Date ranges are used where the exact completion day is not recorded.
 
+## 2026-10-11 — Public documentation enrichment and runbook retirement
+
+- Incorporated verified August–September build details into existing architecture, validation, decision, observability, incident and cyber-range records.
+- Removed the privacy-reduced public operations runbook; sensitive operating procedures remain outside this repository in the private handbook.
+- Updated document links and retained a public, non-sensitive engineering history without creating additional documentation categories.
+
+## 2026-09-26 — Controlled cyber-range gateway
+
+- Added a dual-homed Linux gateway design to the separate Hyper-V range.
+- Kept connectivity between the experiment network and supporting services deliberately scoped; no household-network penetration path is implied.
+
+## 2026-09-25 — Wazuh telemetry validation
+
+- Confirmed Wazuh ingestion from the Kali testing machine.
+- Failed local authentication attempts produced rules 5557 and 5503; the associated classification included MITRE T1110.001.
+- Captured an observed event path, not evidence of exploitation or complete detection coverage.
+
+## 2026-09-19 to 2026-09-24 — Hyper-V domain and endpoint
+
+- Confirmed Windows domain controller promotion and lab DNS operation on 19 September.
+- By 24 September, connectivity and port enumeration showed the controller presenting normal domain services, while the Windows client filtered a baseline TCP scan.
+- Subsequent experiments added a controlled gateway and monitoring integration.
+
+## 2026-09-12 to 2026-09-16 — Networking investigations
+
+- USG WAN automatic addressing behaved inconsistently; static addressing temporarily restored service before a separate apparent hardware/power failure ended the trial on 14 September.
+- SOC1's internal wired link negotiated at approximately 10 Mb/s. An RTL8153-family USB interface with the Linux r8152 driver restored a validated 1 Gb/s link.
+
+## 2026-08-29 to 2026-08-30 — SOC1 startup validation
+
+- Verified VM130 (`monitoring-01`) and VM140 (`home-assistant-01`) on SOC1 with VM autostart enabled.
+- Verified Proxmox node reboot, continuing cluster quorum and running guests.
+
+## 2026-08-16 to 2026-08-18 — Monitoring deployment
+
+- Prometheus, Node Exporter and Grafana active on VM130 by 16 August.
+- Nine hosts monitored across the core host, SOC nodes, infrastructure VMs and Raspberry Pi utilities.
+- Initial dashboards investigated cluster health, virtual machines, storage and backup coverage.
+- AdGuard configuration synchronisation between primary and secondary resolvers configured for periodic execution.
+
+## 2026-08-14 to 2026-08-15 — DNS parity and node recovery
+
+- Secondary AdGuard returned successful public and internal DNS responses and matched primary resolver answers on internal tests.
+- Backed up SOC2 node configuration, reinstalled the node and verified a three-node quorate cluster on 15 August.
+
+## 2026-08-03 to 2026-08-04 — Proxmox cluster formation
+
+- Built the Lenovo T440p/T450 Proxmox nodes; T450 installation required changing a VT-d firmware setting.
+- Established the three-node cluster, checked host-level networking and administration and performed storage/SMART checks.
+
 ## 2026-10-11 — Documentation reconciliation and publication controls
 
 - Reconciled the public Asset Register, Architecture, Services Platform and README with observed deployments.
@@ -87,25 +137,25 @@ Created:
 ## 2026-06-12 - Stable Namespace, Internal PKI and Vaultwarden Production Use
 
 ### Added
-- Enabled Tailscale subnet routing on VM100 `ubuntu-mgmt-01` for `[internal address omitted]`.
+- Enabled Tailscale subnet routing on VM100 `ubuntu-mgmt-01` for `the lab subnet`.
 - Integrated AdGuard Home with Tailscale DNS clients.
-- Standardized local and remote service access through `[historical internal service name]`.
+- Standardized local and remote service access through `the former internal service namespace`.
 - Enhanced Homepage with Docker integration and live container status.
 - Added Homepage resource, search and datetime widgets.
 - Created the CMR Lab internal Root Certificate Authority.
-- Issued a TLS certificate for `[historical internal service name]`.
+- Issued a TLS certificate for `the former internal service namespace`.
 - Configured Vaultwarden HTTPS through Nginx Proxy Manager.
 - Installed and validated Vaultwarden/Bitwarden clients on Chrome and iPhone.
 - Imported passwords from Chrome Password Manager.
 - Imported passwords from Apple Passwords.
 
 ### Changed
-- Homepage service links were updated to use stable `[historical internal service name]` hostnames.
+- Homepage service links were updated to use stable `the former internal service namespace` hostnames.
 - Remote access now uses Tailscale subnet routing instead of service-specific Tailscale URLs.
 - Vaultwarden moved from lab testing to active production use.
 
 ### Validated
-- `[historical internal service name]` service access works locally and remotely.
+- `the former internal service namespace` service access works locally and remotely.
 - Vaultwarden HTTPS secure context warning is resolved.
 - Chrome extension sync is working.
 - iPhone Bitwarden app sync is working.
@@ -153,21 +203,12 @@ Operations and Governance
 - Installed AdGuard Home on VM100 `ubuntu-mgmt-01`.
 - Migrated DNS port 53 from `systemd-resolved` stub listener to AdGuard Home.
 - Configured Quad9 DNS-over-HTTPS upstream: `https://dns10.quad9.net/dns-query`.
-- Created internal DNS namespace: `[historical internal service name]`.
+- Created internal DNS namespace: `the former internal service namespace`.
 - Added DNS rewrites for core lab services.
 - Integrated Nginx Proxy Manager with the new `.internal` namespace.
-- Updated Homepage allowed hosts to include `[historical internal service name]`.
+- Updated Homepage allowed hosts to include `the former internal service namespace`.
 - Validated internal service access from Windows workstation.
 - Created Proxmox snapshots for VM100 and VM120 after successful DNS and proxy validation.
-
-### Validated URLs
-- `[historical internal endpoint omitted]`
-- `[historical internal endpoint omitted]`
-- `[historical internal endpoint omitted]`
-- `[historical internal endpoint omitted]`
-- `[historical internal endpoint omitted]`
-- `[historical internal endpoint omitted]`
-- `[historical internal endpoint omitted]`
 
 ### Known Issues
 - HTTPS certificates are not yet implemented for internal services.
@@ -219,7 +260,7 @@ scripts/ansible/health-check.yml
 ### VM120 Docker Services Platform
 
 - Created VM120 `docker-services-01`.
-- Assigned VM120 IP address `[internal address omitted]`.
+- Assigned VM120 IP address `the lab subnet`.
 - Installed Docker Engine.
 - Added user `charles` to the Docker group.
 - Deployed Portainer CE for Docker management.
@@ -231,16 +272,9 @@ scripts/ansible/health-check.yml
 - Confirmed Vaultwarden container health.
 - Identified Vaultwarden HTTPS requirement before production use.
 - Deployed Nginx Proxy Manager.
-- Created initial `.[historical internal service name]` proxy host entries.
+- Created initial `.the former internal service namespace` proxy host entries.
 - Configured temporary Windows hosts file mappings for lab service names.
 - Updated Homepage dashboard links and bookmarks.
-
-### Current Working Access
-
-- Homepage: `[historical internal endpoint omitted]`
-- Uptime Kuma: `[historical internal endpoint omitted]`
-- Portainer: `[historical internal endpoint omitted]`
-- Nginx Proxy Manager: `[historical internal endpoint omitted]`
 
 ### Known Issues
 
@@ -255,7 +289,7 @@ scripts/ansible/health-check.yml
 - Created VM110 `unifi-controller-01` using Ubuntu Server 24.04.
 - Installed Java 21, MongoDB, and UniFi Network Application.
 - Resolved MongoDB startup failure by changing VM110 CPU type from `x86-64-v2-AES` to `host`.
-- Confirmed UniFi Network Application loaded successfully at `[historical internal endpoint omitted]`.
+- Confirmed UniFi Network Application loaded successfully at a historical internal service endpoint.
 - Recreated existing WiFi SSIDs on the new controller.
 - Migrated UniFi AC Pro from the Dell Micro controller to VM110.
 - Confirmed AP adoption into VM110.
@@ -272,7 +306,7 @@ scripts/ansible/health-check.yml
 
 - Installed Proxmox VE 9.2.2 on `cmr-srv-01`.
 - Installed Proxmox on the PNY 500GB SATA SSD.
-- Confirmed Proxmox web UI access at `[historical internal endpoint omitted]`.
+- Confirmed Proxmox web UI access at a historical internal service endpoint.
 - Confirmed node hostname as `cmr-srv-01`.
 - Confirmed 19.42 GiB memory detected by Proxmox.
 - Confirmed Intel Core i7-3770 with 8 logical CPUs.
@@ -316,7 +350,7 @@ scripts/ansible/health-check.yml
 - Recovered UniFi Cloud Key Gen1.
 - Factory reset and upgraded Cloud Key firmware.
 - Confirmed UniFi controller operational.
-- Confirmed AP reachable at [internal address omitted].
+- Confirmed AP reachable at the lab subnet.
 - Determined AP is adopted by existing controller on main workstation.
 - Evaluated migration of network management to Proxmox-hosted controller.
 

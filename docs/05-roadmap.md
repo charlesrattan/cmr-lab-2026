@@ -16,12 +16,15 @@ The guiding objective is to develop practical infrastructure, security and opera
 | June 2026 | Initial automation and remote access | Ansible health-check work, Tailscale connectivity, DNS naming and an internal certificate authority established |
 | July 2026 | Operational documentation workspace | A separate, local MkDocs documentation environment created for working notes |
 | August 2026 | Network utility separation | Primary and secondary AdGuard resolvers and dedicated Raspberry Pi remote-access utility established |
-| August–September 2026 | Expanded virtualisation | Two repurposed ThinkPads incorporated as additional Proxmox nodes |
-| September 2026 | Observability and security monitoring | Prometheus, Grafana, Home Assistant and Wazuh workloads deployed across the expanded environment |
-| September 2026 | Independent cyber-range | Hyper-V Windows domain, endpoint, Kali workstation and controlled gateway established; initial telemetry observed |
+| 3–15 August 2026 | Expanded virtualisation | T440p/T450 joined the Proxmox cluster; the SOC2 reinstall/rejoin and three-node quorum were verified |
+| 16–18 August 2026 | Initial observability | Prometheus, Node Exporter and Grafana were active, nine host targets were monitored and initial dashboard views developed |
+| August–September 2026 | Household and security workloads | Home Assistant on SOC1 and Wazuh on SOC2 were established; integrations and alert interpretation developed |
+| 19–26 September 2026 | Independent cyber-range | Hyper-V Windows domain, endpoint, Kali workstation and controlled gateway established; domain behaviour and Wazuh alerts observed |
 | October 2026 | Documentation reconciliation | Asset Register, Architecture, Services Platform and README updated against verified evidence |
 
 Milestone dates are based on project records and lab conversations; a month or range is used where the exact completion day was not established. Deployment means a system was established, not that every possible use case or recovery scenario was tested.
+
+The August Proxmox expansion and monitoring milestones are recorded separately from the September Wazuh and cyber-range experiments. This prevents the broad implementation periods from obscuring the earlier monitoring work.
 
 ## Current direction: operate, observe and verify
 

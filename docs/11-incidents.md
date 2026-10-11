@@ -48,6 +48,28 @@ An exploratory gateway deployment showed unstable behaviour and was removed from
 
 **Lessons:** Maintain a rollback path for network changes, especially when the lab shares connectivity with everyday services. Treat trial equipment as experimental until operational behaviour is demonstrated over time.
 
+## INC-2026-005 — SOC2 reinstall and cluster rejoin
+
+**Period:** 14–15 August 2026  
+**Classification:** Virtualisation host recovery and cluster membership  
+**Historical status:** Reinstalled and verified quorate
+
+The Lenovo T450 security node was rebuilt after prior configuration capture. Instead of copying cluster-managed state blindly, the reinstall restored normal operating access and then deliberately re-established cluster membership. By 15 August, the Proxmox cluster again reported all three nodes and quorum.
+
+**Lessons:** Restoring a physical node and restoring distributed cluster membership are distinct tasks. An off-host configuration archive supports recovery planning, but a success claim must be based on validated cluster state.
+
+## INC-2026-006 — UniFi gateway evaluation and failure
+
+**Period:** 12–14 September 2026  
+**Classification:** Routing equipment trial  
+**Historical status:** Test discontinued; existing household gateway retained
+
+The trialled USG intermittently failed to obtain or retain working WAN configuration through its expected automatic addressing. A static WAN configuration restored connectivity during investigation, but the configuration state observed afterward still indicated DHCP. On 14 September, the device later became unresponsive; port LEDs behaved abnormally and the normal top indicator was absent even after a power cycle.
+
+The visible symptoms support concluding that the gateway was unsuitable for continued household use in that state. They do not prove which internal component failed.
+
+**Lessons:** Keep a known-good rollback path for experiments affecting shared internet access. Separate a configuration defect from subsequent hardware symptoms, and do not infer component-level root cause without measurement.
+
 ## Incident-record method
 
 Each future public account should capture the period, observable symptoms, scope of impact, evidence, recovery outcome and lessons learned. Avoid publishing live addressing, access paths, sensitive diagnostic outputs or unresolved weaknesses. Root causes should be labelled as confirmed only when evidence supports that conclusion.
