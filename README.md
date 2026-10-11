@@ -96,6 +96,8 @@ Read the [Lab Evolution](docs/10-lab-evolution.md) for the fuller narrative and 
 | [Decision Log](docs/06-decision-log.md) | Why major engineering choices were made |
 | [Incidents](docs/11-incidents.md) | Historical investigation and troubleshooting lessons |
 | [Operations Runbook](docs/09-operations-runbook.md) | Reusable operational methods and evidence handling |
+| [Hyper-V Cyber-Range](docs/13-cyber-range.md) | Windows/Linux test environment, observations and experimental method |
+| [Observability](docs/14-observability.md) | Metrics, availability checks and security-event interpretation |
 | [Documentation Approach](docs/12-documentation-approach.md) | Document scope, evidence vocabulary and publication boundaries |
 
 The current-state documents are updated as the lab changes. Historical records preserve earlier approaches and decisions rather than presenting them as the current configuration.
