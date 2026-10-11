@@ -40,6 +40,34 @@ Infrastructure measurements and network-device monitoring have been introduced. 
 
 Wazuh has ingested events from laboratory systems. During controlled September 2026 testing, activity on a test machine produced observable alerts. This establishes that a particular event path worked at that time; it does not establish that every intended endpoint is monitored or every attack would be detected.
 
+## Implementation chronology and evidence
+
+### 16 August: Nine-host metrics foundation
+
+On SOC1, VM130 (`monitoring-01`) had Prometheus, Grafana and Node Exporter running by 16 August. The initial measurement estate covered **nine hosts**: `cmr-srv-01`, both Lenovo nodes, `monitoring-01`, the management, Docker and UniFi VMs and both Raspberry Pi utilities.
+
+Prometheus target checks included successful `up=1` observations and Node Exporter measurements. These checks demonstrate collection from particular targets at the time of observation, not permanent availability or complete instrumentation.
+
+The following **general sample queries** show the kind of non-sensitive information the monitoring environment can investigate; they are not verbatim outputs from the original deployment:
+
+```promql
+up
+node_memory_MemAvailable_bytes
+node_filesystem_avail_bytes
+```
+
+### 17–18 August: Dashboard construction
+
+The work developed beyond a default installation into Grafana sections addressing **Cluster Health**, **Proxmox Storage**, **Virtual Machines** and **Backup Coverage**. Some panels were refined by comparing Prometheus metrics with what Proxmox itself reported. These panels are evidence of monitoring development; backup-coverage views are not equivalent to a successful restoration test.
+
+Later network-device observations added a managed-switch/SNMP perspective. The public record does not reproduce SNMP access values, live endpoints or dashboard credentials.
+
+### September: Distinguishing telemetry types
+
+Wazuh on SOC2 is a separate event-analysis platform, not part of the Prometheus metrics datastore. Controlled failed local authentication on `KALI01` generated Wazuh rules **5557** and **5503** on 25 September. The result validates a specific alert path but does not prove general attack detection.
+
+Operational observability therefore involves at least three categories of independent evidence: **metrics**, **endpoint availability** and **security logs/events**. They can support one another during investigation without being interchangeable.
+
 ## Questions worth answering with evidence
 
 A dashboard should help answer something actionable, for example:
