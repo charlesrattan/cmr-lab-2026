@@ -168,7 +168,7 @@ The purpose of the platform is not to maximise the number of containers. It is t
 
 - [Architecture](03-architecture.md) — the deployed platforms and their responsibilities
 - [Asset Register](02-asset-register.md) — current physical and virtual infrastructure
-- [Incidents](11-incidents.md) — selected application and infrastructure troubleshooting
+- [Incidents](10-incidents.md) — selected application and infrastructure troubleshooting
 - [Decision Log](06-decision-log.md) — reasons behind important technical choices
-- [Lab Evolution](10-lab-evolution.md) — history of the environment
-- [Observability](14-observability.md) — monitoring systems and their interpretation
+- [Lab Evolution](09-lab-evolution.md) — history of the environment
+- [Observability](13-observability.md) — monitoring systems and their interpretation

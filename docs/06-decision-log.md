@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This register records consequential engineering choices, their context and their outcomes. It captures **why** the lab changed. Current configuration belongs in the [Architecture](03-architecture.md), while the dated sequence belongs in [Lab Evolution](10-lab-evolution.md).
+This register records consequential engineering choices, their context and their outcomes. It captures **why** the lab changed. Current configuration belongs in the [Architecture](03-architecture.md), while the dated sequence belongs in [Lab Evolution](09-lab-evolution.md).
 
 Dates reflect available project evidence; month-level entries avoid invented precision. A decision can be superseded without making its original reasoning irrelevant.
 
@@ -65,7 +65,7 @@ Dates reflect available project evidence; month-level entries avoid invented pre
 
 **Choice:** Restore and retain the previously working Linksys gateway rather than commit the household network to unstable trial equipment.
 
-**Outcome:** Gateway replacement remains a future evaluation, and the observed failure is preserved in [Incidents](11-incidents.md).
+**Outcome:** Gateway replacement remains a future evaluation, and the observed failure is preserved in [Incidents](10-incidents.md).
 
 ### Use a tested external NIC on SOC1 rather than accept a degraded link
 
@@ -97,5 +97,5 @@ New entries should describe the context, options considered, selection, evidence
 
 - [Architecture](03-architecture.md)
 - [Roadmap](05-roadmap.md)
-- [Lab Evolution](10-lab-evolution.md)
-- [Incidents](11-incidents.md)
+- [Lab Evolution](09-lab-evolution.md)
+- [Incidents](10-incidents.md)

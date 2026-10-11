@@ -165,7 +165,7 @@ Created:
 ### Added
 
 - Added `09-operations-runbook.md`.
-- Added `10-lab-evolution.md`.
+- Added `09-lab-evolution.md`.
 - Expanded repository governance documentation.
 - Documented operational procedures for routine administration.
 - Documented historical evolution of the lab from informal home technology environment to enterprise-style infrastructure simulation platform.
