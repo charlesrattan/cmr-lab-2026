@@ -106,7 +106,7 @@ The current focus is no longer adding services rapidly. The focus is now:
 | docs/00-baseline-inventory.md  | Original inventory and starting point             |
 | docs/01-lab-charter.md         | Vision, mission, principles, and success criteria |
 | docs/02-asset-register.md      | Infrastructure and asset register                 |
-| docs/03-target-architecture.md | Architecture evolution and current design         |
+| docs/03-architecture.md | Architecture evolution and current design         |
 | docs/04-lab-maturity.md        | Maturity assessment and tracking                  |
 | docs/05-roadmap.md             | Completed milestones and future priorities        |
 | docs/06-decision-log.md        | Key architecture and implementation decisions     |
