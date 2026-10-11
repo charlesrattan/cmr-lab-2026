@@ -4,7 +4,7 @@
 
 This document preserves selected **resolved or historically bounded** incidents that provided meaningful engineering lessons. It records observations and conclusions without publishing current administrative endpoints, sensitive recovery procedures or live security weaknesses.
 
-For active incident handling, access-control decisions and environment-specific recovery steps, use restricted operational documentation. The [Operations Runbook](09-operations-runbook.md) explains the public process framework.
+Active incident handling, access-control decisions and environment-specific recovery steps belong in restricted operational documentation. The [Documentation Approach](12-documentation-approach.md) explains the publication boundary and evidence standards.
 
 ## INC-2026-001 — Core host connectivity interruption
 
@@ -40,13 +40,17 @@ A repurposed Proxmox laptop had unexpectedly poor Ethernet negotiation. Investig
 
 ## INC-2026-004 — Gateway evaluation interrupted
 
-**Period:** September 2026  
-**Classification:** Network equipment evaluation  
-**Historical status:** Trial discontinued
+**Period:** 12–14 September 2026  
+**Classification:** Network gateway evaluation and suspected equipment failure  
+**Historical status:** Trial discontinued; Linksys retained
 
-An exploratory gateway deployment showed unstable behaviour and was removed from the production path. The existing router remained the household gateway.
+The tested UniFi Security Gateway intermittently failed to establish a reliable WAN connection through automatic DHCP addressing. A manually entered static WAN configuration restored connectivity during investigation, but later configuration inspection still showed DHCP. This made configuration persistence a separate unresolved question.
 
-**Lessons:** Maintain a rollback path for network changes, especially when the lab shares connectivity with everyday services. Treat trial equipment as experimental until operational behaviour is demonstrated over time.
+On 14 September, the gateway appeared to suffer an additional device-level failure: an empty port flashed, other port indicators remained off and the usual top status light did not illuminate after a power cycle. The trial was discontinued and the previous household gateway remained in service.
+
+**Finding:** Both WAN configuration problems and abnormal physical indicator behaviour were observed. The available evidence does not establish an exact failed hardware component.
+
+**Lessons:** Maintain a known-working network rollback path, verify persisted configuration and separate a software/network explanation from later hardware symptoms.
 
 ## INC-2026-005 — SOC2 reinstall and cluster rejoin
 
@@ -57,18 +61,6 @@ An exploratory gateway deployment showed unstable behaviour and was removed from
 The Lenovo T450 security node was rebuilt after prior configuration capture. Instead of copying cluster-managed state blindly, the reinstall restored normal operating access and then deliberately re-established cluster membership. By 15 August, the Proxmox cluster again reported all three nodes and quorum.
 
 **Lessons:** Restoring a physical node and restoring distributed cluster membership are distinct tasks. An off-host configuration archive supports recovery planning, but a success claim must be based on validated cluster state.
-
-## INC-2026-006 — UniFi gateway evaluation and failure
-
-**Period:** 12–14 September 2026  
-**Classification:** Routing equipment trial  
-**Historical status:** Test discontinued; existing household gateway retained
-
-The trialled USG intermittently failed to obtain or retain working WAN configuration through its expected automatic addressing. A static WAN configuration restored connectivity during investigation, but the configuration state observed afterward still indicated DHCP. On 14 September, the device later became unresponsive; port LEDs behaved abnormally and the normal top indicator was absent even after a power cycle.
-
-The visible symptoms support concluding that the gateway was unsuitable for continued household use in that state. They do not prove which internal component failed.
-
-**Lessons:** Keep a known-good rollback path for experiments affecting shared internet access. Separate a configuration defect from subsequent hardware symptoms, and do not infer component-level root cause without measurement.
 
 ## Incident-record method
 

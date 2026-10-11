@@ -70,6 +70,16 @@ The MkDocs site is an internal operational reference. Its deployment is distinct
 
 cAdvisor supplies container metrics to the observability environment; it is a supporting component, not a user-facing application dashboard.
 
+## Evolution of application hosting
+
+The June Docker VM initially consolidated Homepage, Portainer, Uptime Kuma, Vaultwarden and Nginx Proxy Manager. The original deployment also established the need for predictable persistent storage and secure contexts for applications such as Vaultwarden.
+
+On 14 June, the media stack expanded with Jellyfin and the request, indexer, media-management and download tools. A storage-capacity problem required a VM filesystem adjustment. A defined Jellyseerr-to-download workflow was observed working after initial setup.
+
+By October, multiple Compose projects provided separation among administration, media, documentation and utility services. Later applications included Calibre-Web, Stirling PDF, Minecraft Bedrock and container-resource telemetry, alongside the existing media tools. The exact private filesystem layout and individual management endpoints are deliberately excluded.
+
+Home Assistant, Prometheus/Grafana and Wazuh run on their own Proxmox virtual machines rather than on this Docker host. This division reflects their continuing household or infrastructure responsibilities.
+
 ## Service relationships
 
 ```mermaid
@@ -142,7 +152,7 @@ This distinction is particularly important for services that rely on other conta
 
 Compose definitions provide a repeatable starting point for application deployment. Configuration files, persistent application data and recovery procedures have different responsibilities and must be considered together during maintenance.
 
-Operational commands, environment-specific settings and detailed recovery procedures belong in the [Operations Runbook](09-operations-runbook.md) and internal documentation. Changes that alter the responsibilities of the application platform should also be reflected in the [Architecture](03-architecture.md) and the [Asset Register](02-asset-register.md).
+Live administration commands, environment-specific settings and recovery procedures belong in the restricted internal handbook. This public document focuses on application responsibilities, significant implementation choices and demonstrable results. Changes that alter the responsibilities of the application platform should also be reflected in the [Architecture](03-architecture.md) and the [Asset Register](02-asset-register.md).
 
 ### Recovery and validation
 
@@ -158,7 +168,7 @@ The purpose of the platform is not to maximise the number of containers. It is t
 
 - [Architecture](03-architecture.md) — the deployed platforms and their responsibilities
 - [Asset Register](02-asset-register.md) — current physical and virtual infrastructure
-- [Operations Runbook](09-operations-runbook.md) — operational practices and recovery procedures
+- [Incidents](11-incidents.md) — selected application and infrastructure troubleshooting
 - [Decision Log](06-decision-log.md) — reasons behind important technical choices
 - [Lab Evolution](10-lab-evolution.md) — history of the environment
 - [Observability](14-observability.md) — monitoring systems and their interpretation

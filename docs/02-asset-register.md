@@ -55,6 +55,21 @@ The three Proxmox systems operate as a cluster, although workloads are assigned 
 
 The cyber-range infrastructure and initial monitoring integrations are established. Structured attack, observation, hardening and repeat-testing exercises are the next stage of the project.
 
+## Verified Proxmox guest assignments
+
+VM IDs identify virtual machines in Proxmox; they are not addresses. This is the functional distribution established through the 2026 build history.
+
+| Proxmox host | VM ID | Workload | Responsibility |
+| --- | ---: | --- | --- |
+| Core OptiPlex | 100 | `ubuntu-mgmt-01` | Utilities, Ansible and secondary DNS |
+| Core OptiPlex | 110 | `unifi-controller-01` | UniFi Network Application |
+| Core OptiPlex | 120 | `docker-services-01` | Containerised application platform |
+| Lenovo T440p / SOC1 | 130 | `monitoring-01` | Prometheus and Grafana |
+| Lenovo T440p / SOC1 | 140 | `home-assistant-01` | Household automation |
+| Lenovo T450 / SOC2 | 150 | `wazuh01` | Security events and analysis |
+
+SOC1's VM130 and VM140 were observed running after a controlled node restart on 30 August. The node's network uplink was later changed to a validated external Gigabit adapter after the built-in interface negotiated at approximately 10 Mb/s.
+
 ## Application and services platform
 
 The Docker environment hosts a range of self-hosted applications. Principal lab services are grouped below by purpose rather than by their administration endpoints.
