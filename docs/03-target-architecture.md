@@ -1,226 +1,146 @@
-# CMR Lab 2026 - Architecture
+# CMR Lab Architecture
 
-## Purpose
+## Overview
 
-This document describes the architectural evolution, current implemented architecture and future architectural direction of CMR Lab.
+CMR Lab is a self-hosted engineering environment that combines household services with practical infrastructure and cybersecurity experimentation. Its architecture uses repurposed hardware, multiple virtualisation platforms and a small collection of dedicated network utility devices.
 
-The objective is to preserve the project's history while clearly documenting the environment that exists today.
+The environment is organised around a three-node **Proxmox VE cluster** for infrastructure and operational workloads, supplemented by a separate **Microsoft Hyper-V cyber-range**. Selected services run outside the virtualisation hosts where that separation serves a practical purpose.
 
-## Architecture Principles
+This document describes the implemented architectural relationships and the responsibilities of the major platforms. The [Asset Register](02-asset-register.md) provides the current equipment and workload inventory. Architectural decisions and changes over time are recorded in the [Decision Log](06-decision-log.md) and [Lab Evolution](10-lab-evolution.md).
 
-The architecture of CMR Lab is guided by the following principles:
+## Design principles
 
-* Stability before complexity
-* Separation of responsibilities
-* Documentation before expansion
-* Recovery before experimentation
-* Automation where it improves reliability
-* Infrastructure that can be understood, maintained and rebuilt
+The lab is guided by a set of practical engineering principles:
 
----
+- **Use available resources deliberately.** Assign workloads according to hardware capacity and actual requirements rather than an idealised initial design.
+- **Separate responsibilities.** Keep network management, applications, observability and cybersecurity experimentation understandable as distinct functions.
+- **Prefer usable infrastructure over unnecessary complexity.** Home automation and other everyday services must remain useful alongside experiments.
+- **Build for visibility and recoverability.** Use monitoring, configuration records and backups to support diagnosis, maintenance and future recovery exercises.
+- **Test claims, not just deployments.** Distinguish installed services from validated end-to-end behaviour.
+- **Preserve the engineering record.** Update the current architecture when it changes while retaining earlier decisions in historical documentation.
 
-# Original Architecture Direction
+## Logical architecture
 
-The original rebuild effort was intended to move away from an unstable, Wi-Fi-dependent environment toward a structured and documented infrastructure platform.
+```mermaid
+flowchart TB
+    NETWORK["Household connectivity<br/>Routing · Managed switching · Wi-Fi"]
+    DNS["Network utilities<br/>Primary DNS · Remote access"]
 
-At the beginning of the project the environment consisted of:
+    subgraph PROXMOX["Proxmox VE cluster"]
+        CORE["Core infrastructure node<br/>Management · UniFi · Docker"]
+        OPS["Operations node<br/>Metrics · Home Assistant"]
+        SEC["Security monitoring node<br/>Wazuh"]
+    end
 
-* ISP router
-* Linksys EA4500 router
-* UniFi AC Pro access point
-* Ubuntu Server running on a MacBook Pro
-* Several unused or partially tested devices
-* Limited documentation
-* No centralized DNS
-* No workload separation
-* Minimal operational procedures
+    subgraph HYPERV["Separate Hyper-V cyber-range"]
+        RANGE["Windows domain · Windows client<br/>Kali Linux · Controlled gateway"]
+    end
 
-The initial goal was to establish a stable foundation before introducing additional services.
-
----
-
-# Current Implemented Architecture
-
-## Physical Infrastructure
-
-```text
-Internet
-    |
-ISP Router
-    |
-Linksys EA4500
-    |
-Lab Network
-    |
-+-- UniFi AC Pro
-|
-+-- Dell OptiPlex Micro
-|
-+-- Dell OptiPlex 7010 SFF
-|
-+-- Raspberry Pi 3
-|
-+-- Utility Devices
+    NETWORK --- DNS
+    NETWORK --- CORE
+    NETWORK --- OPS
+    NETWORK --- SEC
+    NETWORK --- RANGE
+    RANGE -.->|Security telemetry| SEC
 ```
 
-### Physical Systems
+The diagram is a logical view of the platforms and their relationships, not a physical cabling plan. The Proxmox and Hyper-V environments perform different roles even though they participate in the wider CMR Lab ecosystem.
 
-| System                 | Purpose                     |
-| ---------------------- | --------------------------- |
-| Linksys EA4500         | Gateway, routing and DHCP   |
-| UniFi AC Pro           | Wireless networking         |
-| Dell OptiPlex 7010 SFF | Proxmox virtualization host |
-| Dell OptiPlex Micro    | Primary workstation         |
-| Raspberry Pi 3         | Homebridge platform         |
+## Network and foundation services
 
----
+The Linksys EA4500 remains the household gateway and DHCP server. Wired connectivity is provided through a managed Gigabit Ethernet switch, while a UniFi access point is administered through the UniFi Network Application hosted in the Proxmox environment.
 
-## Virtual Infrastructure
+Two Raspberry Pi systems provide dedicated network utility functions:
 
-```text
-cmr-srv-01
-|
-+-- VM100 - ubuntu-mgmt-01
-|
-+-- VM110 - unifi-controller-01
-|
-+-- VM120 - docker-services-01
-```
+| Function | Implemented approach | Architectural purpose |
+| --- | --- | --- |
+| Internal DNS | AdGuard Home on a Raspberry Pi, with a secondary resolver on a management VM | Local name resolution and DNS filtering across the environment |
+| Remote access | Tailscale service hosted on a separate Raspberry Pi | Authorised access to lab resources independently of the core virtualisation host |
 
-### VM Ownership Model
+The DNS services have been configured for synchronisation and tested for resolver failover. This is a network-service design rather than a claim that all workloads have automatic failover.
 
-| VM    | Role                           |
-| ----- | ------------------------------ |
-| VM100 | Management, automation and DNS |
-| VM110 | Network management             |
-| VM120 | Application services           |
+Internal HTTPS is provided for selected applications through a private certificate authority and reverse-proxy services. The lab's application platform also provides a consistent entry point to many self-hosted services.
 
----
+## Virtualisation platforms
 
-## Service Architecture
+### Proxmox VE cluster
 
-### VM100 - Management Platform
+Proxmox VE provides the main virtualisation foundation. The cluster consists of three physical systems with different workload responsibilities:
 
-| Service      | Purpose                                    |
-| ------------ | ------------------------------------------ |
-| AdGuard Home | Internal DNS and service discovery         |
-| Ansible      | Automation and health checks               |
-| Git          | Documentation and configuration management |
-| Tailscale    | Secure remote access                       |
+| Node role | Hardware | Workload responsibilities |
+| --- | --- | --- |
+| Core infrastructure | Dell OptiPlex 7010 SFF | Management utilities, secondary DNS, UniFi Network Application and Docker services |
+| Operations | Lenovo ThinkPad T440p | Prometheus/Grafana monitoring and Home Assistant |
+| Security monitoring | Lenovo ThinkPad T450 | Wazuh security monitoring |
 
----
+The core infrastructure node hosts separate virtual machines for management, network administration and containerised applications. This keeps their operating environments distinct while allowing them to share the same physical compute platform.
 
-### VM110 - Network Platform
+The two Lenovo systems were originally considered for a more dedicated security operations design. Their eventual assignments reflect capacity planning and operational needs: one primarily supports observability and home automation, while the other hosts Wazuh. Cybersecurity test systems were placed elsewhere rather than forcing the entire test environment onto these nodes.
 
-| Service                   | Purpose                            |
-| ------------------------- | ---------------------------------- |
-| UniFi Network Application | Wireless infrastructure management |
+### Hyper-V cyber-range
 
----
+A separate Microsoft Hyper-V environment runs on the existing Windows engineering workstation. It provides a controlled setting for experimenting with Windows administration, security telemetry and authorised testing.
 
-### VM120 - Application Platform
+| Component | Responsibility |
+| --- | --- |
+| Windows domain controller | Active Directory Domain Services and DNS for the test environment |
+| Windows client | Domain-joined endpoint for system and security observations |
+| Kali Linux | Testing workstation within the cyber-range |
+| Controlled gateway | Restricts and manages selected connectivity between the test environment and monitoring services |
 
-| Service             | Purpose                           |
-| ------------------- | --------------------------------- |
-| Docker Engine       | Container runtime                 |
-| Homepage            | Service dashboard                 |
-| Portainer           | Container management              |
-| Uptime Kuma         | Monitoring                        |
-| Vaultwarden         | Password management               |
-| Nginx Proxy Manager | Reverse proxy and service routing |
+The environment is connected to Wazuh for security event collection, including telemetry from the Windows client. Its intended exercise cycle is **test → observe → document → harden → retest**. The supporting infrastructure and telemetry are deployed; a completed end-to-end exercise cycle remains a future milestone.
 
----
+## Applications and operational services
 
-# Internal DNS Architecture
+### Containerised applications
 
-CMR Lab uses AdGuard Home on VM100 as the authoritative internal DNS platform.
+Docker and Docker Compose provide the primary self-hosted application platform. Workloads are managed as distinct application stacks, making them easier to operate and revise independently.
 
-### DNS Platform
+The platform supports administration and dashboards, availability monitoring, password management, media and library applications, household utilities and an internal MkDocs documentation site. Portainer is used for container administration, while Nginx Proxy Manager provides reverse-proxy functionality for selected internal services.
 
-| Component          | Value                  |
-| ------------------ | ---------------------- |
-| DNS Server         | AdGuard Home           |
-| Host               | VM100 - ubuntu-mgmt-01 |
-| IP Address         | 10.146.91.99           |
-| Upstream DNS       | Quad9 DNS-over-HTTPS   |
-| Internal Namespace | cmrlab.internal        |
+The detailed application inventory is maintained in the [Asset Register](02-asset-register.md) and [Services Platform](08-services-platform.md) documentation.
 
-The previous `.local` naming convention is being retired because `.local` is reserved for multicast DNS and may conflict with service discovery systems.
+### Monitoring and security telemetry
 
-### Service Catalog
+Operational observability and security monitoring are separate but complementary functions.
 
-| Service      | DNS Name                  |
-| ------------ | ------------------------- |
-| Proxmox      | proxmox.cmrlab.internal   |
-| UniFi        | unifi.cmrlab.internal     |
-| Dashboard    | dashboard.cmrlab.internal |
-| Vaultwarden  | vault.cmrlab.internal     |
-| Uptime Kuma  | kuma.cmrlab.internal      |
-| Portainer    | portainer.cmrlab.internal |
-| AdGuard Home | adguard.cmrlab.internal   |
+| Platform | Focus | Sources and use |
+| --- | --- | --- |
+| Prometheus and Grafana | Infrastructure and service metrics | Host, application and managed-switch metrics; visualisation and investigation |
+| Uptime Kuma | Service availability | Endpoint checks and service status tracking |
+| Wazuh | Security telemetry | Events collected from systems including the Hyper-V cyber-range |
 
----
+Monitoring components are deployed and collecting information. Dashboard refinement and more structured investigation exercises form part of the lab's continuing development.
 
-# Operational Architecture
+### Home automation
 
-The current architecture follows a layered model.
+Home Assistant runs as a dedicated Proxmox virtual machine on the operations node and supports daily household use. Its integrations include existing smart-home platforms and Apple Home-related services. Keeping this workload separate from the main application host recognises its ongoing household role rather than treating it as a disposable lab experiment.
 
-```text
-Physical Infrastructure
-        |
-Virtualization Layer
-        |
-Management Layer
-        |
-Network Management Layer
-        |
-Application Services Layer
-```
+## Operations and recovery
 
-### Layer Responsibilities
+CMR Lab uses a combination of virtual-machine backup procedures, recurring configuration archives for network utility devices, infrastructure monitoring and Git-based technical documentation.
 
-| Layer                   | Responsibility                        |
-| ----------------------- | ------------------------------------- |
-| Physical Infrastructure | Hardware, networking and connectivity |
-| Virtualization          | Proxmox platform                      |
-| Management              | DNS, automation and remote access     |
-| Network Management      | UniFi management                      |
-| Application Services    | User-facing services                  |
+Recovery processes and evidence of validation are maintained as operational work rather than presumed to follow automatically from the existence of backups. The related procedures belong in the [Operations Runbook](09-operations-runbook.md).
 
----
+Architecture, inventory and historical records have different responsibilities. This document describes how the deployed systems fit together; it is revised when those relationships change. The historical reasons for a change are preserved in the [Decision Log](06-decision-log.md) and [Lab Evolution](10-lab-evolution.md).
 
-# Future Architectural Direction
+## Architectural direction
 
-The next stage of development focuses on operational maturity rather than rapid service expansion.
+Current development prioritises improving the environment already in use rather than adding services solely for their own sake. Areas of continued work include:
 
-## Near-Term Priorities
+- Refinement of monitoring dashboards and operational visibility
+- Documented recovery exercises and automation improvements
+- Further cyber-range experiments connecting offensive testing with defensive observations
+- Evaluation of a future network gateway replacement
+- Maintenance of accurate technical records alongside infrastructure changes
 
-* Complete documentation refactor
-* Expand the operations runbook
-* Resolve Ansible privileged update workflow
-* Implement HTTPS for internal services
-* Validate backup and restore procedures
-* Review home network DNS strategy
+These are development directions, not additional components of the implemented architecture.
 
-## Future Service Candidates
+## Related documentation
 
-Potential future services include:
-
-* Jellyfin
-* Home Assistant
-* Grafana
-* Prometheus
-* Wazuh
-* Local AI experimentation
-
-These services should only be introduced when the current platform remains documented, recoverable and stable.
-
----
-
-## Current Architecture Status
-
-Status: Operational
-
-Current Phase: Operations and Governance
-
-The platform has established a stable virtualization, automation, monitoring, DNS and service management baseline. Future development should prioritize operational maturity before introducing significant new complexity.
+- [Asset Register](02-asset-register.md) — current physical and virtual inventory
+- [Baseline Inventory](00-baseline-inventory.md) — initial equipment and starting conditions
+- [Decision Log](06-decision-log.md) — reasons behind significant engineering decisions
+- [Services Platform](08-services-platform.md) — hosted applications and services
+- [Operations Runbook](09-operations-runbook.md) — operational practices and recovery procedures
+- [Lab Evolution](10-lab-evolution.md) — historical development of the environment
