@@ -6,7 +6,7 @@ CMR Lab is a self-hosted engineering environment built around repurposed compute
 
 The lab uses two complementary virtualisation environments: a three-node Proxmox VE cluster for infrastructure and service workloads, and a separate Hyper-V environment for controlled cybersecurity experiments.
 
-This register describes the equipment and deployed workloads that define the current lab. The [baseline inventory](00-baseline-inventory.md) documents the starting hardware, while the [architecture](03-target-architecture.md) explains how the design has evolved.
+This register describes the equipment and deployed workloads that define the current lab. The [baseline inventory](00-baseline-inventory.md) documents the starting hardware, while the [architecture](03-architecture.md) explains how the design has evolved.
 
 ## Network infrastructure
 
@@ -79,7 +79,7 @@ A UniFi gateway is under consideration as a future replacement for the current r
 ## Related documentation
 
 - [Baseline Inventory](00-baseline-inventory.md) — equipment available at the start of the project
-- [Architecture](03-target-architecture.md) — the design and responsibilities of the major platforms
+- [Architecture](03-architecture.md) — the design and responsibilities of the major platforms
 - [Hardware Validation](07-hardware-validation.md) — original hardware evaluation and validation work
 - [Services Platform](08-services-platform.md) — application and container deployment details
 - [Lab Evolution](10-lab-evolution.md) — how the environment has developed
