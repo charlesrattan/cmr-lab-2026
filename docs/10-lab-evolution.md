@@ -1,340 +1,126 @@
 # CMR Lab Evolution
 
-## Purpose
+## From useful equipment to an intentional laboratory
 
-This document records the evolution of CMR Lab from an informal home technology environment into a structured enterprise-style infrastructure simulation platform.
+CMR Lab did not begin with a clean architectural blueprint or a rack of newly purchased servers. It grew from household technology, spare computers, a wireless network and curiosity about what could be achieved with equipment already on hand.
 
-The objective is to preserve not only what was built but also how the project evolved, why key decisions were made and what lessons were learned along the way.
+The defining change in 2026 was not a particular installation. It was a change of method: **inventory what exists, test its capabilities, assign clear responsibilities, observe the results and retain the reasoning behind decisions**.
 
-This document provides the historical context behind the current architecture, operational model and project direction.
+This is a historical record. For what is currently deployed, consult the [Asset Register](02-asset-register.md) and [Architecture](03-architecture.md). The dates below are drawn from project records and conversations; approximate periods are labelled accordingly.
 
----
+## June 2026 — Rebuilding the foundation
 
-# The Starting Point
+### 3–5 June: Inventory before procurement
 
-CMR Lab did not begin as a planned infrastructure project.
+The first task was to understand a mixed environment that included a Linksys router, UniFi wireless access point, a MacBook previously used for Ubuntu services, Raspberry Pis and several older computers. Working devices and spare equipment were recorded separately.
 
-It began as a collection of useful technology deployed over time to solve practical problems, support family needs and explore new technologies.
+Available Dell OptiPlex computers were inspected. The OptiPlex 7010 SFF became the selected virtualisation host after hardware and storage checks. Existing cabling and switches were used to move the lab towards wired connectivity.
 
-The environment included:
+**Lesson:** An inventory is only useful when it informs a decision. Repurposed equipment can deliver genuine capability, but its constraints must shape the design.
 
-* Linksys router
-* UniFi access point
-* Ubuntu Server running on a MacBook Pro
-* Raspberry Pi devices
-* Multiple laptops and desktops
-* Various networking equipment
+### 6–7 June: Proxmox and a dedicated network controller
 
-The environment was functional but largely undocumented and dependent on individual devices.
+Proxmox VE was installed on the selected OptiPlex. Ubuntu virtual machines began taking responsibilities that had previously been mixed across physical machines. The UniFi Network Application was moved into a dedicated VM and the access point was adopted into the new controller.
 
-At this stage there was little separation between:
+An initial MongoDB startup failure proved to be related to virtual CPU compatibility, not simply to the application installation. A corrected CPU presentation resolved the observed issue.
 
-* Home use
-* Learning
-* Experimentation
-* Infrastructure
+**Lesson:** Virtualisation adds flexibility, but it also introduces details that must be understood and tested.
 
----
+### 7–10 June: Containerised applications and management
 
-# Phase 0 - Informal Home Technology Environment
+A separate application VM provided Docker hosting for Homepage, Portainer, Uptime Kuma, Nginx Proxy Manager and Vaultwarden. Docker Compose became the preferred way to describe related services. A management VM was established for utilities and initial Ansible health checks.
 
-### Characteristics
+Not every maintenance task became automated. The first Ansible scripts demonstrated useful observations while more ambitious privileged-update routines remained work in progress.
 
-* Wi-Fi-dependent infrastructure
-* Mixed hardware platforms
-* Limited documentation
-* Manual administration
-* Services tied to individual machines
-* No centralized DNS
-* No formal backup strategy
-* No defined architecture
+**Lesson:** A running service and an operational process are different achievements.
 
-### Key Lesson
+### 11–12 June: Names, remote access and certificates
 
-Useful technology is not necessarily maintainable technology.
+AdGuard Home introduced consistent internal name resolution, while the reverse proxy offered simpler entry points to selected services. Tailscale provided authorised remote connectivity. An internal certificate authority enabled HTTPS for applications requiring secure contexts, including Vaultwarden.
 
----
+At this stage DNS and remote-access functions were closely associated with the management VM. Their later relocation demonstrates how architecture changes as dependencies become clearer.
 
-# Phase 1 - Hardware Recovery and Rebuild
+**Lesson:** DNS, service access and certificates are related disciplines; reliable behaviour requires understanding their interaction.
 
-The first major decision was to stop expanding the existing environment and instead understand what hardware already existed.
+### 14 June: Media deployment and an infrastructure incident
 
-Rather than purchasing new equipment immediately, available hardware was inspected, tested and documented.
+Jellyfin and supporting media applications were added and an early request-to-download path was demonstrated. During the same period, the lab experienced a broader connectivity outage. Investigation found repeated network-adapter watchdog errors on the Proxmox host. Restoring the host clarified that the incident had been misleadingly associated with recently deployed media services.
 
-The Dell OptiPlex 7010 SFF emerged as the strongest platform and ultimately became the foundation of the rebuilt lab.
+The media VM also underwent a storage adjustment after a capacity-related application problem.
 
-### Key Outcomes
+**Lesson:** Temporal coincidence is not root-cause evidence. Examine infrastructure dependencies before blaming the newest application. See [Incidents](11-incidents.md).
 
-* Hardware inventory established
-* Hardware validation process created
-* Dell OptiPlex 7010 SFF selected
-* Wired infrastructure became a priority
-* GitHub adopted as the documentation platform
+## July 2026 — Documentation as an operational tool
 
-### Why It Mattered
+By late July the lab's information was spread across build conversations and a public repository that already lagged behind the implementation. A local MkDocs workspace was created to support a usable internal handbook. Its purpose was different from that of GitHub: internal procedures could remain detailed, while public records required deliberate review.
 
-This phase established the principle that infrastructure decisions should be evidence-based rather than assumption-based.
+**Lesson:** Technical documentation has different audiences. A rebuild guide and an externally shared engineering portfolio need not expose the same operational details.
 
-### Key Lesson
+## August 2026 — Network utility separation
 
-Validation should come before architecture.
+### Primary and secondary DNS
 
----
+DNS was further developed into a primary AdGuard service on a Raspberry Pi and a secondary resolver on a management VM. Configuration synchronisation and resolution testing were carried out; a resolver-failover exercise was also demonstrated.
 
-# Phase 2 - Virtualization Foundation
+This separated a core network utility from the main virtualisation host while retaining a second resolver.
 
-The next major transition was moving away from individual physical systems toward a virtualized platform.
+### Dedicated remote-access utility
 
-Proxmox was selected as the primary infrastructure platform and deployed on the validated OptiPlex server.
+A second Raspberry Pi took on Tailscale network-access responsibilities. This revised an earlier design in which remote access depended on the management VM. It was a pragmatic separation of concerns, not a claim of automatic application high availability.
 
-### Key Outcomes
+### Extending existing compute
 
-* `cmr-srv-01` deployed
-* Proxmox established as the core platform
-* VM100 created for management and automation
-* VM110 created for network management
-* VM120 created for application services
-* Backup capability introduced
+Two repurposed ThinkPads were incorporated into the Proxmox environment. The new cluster made it possible to host more specialised workloads and learn cluster administration, although the laptops' available capacity constrained where those workloads could run.
 
-### Why It Mattered
+**Lesson:** Independence, redundancy and automated failover are distinct architectural properties.
 
-Workloads became separated by responsibility rather than by physical device.
+## September 2026 — Observability and an independent cyber-range
 
-This was the point where the environment began to resemble enterprise infrastructure rather than a traditional homelab.
+### Monitoring and security telemetry
 
-### Key Lesson
+The expanded Proxmox nodes came to host Prometheus/Grafana monitoring, Home Assistant and Wazuh. Managed-switch metrics and host monitoring broadened observability. Home Assistant became an everyday household service, integrated with existing smart-home systems.
 
-Separation of responsibilities improves reliability and maintainability.
+The initial idea of dedicating entire laptops to offensive and defensive experimentation was revised. Monitoring and household services had real resource requirements that mattered more than the original labels attached to the machines.
 
----
+### A separate Hyper-V experiment environment
 
-# Phase 3 - Services Platform
+The Windows engineering workstation had spare capacity and provided a more suitable place to build a contained cyber-range. Hyper-V hosted a Windows domain controller, a Windows client, Kali Linux and a controlled gateway. Wazuh began receiving relevant security events, including endpoint telemetry.
 
-With the virtualization platform established, attention shifted to application services.
+The goal is a documented cycle of **test → observe → document → harden → retest**. Establishing domain services and telemetry was the foundation for that cycle, not evidence of a completed attack-and-defence study.
 
-VM120 became the dedicated Docker services platform.
+### Networking experiments and maintenance
 
-### Key Outcomes
+A candidate gateway was trialled during September but did not become the household's long-term router. The existing Linksys equipment remained in service. A Proxmox node also required a different Ethernet connection method after link-negotiation problems; the validated replacement path restored Gigabit connectivity.
 
-* Docker Compose adopted
-* Homepage deployed
-* Portainer deployed
-* Uptime Kuma deployed
-* Vaultwarden deployed
-* Nginx Proxy Manager deployed
+**Lesson:** Functional household services set a useful boundary on experimentation. A technically interesting change must still be judged by its operational outcome.
 
-### Why It Mattered
+## October 2026 — Reconciling evidence and the public record
 
-Services became portable, reproducible and easier to manage.
+By October the lab had outgrown the original June documentation. A review of VM placement, container inventory, DNS and remote access, monitoring, cyber-range systems and backups revealed where written claims were stale or overconfident.
 
-Docker Compose also introduced infrastructure patterns commonly used in professional environments.
+The public documentation was reorganised around distinct questions:
 
-### Key Lesson
-
-Standardization simplifies operations.
-
----
-
-# Phase 4 - Automation and Operations
-
-As the number of systems increased, manual administration became less desirable.
-
-VM100 was established as the management and automation platform.
-
-### Key Outcomes
-
-* Ansible deployed
-* Passwordless SSH implemented
-* Health-check automation introduced
-* Service validation routines established
-
-### Why It Mattered
-
-The project began shifting from infrastructure deployment toward infrastructure operations.
-
-### Open Issue
-
-The `update-all.yml` workflow still requires refinement to fully support privileged operations.
-
-### Key Lesson
-
-Operating infrastructure is often more challenging than deploying it.
-
----
-
-# Phase 5 - Internal DNS and Service Discovery
-
-As services expanded, remembering IP addresses and ports became increasingly impractical.
-
-Centralized DNS became necessary.
-
-### Key Outcomes
-
-* AdGuard Home deployed
-* Internal DNS platform established
-* `cmrlab.internal` adopted
-* DNS rewrites implemented
-* Internal service names standardized
-* Nginx Proxy Manager integrated with DNS naming
-
-### Why It Mattered
-
-Service discovery became independent of IP addressing.
-
-The environment became easier to understand and operate.
-
-### Key Lesson
-
-Naming is infrastructure.
-
----
-
-# Phase 6 - Remote Access, Internal PKI and Service Consolidation
-
-With internal DNS established, the next challenge was providing a consistent user experience regardless of location.
-
-The objective was to eliminate the distinction between local and remote service access while improving security and usability.
-
-### Key Outcomes
-
-* Tailscale subnet routing enabled on VM100.
-* Remote clients gained access to the internal lab subnet.
-* `cmrlab.internal` became the authoritative namespace for both local and remote access.
-* Homepage migrated from Tailscale-specific URLs to internal DNS names.
-* Internal Certificate Authority (CA) established.
-* First internal TLS certificate issued for `vault.cmrlab.internal`.
-* Vaultwarden HTTPS implemented through Nginx Proxy Manager.
-* Vaultwarden adopted for active password management.
-* Chrome and iPhone Vaultwarden clients deployed and validated.
-
-### Why It Mattered
-
-Infrastructure services became location-independent.
-
-Users no longer needed to remember different URLs for local and remote access.
-
-The introduction of internal PKI also established a foundation for future TLS deployments across the environment.
-
-### Key Lesson
-
-Service discovery, remote access and certificate management are most effective when designed as a unified system.
-
----
-
-# Major Inflection Points
-
-Several decisions fundamentally changed the direction of the project.
-
-| Decision                           | Impact                                         |
-| ---------------------------------- | ---------------------------------------------- |
-| Adoption of GitHub documentation   | Created a permanent project record             |
-| Selection of the OptiPlex 7010     | Established a stable infrastructure foundation |
-| Deployment of Proxmox              | Enabled workload separation and scalability    |
-| Creation of VM100, VM110 and VM120 | Introduced clear service ownership             |
-| Adoption of Docker Compose         | Improved repeatability and recoverability      |
-| Deployment of AdGuard Home         | Introduced centralized service discovery       |
-| Adoption of `cmrlab.internal`      | Established a consistent naming strategy       |
-| Operations before expansion        | Shifted focus from building to operating       |
-
----
-
-# Current Phase - Operations and Governance
-
-CMR Lab has now entered an Operations and Governance phase.
-
-The objective is no longer rapid service deployment.
-
-The objective is to understand, document, secure, monitor, automate and operate the environment in a professional manner.
-
-### Current Focus
-
-* Documentation quality
-* Operational procedures
-* Backup validation
-* Recovery planning
-* Service reliability
-* Automation maturity
-* Controlled service expansion
-
-### Why It Matters
-
-This phase aligns the project more closely with real-world infrastructure operations and professional ICT practices.
-
----
-
-# Evolution of the Mission
-
-The mission of the project has evolved significantly.
-
-| Stage                         | Primary Goal                          |
-| ----------------------------- | ------------------------------------- |
-| Initial Environment           | Make technology useful                |
-| Rebuild Phase                 | Stabilize infrastructure              |
-| Virtualization Phase          | Modernize the platform                |
-| Services Phase                | Deliver practical services            |
-| Automation Phase              | Reduce manual administration          |
-| DNS Phase                     | Simplify service discovery            |
-| Remote Access and PKI Phase   | Unify access and improve security     |
-| Current Phase                 | Improve operational maturity          |
-
-The project has evolved from a homelab into an enterprise infrastructure simulation platform.
-
----
-
-# Current Mission
-
-CMR Lab is an enterprise infrastructure simulation platform used to develop practical skills in:
-
-* Systems administration
-* Networking
-* Cybersecurity
-* Automation
-* Documentation
-* Governance
-* Operations
-
-The environment also supports selected personal and family services where those services contribute to reliability, usefulness and practical learning.
-
----
-
-# Lessons Learned
-
-Several recurring themes emerged throughout the project:
-
-* Stability should come before complexity.
-* Documentation should distinguish between historical plans and current state.
-* Infrastructure decisions should be evidence-based.
-* Service names should be managed through DNS rather than bookmarks or hosts files.
-* Snapshots should be taken before significant changes.
-* Recoverability is more important than feature count.
-* Operational discipline creates long-term value.
-* A homelab becomes more useful when operated like a real environment.
-
----
-
-# Looking Ahead
-
-The next stage of the project is not defined by additional services.
-
-It is defined by improving maturity.
-
-Future growth should focus on:
-
-* Better operations
-* Better automation
-* Better recovery procedures
-* Better documentation
-* Better security
-
-The goal is not to build the largest homelab possible.
-
-The goal is to build an environment that is understandable, maintainable, recoverable and professionally operated.
-
----
-
-# Review History
-
-| Date       | Reviewer       | Notes                                      |
-| ---------- | -------------- | ------------------------------------------ |
-| 2026-06-11 | Charles Rattan | Initial evolution document created         |
-| 2026-06-11 | Charles Rattan | Expanded into historical project narrative |
+| Record | Question answered |
+| --- | --- |
+| [Asset Register](02-asset-register.md) | What is deployed now? |
+| [Architecture](03-architecture.md) | How do the deployed systems fit together? |
+| [Services Platform](08-services-platform.md) | What applications are hosted and what do they do? |
+| [Decision Log](06-decision-log.md) | Why were choices made? |
+| [Roadmap](05-roadmap.md) | What is demonstrated and what remains ahead? |
+| [Incidents](11-incidents.md) | What failed, what was observed and what was learned? |
+| This document | How did the project reach its present form? |
+
+Chronology is retained without confusing old plans with live configurations. Sensitive operational details are kept outside the public record.
+
+## Themes that recur
+
+- **Reuse before replacement.** Understand the strengths and limits of available hardware.
+- **Separate responsibilities thoughtfully.** Distinct systems improve understanding but increase operational complexity.
+- **Observe rather than assume.** A deployed component is not automatically an end-to-end validated workflow.
+- **Adapt the architecture to evidence.** Resource limits and real household requirements are valid reasons to revise the design.
+- **Maintain the historical record.** Superseded configurations remain useful as dated evidence, not as instructions for the present.
+- **Build skills through complete cycles.** The value of the lab is in decisions, failures, investigation, improvement and reproduction.
+
+## Looking ahead
+
+CMR Lab continues to develop its monitoring, recovery validation, automation and cyber-range experiments. The objective is not the largest possible stack, but an environment that remains useful and whose engineering choices can be explained and demonstrated.

@@ -1,10 +1,45 @@
-# CMR Lab 2026 Changelog
+# CMR Lab Changelog
 
-This document records significant infrastructure, operational, architectural and documentation changes made within CMR Lab.
+Significant changes are recorded newest first. Earlier entries remain historical evidence, not instructions for the current configuration. Date ranges are used where the exact completion day is not recorded.
 
-Entries are recorded chronologically and are intended to provide a historical record of the evolution of the environment.
+## 2026-10-11 — Documentation reconciliation and publication controls
 
-Superseded decisions and intermediate implementation steps may remain documented here even if later replaced by newer approaches.
+- Reconciled the public Asset Register, Architecture, Services Platform and README with observed deployments.
+- Renamed the architecture document to describe the implemented rather than a target design.
+- Added a dated June–October evolution narrative and updated roadmap, decision records and incident summaries.
+- Reviewed public documentation for operational details better held in restricted internal records.
+- Separated the external engineering reference from the existing local MkDocs operational workspace.
+
+## 2026-10 — Verified service and recovery inventory
+
+- Verified the current Proxmox workload distribution and the active Docker application set.
+- Confirmed ongoing network-utility configuration archives produced through an automated schedule.
+- Reviewed backup practices and distinguished archive creation from restoration evidence.
+- Continued to treat unfinished monitoring and cyber-range exercises as ongoing work rather than completed demonstrations.
+
+## 2026-09 — Proxmox expansion, monitoring and cyber-range
+
+- Added two repurposed laptop nodes to the Proxmox environment and assigned monitoring, home automation and security-monitoring workloads according to capacity.
+- Implemented Prometheus/Grafana monitoring and Wazuh event collection.
+- Built a separate Hyper-V experiment range with Windows domain services, a Windows client, Kali and a controlled gateway; initial endpoint telemetry was observed.
+- Validated an alternative Ethernet adapter on a node after a link-negotiation problem.
+- Completed exploratory gateway tests without replacing the active household router.
+
+## 2026-08 — Dedicated network utilities
+
+- Established primary AdGuard DNS on a Raspberry Pi alongside the management VM's secondary resolver.
+- Implemented configuration synchronisation and observed DNS failover behaviour.
+- Moved the principal Tailscale network utility function to a dedicated Raspberry Pi.
+- Continued development of multi-node infrastructure and monitoring.
+
+## 2026-07 — Internal documentation workspace
+
+- Established a separate MkDocs Material workspace as a local engineering handbook.
+- Retained the public GitHub repository as the version-controlled, reviewed engineering record.
+
+## Earlier documented changes — June 2026
+
+The following is the sanitised original June changelog. It preserves the sequence and implementation lessons while omitting live administrative addressing and environment-specific access paths.
 
 ## 2026-06-14 - Media Platform Validation and Incident Response
 
@@ -17,9 +52,9 @@ Superseded decisions and intermediate implementation steps may remain documented
 * Added Nginx Proxy Manager proxy hosts for media services.
 * Created dedicated media storage structure:
 
-  * /media/downloads
-  * /media/movies
-  * /media/tv
+  * a media storage directory
+  * a media storage directory
+  * a media storage directory
 
 ### Changed
 
@@ -52,25 +87,25 @@ Created:
 ## 2026-06-12 - Stable Namespace, Internal PKI and Vaultwarden Production Use
 
 ### Added
-- Enabled Tailscale subnet routing on VM100 `ubuntu-mgmt-01` for `10.146.91.0/24`.
+- Enabled Tailscale subnet routing on VM100 `ubuntu-mgmt-01` for `[internal address omitted]`.
 - Integrated AdGuard Home with Tailscale DNS clients.
-- Standardized local and remote service access through `cmrlab.internal`.
+- Standardized local and remote service access through `[historical internal service name]`.
 - Enhanced Homepage with Docker integration and live container status.
 - Added Homepage resource, search and datetime widgets.
 - Created the CMR Lab internal Root Certificate Authority.
-- Issued a TLS certificate for `vault.cmrlab.internal`.
+- Issued a TLS certificate for `[historical internal service name]`.
 - Configured Vaultwarden HTTPS through Nginx Proxy Manager.
 - Installed and validated Vaultwarden/Bitwarden clients on Chrome and iPhone.
 - Imported passwords from Chrome Password Manager.
 - Imported passwords from Apple Passwords.
 
 ### Changed
-- Homepage service links were updated to use stable `cmrlab.internal` hostnames.
+- Homepage service links were updated to use stable `[historical internal service name]` hostnames.
 - Remote access now uses Tailscale subnet routing instead of service-specific Tailscale URLs.
 - Vaultwarden moved from lab testing to active production use.
 
 ### Validated
-- `cmrlab.internal` service access works locally and remotely.
+- `[historical internal service name]` service access works locally and remotely.
 - Vaultwarden HTTPS secure context warning is resolved.
 - Chrome extension sync is working.
 - iPhone Bitwarden app sync is working.
@@ -118,21 +153,21 @@ Operations and Governance
 - Installed AdGuard Home on VM100 `ubuntu-mgmt-01`.
 - Migrated DNS port 53 from `systemd-resolved` stub listener to AdGuard Home.
 - Configured Quad9 DNS-over-HTTPS upstream: `https://dns10.quad9.net/dns-query`.
-- Created internal DNS namespace: `cmrlab.internal`.
+- Created internal DNS namespace: `[historical internal service name]`.
 - Added DNS rewrites for core lab services.
 - Integrated Nginx Proxy Manager with the new `.internal` namespace.
-- Updated Homepage allowed hosts to include `dashboard.cmrlab.internal`.
+- Updated Homepage allowed hosts to include `[historical internal service name]`.
 - Validated internal service access from Windows workstation.
 - Created Proxmox snapshots for VM100 and VM120 after successful DNS and proxy validation.
 
 ### Validated URLs
-- `http://dashboard.cmrlab.internal`
-- `http://vault.cmrlab.internal`
-- `http://kuma.cmrlab.internal`
-- `https://portainer.cmrlab.internal`
-- `http://adguard.cmrlab.internal`
-- `https://unifi.cmrlab.internal:8443`
-- `https://proxmox.cmrlab.internal:8006`
+- `[historical internal endpoint omitted]`
+- `[historical internal endpoint omitted]`
+- `[historical internal endpoint omitted]`
+- `[historical internal endpoint omitted]`
+- `[historical internal endpoint omitted]`
+- `[historical internal endpoint omitted]`
+- `[historical internal endpoint omitted]`
 
 ### Known Issues
 - HTTPS certificates are not yet implemented for internal services.
@@ -165,10 +200,10 @@ scripts/ansible/health-check.yml
 - Configured passwordless SSH from VM100 to VM110 and VM120.
 - Created Ansible inventory for management, network, and services VMs.
 - Validated Ansible connectivity across VM100, VM110, and VM120.
-- Consolidated Docker services on VM120 under `/home/charles/docker/docker-compose.yml`.
+- Consolidated Docker services on VM120 under `a private Docker Compose manifest`.
 - Confirmed Homepage, Portainer, Uptime Kuma, Vaultwarden, and Nginx Proxy Manager as active Docker services.
 - Created Docker backup archive `docker-backup-20260610.tar.gz`.
-- Validated Proxmox backup of VM120 to `hdd-storage`.
+- Validated Proxmox backup of VM120 to a local backup destination.
 - Configured weekly scheduled Proxmox backups for VM110 and VM120.
 
 ### Changed
@@ -184,7 +219,7 @@ scripts/ansible/health-check.yml
 ### VM120 Docker Services Platform
 
 - Created VM120 `docker-services-01`.
-- Assigned VM120 IP address `10.146.91.230`.
+- Assigned VM120 IP address `[internal address omitted]`.
 - Installed Docker Engine.
 - Added user `charles` to the Docker group.
 - Deployed Portainer CE for Docker management.
@@ -196,16 +231,16 @@ scripts/ansible/health-check.yml
 - Confirmed Vaultwarden container health.
 - Identified Vaultwarden HTTPS requirement before production use.
 - Deployed Nginx Proxy Manager.
-- Created initial `.cmrlab.local` proxy host entries.
+- Created initial `.[historical internal service name]` proxy host entries.
 - Configured temporary Windows hosts file mappings for lab service names.
 - Updated Homepage dashboard links and bookmarks.
 
 ### Current Working Access
 
-- Homepage: `http://dashboard.cmrlab.local`
-- Uptime Kuma: `http://kuma.cmrlab.local`
-- Portainer: `https://10.146.91.230:9443`
-- Nginx Proxy Manager: `http://10.146.91.230:81`
+- Homepage: `[historical internal endpoint omitted]`
+- Uptime Kuma: `[historical internal endpoint omitted]`
+- Portainer: `[historical internal endpoint omitted]`
+- Nginx Proxy Manager: `[historical internal endpoint omitted]`
 
 ### Known Issues
 
@@ -220,7 +255,7 @@ scripts/ansible/health-check.yml
 - Created VM110 `unifi-controller-01` using Ubuntu Server 24.04.
 - Installed Java 21, MongoDB, and UniFi Network Application.
 - Resolved MongoDB startup failure by changing VM110 CPU type from `x86-64-v2-AES` to `host`.
-- Confirmed UniFi Network Application loaded successfully at `https://10.146.91.172:8443`.
+- Confirmed UniFi Network Application loaded successfully at `[historical internal endpoint omitted]`.
 - Recreated existing WiFi SSIDs on the new controller.
 - Migrated UniFi AC Pro from the Dell Micro controller to VM110.
 - Confirmed AP adoption into VM110.
@@ -237,7 +272,7 @@ scripts/ansible/health-check.yml
 
 - Installed Proxmox VE 9.2.2 on `cmr-srv-01`.
 - Installed Proxmox on the PNY 500GB SATA SSD.
-- Confirmed Proxmox web UI access at `https://10.146.91.13:8006`.
+- Confirmed Proxmox web UI access at `[historical internal endpoint omitted]`.
 - Confirmed node hostname as `cmr-srv-01`.
 - Confirmed 19.42 GiB memory detected by Proxmox.
 - Confirmed Intel Core i7-3770 with 8 logical CPUs.
@@ -251,7 +286,7 @@ scripts/ansible/health-check.yml
 - Confirmed PNY 500GB SATA SSD detected and passed SMART.
 - Confirmed WDC WD1002FBYS 1TB HDD detected and passed SMART.
 - Identified 1TB HDD still contains existing NTFS partition and will be repurposed later.
-- Added 1TB HDD as hdd-storage.
+- Added 1TB HDD as a local backup destination.
 - Configured secondary storage repository.
 - Established SSD/HDD storage separation.
 
@@ -281,7 +316,7 @@ scripts/ansible/health-check.yml
 - Recovered UniFi Cloud Key Gen1.
 - Factory reset and upgraded Cloud Key firmware.
 - Confirmed UniFi controller operational.
-- Confirmed AP reachable at 10.146.91.153.
+- Confirmed AP reachable at [internal address omitted].
 - Determined AP is adopted by existing controller on main workstation.
 - Evaluated migration of network management to Proxmox-hosted controller.
 

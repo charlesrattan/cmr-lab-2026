@@ -2,169 +2,56 @@
 
 ## Purpose
 
-This document records the hardware validation activities performed during the CMR Lab rebuild.
+This is a **historical account** of the hardware-recovery and validation work that began the CMR Lab rebuild in June 2026. It should not be used as a present-day equipment inventory; consult the [Asset Register](02-asset-register.md) for current roles.
 
-Its purpose is to document how hardware was assessed, what decisions resulted from that assessment and which systems were ultimately selected for operational use.
+## Approach
 
-This document serves as a historical validation record rather than a current inventory.
+The rebuild began with a practical question: what could be built reliably from equipment already available?
 
-The current inventory of active infrastructure is maintained in:
+Candidate equipment was evaluated for basic operation, CPU and memory identification, storage condition, boot behaviour, networking and suitability for long-running virtualisation. Hardware with limited value as a complete system could still serve as a source of replacement parts.
 
-```text
-docs/02-asset-register.md
-```
+## Core compute system
 
----
+The Dell OptiPlex 7010 SFF was selected as the original primary virtualisation host.
 
-# Validation Objective
+| Aspect | Recorded result |
+| --- | --- |
+| Processor | Intel Core i7-3770, eight logical processors |
+| Memory at initial build | 20 GB DDR3 |
+| Primary storage | 500 GB SSD |
+| Secondary storage | 1 TB HDD |
+| POST and BIOS access | Passed |
+| Storage identification and diagnostic checks | Passed in the original validation |
+| Headless operation | Demonstrated |
+| Proxmox VE installation and restart | Demonstrated |
+| Overall decision | Suitable as the initial core hypervisor |
 
-The objective of the hardware validation phase was to determine which available equipment could reliably support the long-term goals of CMR Lab.
+Successful hardware checks supported the original selection; they are **not** a perpetual guarantee of component health.
 
-The validation process focused on:
+## Building a wired foundation
 
-* Hardware functionality
-* Stability
-* Upgrade potential
-* Suitability for virtualization
-* Suitability for infrastructure workloads
-* Availability of replacement parts
+The original network depended heavily on wireless connectivity and multipurpose devices. The project added a tested wired cable run and used available switching equipment during early implementation. UniFi equipment, a legacy Cloud Key and a candidate gateway were also evaluated as part of the rebuild.
 
----
+These early tests should not be confused with the later production network design or subsequent gateway experiments.
 
-# Primary Hardware Evaluation
+## Validation beyond the first host
 
-## Dell OptiPlex 7010 SFF
+Later in 2026, two Lenovo ThinkPads were reused as additional Proxmox nodes. This required assessing the relationship between limited hardware resources, network connectivity and suitable workload placement. The result was a three-node cluster in which the nodes perform different jobs.
 
-This platform became the primary infrastructure candidate following successful validation.
+A separate Dell OptiPlex Micro workstation subsequently supported Hyper-V experiments using otherwise available compute capacity.
 
-### Validation Results
+## Lessons
 
-| Check              | Result                           |
-| ------------------ | -------------------------------- |
-| POST               | Passed                           |
-| BIOS Access        | Passed                           |
-| CPU Detection      | Passed                           |
-| Storage Detection  | Passed                           |
-| Memory Detection   | Passed                           |
-| Dell Diagnostics   | Passed                           |
-| Hardware Stability | Passed                           |
-| Final Outcome      | Selected as primary Proxmox host |
+- Record hardware capability before assigning workloads.
+- Confirm storage and filesystem behaviour rather than relying on nominal capacity.
+- Treat link speed and stability as observed values.
+- Revisit hardware assumptions when the project expands.
+- Balance replacement cost against the time and complexity of maintaining older systems.
+- Preserve old validation records as history without presenting them as current health certificates.
 
-### Hardware Configuration
+## Related records
 
-| Component         | Value                         |
-| ----------------- | ----------------------------- |
-| CPU               | Intel Core i7-3770 @ 3.40 GHz |
-| RAM               | 20 GB DDR3                    |
-| Primary Storage   | 500 GB SSD                    |
-| Secondary Storage | 1 TB HDD                      |
-| Boot Mode         | EFI                           |
-
-### Notes
-
-One DIMM slot appears to be faulty. The issue does not currently impact operational use and the platform remains stable.
-
----
-
-# OptiPlex Recovery Outcome
-
-Multiple OptiPlex units were inspected during the validation process.
-
-### Outcome
-
-| Device Group                     | Result                      |
-| -------------------------------- | --------------------------- |
-| Best-condition OptiPlex 7010 SFF | Selected for production use |
-| Remaining OptiPlex units         | Converted to parts donors   |
-
-This approach maximized usable hardware while minimizing additional expenditure.
-
----
-
-# Wired Infrastructure Validation
-
-The rebuild introduced a wired lab network to improve reliability and reduce dependence on wireless connectivity.
-
-### Validation Results
-
-| Device                          | Status                |
-| ------------------------------- | --------------------- |
-| Dell OptiPlex 7010 Proxmox Host | Connected             |
-| Dell OptiPlex Micro Workstation | Connected             |
-| TP-Link TL-SF1008P Switch       | Operational           |
-| UniFi Security Gateway          | Connected for testing |
-| UniFi Cloud Key Gen1            | Connected for testing |
-
-### Outcome
-
-The wired lab network was successfully established and became the foundation for subsequent virtualization and service deployment activities.
-
----
-
-# Proxmox Validation
-
-Following hardware validation, Proxmox VE was deployed and validated on the selected platform.
-
-### Validation Results
-
-| Check                    | Result     |
-| ------------------------ | ---------- |
-| Proxmox Installation     | Successful |
-| Web Interface Access     | Successful |
-| Hostname Configuration   | Successful |
-| Repository Configuration | Successful |
-| Updates Applied          | Successful |
-| Reboot Validation        | Successful |
-| Headless Operation       | Confirmed  |
-| SSD Health               | Passed     |
-| HDD Health               | Passed     |
-
-### Platform Details
-
-| Item          | Value              |
-| ------------- | ------------------ |
-| Hostname      | cmr-srv-01         |
-| Platform      | Proxmox VE         |
-| Management IP | 10.146.91.13       |
-| CPU           | Intel Core i7-3770 |
-| Logical CPUs  | 8                  |
-| Memory        | 20 GB Installed    |
-
-### Outcome
-
-The platform was successfully validated as the primary virtualization host for CMR Lab.
-
----
-
-# Validation Lessons Learned
-
-The validation phase produced several important lessons:
-
-* Existing hardware should be evaluated before replacement is considered.
-* Documentation should begin before major implementation work.
-* Hardware validation reduces architectural uncertainty.
-* A small number of stable systems provides more value than a large number of partially functional systems.
-* Recoverability and maintainability are more important than raw hardware quantity.
-
----
-
-# Final Validation Outcome
-
-| Area                              | Outcome     |
-| --------------------------------- | ----------- |
-| Hardware Recovery                 | Successful  |
-| Wired Lab Deployment              | Successful  |
-| Proxmox Deployment                | Successful  |
-| Virtualization Readiness          | Achieved    |
-| Foundation for Service Deployment | Established |
-
-The hardware validation phase successfully transitioned CMR Lab from planning and inventory activities into infrastructure deployment and operational development.
-
----
-
-# Review History
-
-| Date       | Reviewer       | Notes                                        |
-| ---------- | -------------- | -------------------------------------------- |
-| 2026-06-03 | Charles Rattan | Initial validation record created            |
-| 2026-06-11 | Charles Rattan | Refactored into historical validation record |
+- [Baseline Inventory](00-baseline-inventory.md)
+- [Asset Register](02-asset-register.md)
+- [Architecture](03-architecture.md)
+- [Incidents](11-incidents.md)
