@@ -45,13 +45,12 @@ Significant changes are recorded newest first. Earlier entries remain historical
 - USG WAN automatic addressing behaved inconsistently; static addressing temporarily restored service before a separate apparent hardware/power failure ended the trial on 14 September.
 - SOC1's internal wired link negotiated at approximately 10 Mb/s. An RTL8153-family USB interface with the Linux r8152 driver restored a validated 1 Gb/s link.
 
-## 2026-09 — Proxmox expansion, monitoring and cyber-range
+## 2026-09 — Security monitoring, home automation and cyber-range
 
-- Added two repurposed laptop nodes to the Proxmox environment and assigned monitoring, home automation and security-monitoring workloads according to capacity.
-- Implemented Prometheus/Grafana monitoring and Wazuh event collection.
+- Continued Home Assistant on SOC1 and established Wazuh event collection on SOC2; their workload placement followed available capacity and household requirements.
 - Built a separate Hyper-V experiment range with Windows domain services, a Windows client, Kali and a controlled gateway; initial endpoint telemetry was observed.
-- Validated an alternative Ethernet adapter on a node after a link-negotiation problem.
-- Completed exploratory gateway tests without replacing the active household router.
+- Validated the external Ethernet adapter after SOC1's link-negotiation problem.
+- Ended exploratory gateway tests without replacing the active household router.
 
 ## 2026-08-29 to 2026-08-30 — SOC1 startup validation
 
