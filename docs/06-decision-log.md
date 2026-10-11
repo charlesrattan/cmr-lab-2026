@@ -31,6 +31,50 @@ Dates reflect available project evidence; month-level entries avoid invented pre
 | September 2026 | Retain the existing gateway after exploratory replacement testing | Prioritise stable household networking | Legacy gateway remains active; replacement is a future evaluation |
 | October 2026 | Reconcile the public repository against actual deployments | June documentation no longer represented the entire environment | Current-state documents refreshed; history and operational detail assigned separate responsibilities |
 
+## Expanded engineering decisions: August–September
+
+### Expand with two repurposed laptops instead of replacing the core host
+
+**Context:** The initial single-host design had little space for simultaneous household workloads, security tools and observation systems. Two ThinkPads were available.
+
+**Choice:** Add the T440p and T450 as additional Proxmox nodes, after checking installation compatibility, networking and cluster readiness.
+
+**Alternatives considered:** Continue on one machine or dedicate the laptops solely to separate non-clustered security experiments. The latter would have simplified separation but reduced the opportunity to operate a clustered platform and constrained capacity.
+
+**Outcome:** A three-node cluster was verified quorate after the SOC2 reinstall/rejoin in August. This provided distinct places for monitoring, automation and Wazuh, but did not imply shared storage or automated recovery of guests.
+
+### Place day-to-day services ahead of the original red/blue node labels
+
+**Context:** SOC1 and SOC2 were originally conceived as red/blue security nodes. Monitoring, home automation and Wazuh each had practical resource needs.
+
+**Choice:** Place Prometheus/Grafana and Home Assistant on SOC1, Wazuh on SOC2 and the attacker/victim range on an independent Hyper-V workstation.
+
+**Outcome:** Household and experimental responsibilities became clearer. Keeping the original SOC hostnames is a historical naming choice, not evidence that both laptops host attack machines.
+
+### Adopt a primary/secondary DNS design without assuming full high availability
+
+**Context:** Early lab DNS depended on a virtual machine sharing the core Proxmox host with other infrastructure.
+
+**Choice:** Use a Raspberry Pi for primary AdGuard Home and retain a secondary resolver on the management VM; configure synchronisation and test equivalent resolution behaviour.
+
+**Outcome:** Both resolvers returned consistent internal results during August testing; failover was subsequently exercised. Resolver redundancy does not mean that all lab applications fail over.
+
+### Retain the Linksys gateway after USG instability
+
+**Context:** September gateway tests revealed intermittent WAN configuration issues followed by an apparent hardware/power failure.
+
+**Choice:** Restore and retain the previously working Linksys gateway rather than commit the household network to unstable trial equipment.
+
+**Outcome:** Gateway replacement remains a future evaluation, and the observed failure is preserved in [Incidents](11-incidents.md).
+
+### Use a tested external NIC on SOC1 rather than accept a degraded link
+
+**Context:** The built-in Ethernet negotiated at approximately 10 Mb/s, limiting practical monitoring and virtualisation usefulness.
+
+**Choice:** Validate an external USB Gigabit adapter and use it as the bridge's physical uplink.
+
+**Outcome:** Link negotiation reached 1 Gb/s through the Realtek `r8152` path. This was a pragmatic repair, not proof of the exact fault inside the original jack or controller.
+
 ## Technical lessons that affected decisions
 
 ### Application compatibility

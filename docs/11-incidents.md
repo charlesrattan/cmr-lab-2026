@@ -4,7 +4,7 @@
 
 This document preserves selected **resolved or historically bounded** incidents that provided meaningful engineering lessons. It records observations and conclusions without publishing current administrative endpoints, sensitive recovery procedures or live security weaknesses.
 
-For active incident handling, access-control decisions and environment-specific recovery steps, use restricted operational documentation. The [Operations Runbook](09-operations-runbook.md) explains the public process framework.
+Active incident handling, access-control decisions and environment-specific recovery steps belong in restricted operational documentation. The [Documentation Approach](12-documentation-approach.md) explains the publication boundary and evidence standards.
 
 ## INC-2026-001 — Core host connectivity interruption
 
@@ -34,19 +34,33 @@ A media application could not start reliably when its underlying virtual-machine
 **Classification:** Hardware interoperability  
 **Historical status:** Alternative connection validated
 
-A repurposed Proxmox laptop had unexpectedly poor Ethernet negotiation. Investigation compared link behaviour through the internal interface and an external network adapter. The external connection established a stable Gigabit link.
+SOC1, the Lenovo T440p, negotiated at approximately **10 Mb/s** using its built-in Intel Ethernet path. Interface and bridge behaviour were compared with an external USB Gigabit adapter using the Realtek RTL8153 family and Linux `r8152` driver. After the bridge was associated with the external interface, the host operated at a validated **1 Gb/s** negotiated link. The test supports the workaround, but not a conclusive physical diagnosis of the original NIC or connector.
 
 **Lessons:** Link negotiation must be measured rather than assumed from nominal port specifications. A low-cost adapter may be a practical workaround where replacing otherwise useful hardware is unnecessary.
 
 ## INC-2026-004 — Gateway evaluation interrupted
 
-**Period:** September 2026  
-**Classification:** Network equipment evaluation  
-**Historical status:** Trial discontinued
+**Period:** 12–14 September 2026  
+**Classification:** Network gateway evaluation and suspected equipment failure  
+**Historical status:** Trial discontinued; Linksys retained
 
-An exploratory gateway deployment showed unstable behaviour and was removed from the production path. The existing router remained the household gateway.
+The tested UniFi Security Gateway intermittently failed to establish a reliable WAN connection through automatic DHCP addressing. A manually entered static WAN configuration restored connectivity during investigation, but later configuration inspection still showed DHCP. This made configuration persistence a separate unresolved question.
 
-**Lessons:** Maintain a rollback path for network changes, especially when the lab shares connectivity with everyday services. Treat trial equipment as experimental until operational behaviour is demonstrated over time.
+On 14 September, the gateway appeared to suffer an additional device-level failure: an empty port flashed, other port indicators remained off and the usual top status light did not illuminate after a power cycle. The trial was discontinued and the previous household gateway remained in service.
+
+**Finding:** Both WAN configuration problems and abnormal physical indicator behaviour were observed. The available evidence does not establish an exact failed hardware component.
+
+**Lessons:** Maintain a known-working network rollback path, verify persisted configuration and separate a software/network explanation from later hardware symptoms.
+
+## INC-2026-005 — SOC2 reinstall and cluster rejoin
+
+**Period:** 14–15 August 2026  
+**Classification:** Virtualisation host recovery and cluster membership  
+**Historical status:** Reinstalled and verified quorate
+
+The Lenovo T450 security node was rebuilt after prior configuration capture. Instead of copying cluster-managed state blindly, the reinstall restored normal operating access and then deliberately re-established cluster membership. By 15 August, the Proxmox cluster again reported all three nodes and quorum.
+
+**Lessons:** Restoring a physical node and restoring distributed cluster membership are distinct tasks. An off-host configuration archive supports recovery planning, but a success claim must be based on validated cluster state.
 
 ## Incident-record method
 

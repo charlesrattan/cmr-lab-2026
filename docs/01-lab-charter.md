@@ -49,7 +49,7 @@ A milestone is stronger when it includes a defined objective, implementation, te
 | [Roadmap](05-roadmap.md) | Distinguish established milestones and intended work |
 | [Decision Log](06-decision-log.md) | Record the reasons for major changes |
 | [Lab Evolution](10-lab-evolution.md) | Preserve chronology and lessons |
-| [Incidents](11-incidents.md) | Retain publishable incident case studies |
+| [Incidents](11-incidents.md) | Retain publishable incident case studies and operational lessons |
 | [Documentation Approach](12-documentation-approach.md) | Explain evidence standards and public/private boundaries |
 
 The lab succeeds when its operator can explain the environment, demonstrate how it works, understand its limitations and make informed improvements.

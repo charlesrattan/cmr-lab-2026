@@ -35,6 +35,19 @@ These levels describe evidence about **specific activities**, not a universal gr
 
 The table deliberately does not translate an installed component into a blanket claim of resilience, detection coverage or end-to-end validation.
 
+## Dated supporting evidence
+
+| Period | Verified example | Scope of the finding |
+| --- | --- | --- |
+| 15 August | Three Proxmox nodes with quorum following SOC2 recovery | Cluster membership; not guest high availability |
+| 14–18 August | AdGuard primary/secondary internal DNS parity and scheduled synchronisation | Resolution behaviour; not universal service failover |
+| 16–18 August | Nine monitored hosts, successful Prometheus scrapes and initial Grafana dashboards | Metrics pipeline; monitoring design still developing |
+| 29–30 August | SOC1 reboot followed by running monitoring and Home Assistant VMs | Demonstrated startup in one exercise; not a full restoration test |
+| September | SOC1 external link verified at 1 Gb/s after onboard 10 Mb/s negotiation | Validated workaround; root cause not fully diagnosed |
+| 19–26 September | Windows domain, client firewall observations and Wazuh authentication alerts | Selected test/telemetry evidence; full defensive cycle outstanding |
+
+The assessment avoids assigning a numerical score to a technology simply because it was installed. Each evidence entry supports only the activity actually observed.
+
 ## Learning priorities
 
 The next maturity improvements should be practical and measurable:

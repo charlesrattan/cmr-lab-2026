@@ -46,6 +46,43 @@ Initial discovery and enumeration observations included differences in how Windo
 
 Wazuh collection has also been extended to the Windows client. The supporting environment is established, but a complete, fully documented attack → observe → harden → repeat comparison remains a future project.
 
+## September 2026 build and validation history
+
+### Hyper-V host and network design
+
+The Dell OptiPlex 3070 Micro (Intel i5-8500T, 32 GB RAM) provided a separate host for the experimental guests, reducing pressure on the Proxmox SOC laptops. The arrangement used a Hyper-V Default Switch for upstream NAT access alongside an isolated internal lab switch.
+
+| Guest | Role | Connectivity purpose |
+| --- | --- | --- |
+| `KALI01` | Linux testing workstation | Interfaces for the internal range and an upstream NAT path |
+| `DC01` | Windows domain controller and DNS | Internal range only |
+| `CLIENT01` | Domain-connected Windows 11 test endpoint | Internal range only |
+| `RANGE-GW01` | Debian-based control gateway | Dual-homed between authorised upstream access and the internal range |
+
+The gateway was added to make selected traffic between the range and outside monitoring systems explicit. This did not convert the isolated lab into a general extension of the household network.
+
+### 19 September: Active Directory and DNS
+
+The Windows domain controller was promoted using Active Directory Domain Services. DNS operation was verified following promotion, including the controller's use of its own domain resolver. Initial SSH and internal-network tests also demonstrated Kali administration and guest connectivity.
+
+### 24 September: Comparing domain and client exposure
+
+Controlled network enumeration showed the domain controller answering on expected services such as DNS, Kerberos, LDAP, SMB and directory/global-catalog functions. The Windows 11 client was reachable but a baseline scan reported the first 1,000 TCP ports filtered. That is a useful observation of differing server/client roles and firewall behaviour, **not** proof that the client has no exploitable weaknesses.
+
+### 25 September: Security events visible in Wazuh
+
+An intentionally incorrect local authentication attempt on `KALI01` produced Wazuh events, including rules **5557** (password check failure) and **5503** (PAM login failure), with an MITRE ATT&CK classification including **T1110.001**. This demonstrated that the tested event made its way from the experiment VM to Wazuh on SOC2.
+
+The Windows client was also integrated into the endpoint telemetry design. A successful agent connection or alert is not a comprehensive security-detection test.
+
+### 26 September: Controlled gateway
+
+A Debian gateway VM was configured with an upstream and an internal-range interface. Connectivity for selected security telemetry was checked as part of the gateway build. Live network ranges, NAT policies and gateway settings are excluded from the public record.
+
+### Remaining milestone
+
+A complete evidence-backed test → observe → document → harden → retest comparison has **not yet been completed**. The existing domain, endpoint, Kali and Wazuh integration provide the foundation for that work.
+
 ## Experiment method
 
 A useful cyber-range study should answer a limited, measurable question:

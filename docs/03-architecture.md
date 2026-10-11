@@ -46,6 +46,20 @@ flowchart TB
 
 The diagram is a logical view of the platforms and their relationships, not a physical cabling plan. The Proxmox and Hyper-V environments perform different roles even though they participate in the wider CMR Lab ecosystem.
 
+## Architectural transitions in 2026
+
+| Period | Before and after | Evidence and motivation |
+| --- | --- | --- |
+| June | Single core Proxmox host with separated management, UniFi and application VMs | First move away from services scattered across general-purpose machines |
+| 3–15 August | Added T440p/SOC1 and T450/SOC2 as Proxmox nodes | Cluster rejoin after SOC2 reinstall confirmed three-node quorum |
+| August | Primary DNS shifted onto a Raspberry Pi with a VM-based secondary | Local DNS parity and later synchronisation/failover checks |
+| August | Tailscale network utility placed on a dedicated second Raspberry Pi | Reduced dependence on core hypervisor availability for remote access |
+| August–September | Monitoring and Home Assistant on SOC1; Wazuh on SOC2 | Resource-aware allocation rather than a rigid original red/blue design |
+| September | Separate Hyper-V domain/client/Kali range with a gateway | Controlled experimental workload and telemetry to Wazuh |
+| September | USG trial stopped and Linksys routing retained | Stable household connectivity prioritised over unproven gateway changes |
+
+Proxmox cluster membership and quorum do not, by themselves, mean that the guests have shared storage or automated failover. The different physical nodes provide distinct workload homes, not an unconditional availability guarantee.
+
 ## Network and foundation services
 
 The Linksys EA4500 remains the household gateway and DHCP server. Wired connectivity is provided through a managed Gigabit Ethernet switch, while a UniFi access point is administered through the UniFi Network Application hosted in the Proxmox environment.
@@ -116,11 +130,17 @@ Monitoring components are deployed and collecting information. Dashboard refinem
 
 Home Assistant runs as a dedicated Proxmox virtual machine on the operations node and supports daily household use. Its integrations include existing smart-home platforms and Apple Home-related services. Keeping this workload separate from the main application host recognises its ongoing household role rather than treating it as a disposable lab experiment.
 
+## Selected validations
+
+On **15 August**, the cluster reported three nodes with quorum following an SOC2 rebuild. By **16 August**, `monitoring-01` was collecting Prometheus/Node Exporter metrics from nine hosts. On **29–30 August**, SOC1's configured VM autostart and a later reboot provided an observation of both the monitoring and home automation VMs running again.
+
+September work demonstrated Wazuh security event ingestion from the separate Hyper-V test network and a measured SOC1 network improvement from 10 Mb/s onboard negotiation to 1 Gb/s through a USB Gigabit uplink. These are bounded observations, not claims of complete disaster recovery or security coverage.
+
 ## Operations and recovery
 
 CMR Lab uses a combination of virtual-machine backup procedures, recurring configuration archives for network utility devices, infrastructure monitoring and Git-based technical documentation.
 
-Recovery processes and evidence of validation are maintained as operational work rather than presumed to follow automatically from the existence of backups. The related procedures belong in the [Operations Runbook](09-operations-runbook.md).
+Recovery processes and evidence of validation are maintained as operational work rather than presumed to follow automatically from the existence of backups. Environment-specific restoration procedures are maintained in restricted internal documentation. [Incidents](11-incidents.md) provides selected public investigation and recovery observations.
 
 Architecture, inventory and historical records have different responsibilities. This document describes how the deployed systems fit together; it is revised when those relationships change. The historical reasons for a change are preserved in the [Decision Log](06-decision-log.md) and [Lab Evolution](10-lab-evolution.md).
 
@@ -142,7 +162,7 @@ These are development directions, not additional components of the implemented a
 - [Baseline Inventory](00-baseline-inventory.md) — initial equipment and starting conditions
 - [Decision Log](06-decision-log.md) — reasons behind significant engineering decisions
 - [Services Platform](08-services-platform.md) — hosted applications and services
-- [Operations Runbook](09-operations-runbook.md) — operational practices and recovery procedures
+- [Incidents](11-incidents.md) — investigated failures and lessons learned
 - [Lab Evolution](10-lab-evolution.md) — historical development of the environment
 - [Hyper-V Cyber-Range](13-cyber-range.md) — test environment and evidence method
 - [Observability](14-observability.md) — metrics, availability and security telemetry

@@ -76,8 +76,10 @@ The project treats installation, successful operation and validated recovery as 
 | --- | --- |
 | **June 2026** | Hardware recovery, the original Proxmox host, management and Docker VMs, UniFi migration, DNS, internal PKI and early service operations |
 | **July 2026** | Local MkDocs handbook work and a clearer separation of operational and public documentation |
-| **August 2026** | Dedicated Raspberry Pi network utilities, DNS synchronisation and Proxmox expansion |
-| **September 2026** | Monitoring, Home Assistant, Wazuh and the independent Hyper-V cyber-range; further network and hardware experiments |
+| **3–15 August 2026** | Added the two ThinkPad Proxmox nodes, built the cluster and verified quorum following an SOC2 rebuild |
+| **14–18 August 2026** | Validated secondary DNS, established resolver synchronisation and deployed Prometheus/Grafana monitoring across nine hosts |
+| **Late August–September 2026** | Ran Home Assistant on SOC1, established Wazuh on SOC2, validated an external Gigabit uplink and investigated an unsuccessful gateway trial |
+| **19–26 September 2026** | Built the separate Hyper-V Windows/Linux range and observed AD, firewall and Wazuh telemetry behaviour |
 | **October 2026** | Verified inventory and repository reconciliation, with clearer distinctions between deployed systems, demonstrated results and future work |
 
 Read the [Lab Evolution](docs/10-lab-evolution.md) for the fuller narrative and the [Changelog](CHANGELOG.md) for dated implementation milestones. The [Decision Log](docs/06-decision-log.md) explains why significant design choices were made.
@@ -95,7 +97,6 @@ Read the [Lab Evolution](docs/10-lab-evolution.md) for the fuller narrative and 
 | [Roadmap](docs/05-roadmap.md) | Established milestones and ongoing experiments |
 | [Decision Log](docs/06-decision-log.md) | Why major engineering choices were made |
 | [Incidents](docs/11-incidents.md) | Historical investigation and troubleshooting lessons |
-| [Operations Runbook](docs/09-operations-runbook.md) | Reusable operational methods and evidence handling |
 | [Hyper-V Cyber-Range](docs/13-cyber-range.md) | Windows/Linux test environment, observations and experimental method |
 | [Observability](docs/14-observability.md) | Metrics, availability checks and security-event interpretation |
 | [Documentation Approach](docs/12-documentation-approach.md) | Document scope, evidence vocabulary and publication boundaries |

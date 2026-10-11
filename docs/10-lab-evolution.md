@@ -56,6 +56,20 @@ By late July the lab's information was spread across build conversations and a p
 
 **Lesson:** Technical documentation has different audiences. A rebuild guide and an externally shared engineering portfolio need not expose the same operational details.
 
+## Early August 2026 — Building the Proxmox cluster
+
+### 3–4 August: Two laptops become virtualisation nodes
+
+The Lenovo ThinkPad T440p (`lenovo-soc-01`) and T450 (`lenovo-soc-02`) were evaluated as additional Proxmox hosts. The T450 installation encountered an obstacle associated with the firmware's VT-d setting; disabling VT-d allowed the installation to proceed. By 3 August, the nodes had been brought to a consistent Proxmox 9.2.x baseline, with host naming, network reachability, remote administration and laptop sleep behaviour checked.
+
+The new `cmrlab` cluster was formed across the core OptiPlex and the two laptops. Proxmox clustering linked management and membership; it did **not** magically make all storage shared or establish automatic guest failover.
+
+### 14–15 August: SOC2 rebuild and deliberate rejoin
+
+The T450 underwent a reinstall/recovery exercise. Before rebuilding it, important node configuration was recorded and an off-host copy of recovery information confirmed. The recovery deliberately avoided blindly replacing the cluster-managed configuration directory with files from an earlier installation. After reinstalling and reconnecting the node, `pvecm status` confirmed **three nodes with quorum** on 15 August.
+
+These events illustrated the difference between restoring access to one machine and restoring its correct place in a distributed management system.
+
 ## August 2026 — Network utility separation
 
 ### Primary and secondary DNS
@@ -68,29 +82,43 @@ This separated a core network utility from the main virtualisation host while re
 
 A second Raspberry Pi took on Tailscale network-access responsibilities. This revised an earlier design in which remote access depended on the management VM. It was a pragmatic separation of concerns, not a claim of automatic application high availability.
 
-### Extending existing compute
+### 16–18 August: Observability becomes measurable
 
-Two repurposed ThinkPads were incorporated into the Proxmox environment. The new cluster made it possible to host more specialised workloads and learn cluster administration, although the laptops' available capacity constrained where those workloads could run.
+Prometheus, Node Exporter and Grafana were running on `monitoring-01`. On 16 August the monitoring inventory comprised **nine hosts**, spanning the core Proxmox machine, both Lenovo nodes, infrastructure VMs and two Raspberry Pi utilities. Prometheus targets and host measurements were checked; initial Grafana views addressed cluster state, virtual machines, storage and backup coverage. The distinction between a working metric pipeline and a mature dashboard remained important.
 
-**Lesson:** Independence, redundancy and automated failover are distinct architectural properties.
+By 18 August, AdGuard configuration synchronisation had also been established from the Raspberry Pi primary to the management VM secondary on a **two-hour schedule**. Resolver consistency and later failover observations were separate validation steps.
 
-## September 2026 — Observability and an independent cyber-range
+### 29–30 August: Stable workload assignments
 
-### Monitoring and security telemetry
+By 29 August, SOC1 was hosting VM130 (`monitoring-01`) and VM140 (`home-assistant-01`) with automatic guest startup configured. A subsequent SOC1 reboot confirmed that cluster quorum was maintained and both VMs returned to a running state. SOC2 was prepared for the separate Wazuh security-monitoring role rather than hosting the entire security testing range.
 
-The expanded Proxmox nodes came to host Prometheus/Grafana monitoring, Home Assistant and Wazuh. Managed-switch metrics and host monitoring broadened observability. Home Assistant became an everyday household service, integrated with existing smart-home systems.
+The original shorthand names **SOC1** and **SOC2** therefore became hardware identifiers, not strict descriptions of every running workload.
+
+**Lesson:** A cluster's most valuable learning opportunities include compatibility, workload placement, recovery and verification—not simply its node count.
+
+## September 2026 — Security monitoring and an independent cyber-range
+
+### Household automation and security monitoring
+
+Prometheus/Grafana had already been deployed in August. As the second stage of the infrastructure evolved, Home Assistant became an everyday household service on SOC1 and Wazuh handled security event collection on SOC2. Managed-switch and host measurements broadened the operational picture.
 
 The initial idea of dedicating entire laptops to offensive and defensive experimentation was revised. Monitoring and household services had real resource requirements that mattered more than the original labels attached to the machines.
 
 ### A separate Hyper-V experiment environment
 
-The Windows engineering workstation had spare capacity and provided a more suitable place to build a contained cyber-range. Hyper-V hosted a Windows domain controller, a Windows client, Kali Linux and a controlled gateway. Wazuh began receiving relevant security events, including endpoint telemetry.
+The workstation's spare capacity offered a more suitable home for controlled Windows/Linux experiments than either of the resource-constrained SOC laptops. The required test cycle remained **test → observe → document → harden → retest**, but the September work established its supporting systems and initial telemetry rather than completing that full cycle.
 
-The goal is a documented cycle of **test → observe → document → harden → retest**. Establishing domain services and telemetry was the foundation for that cycle, not evidence of a completed attack-and-defence study.
+### 18–26 September: Windows security experimentation
+
+The Windows workstation's Hyper-V environment hosted a Kali Linux testing VM, a Windows domain controller, a Windows client and, later, a controlled gateway. Domain services and DNS were demonstrated on 19 September. On 24 September, network observations showed different exposure profiles: expected domain services on the controller versus filtered probes against the Windows client.
+
+On 25 September, failed local authentication attempts on the Kali test system produced Wazuh alerts, including rule identifiers **5557** and **5503**. This was evidence of a specific log-collection and detection path; it was not a completed exploitation or defensive retest. The following day, a dual-homed Debian gateway configuration advanced controlled connectivity between the isolated range and authorised supporting systems.
 
 ### Networking experiments and maintenance
 
-A candidate gateway was trialled during September but did not become the household's long-term router. The existing Linksys equipment remained in service. A Proxmox node also required a different Ethernet connection method after link-negotiation problems; the validated replacement path restored Gigabit connectivity.
+A candidate gateway was trialled during September but did not become the household's long-term router. The existing Linksys equipment remained in service. During 12–14 September, a tested UniFi Security Gateway experienced WAN address-management difficulties (temporarily mitigated using a static setting) before a later apparent hardware/power fault ended the trial. The subsequent recovery decision favoured household stability over continued gateway experimentation.
+
+Another Proxmox node, SOC1, showed a negotiated link of approximately **10 Mb/s** through its built-in Intel Ethernet path. Testing an external Realtek-based USB Ethernet interface, supported by the Linux `r8152` driver, established a stable **1 Gb/s** link. The virtualisation bridge was moved to the validated interface, and the node's connectivity was confirmed. The lesson was about measured link behaviour, not merely replacing hardware until a problem disappeared.
 
 **Lesson:** Functional household services set a useful boundary on experimentation. A technically interesting change must still be judged by its operational outcome.
 
@@ -110,7 +138,7 @@ The public documentation was reorganised around distinct questions:
 | [Incidents](11-incidents.md) | What failed, what was observed and what was learned? |
 | This document | How did the project reach its present form? |
 
-Chronology is retained without confusing old plans with live configurations. Sensitive operational details are kept outside the public record.
+Chronology is retained without confusing old plans with live configurations. Sensitive operational details are kept outside the public record. In October the generic public runbook was retired rather than continuing to maintain an incomplete set of sensitive operating procedures in a public repository.
 
 ## Themes that recur
 
