@@ -5,7 +5,7 @@ Significant changes are recorded newest first. Earlier entries remain historical
 ## 2026-10-11 — Public documentation enrichment and runbook retirement
 
 - Incorporated verified August–September build details into existing architecture, validation, decision, observability, incident and cyber-range records.
-- Removed the privacy-reduced public operations runbook; sensitive operating procedures remain outside this repository in the private handbook.
+- Retired the privacy-reduced public operations runbook; sensitive operating procedures remain in the separate private handbook.
 - Updated document links and retained a public, non-sensitive engineering history without creating additional documentation categories.
 
 ## 2026-09-26 — Controlled cyber-range gateway

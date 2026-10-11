@@ -34,7 +34,7 @@ The August Proxmox expansion and monitoring milestones are recorded separately f
 | Network services | Preserve dependable household connectivity while evaluating future gateway options |
 | Monitoring | Refine dashboards, metrics interpretation and event investigation |
 | Cyber-range | Complete repeatable test → observe → harden → retest exercises and document evidence |
-| Recovery | Improve documented recovery exercises and confidence in restoration procedures |
+| Recovery | Maintain restricted operating procedures and increase evidence from non-destructive restoration exercises |
 | Automation | Revisit existing Ansible examples and add tested maintenance workflows selectively |
 | Documentation | Keep current-state references, chronological records and private operations material aligned |
 

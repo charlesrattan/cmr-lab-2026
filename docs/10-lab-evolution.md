@@ -146,7 +146,7 @@ The public documentation was reorganised around distinct questions:
 | [Incidents](11-incidents.md) | What failed, what was observed and what was learned? |
 | This document | How did the project reach its present form? |
 
-Chronology is retained without confusing old plans with live configurations. Sensitive operational details are kept outside the public record.
+Chronology is retained without confusing old plans with live configurations. Sensitive operational details are kept outside the public record. In October the generic public runbook was retired rather than continuing to maintain an incomplete set of sensitive operating procedures in a public repository.
 
 ## Themes that recur
 

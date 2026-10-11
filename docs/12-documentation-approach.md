@@ -2,7 +2,7 @@
 
 ## Purpose
 
-CMR Lab maintains different records for different questions. A current-state inventory cannot replace a chronology, and a public technical reference cannot safely contain every operational detail required to administer a live environment.
+CMR Lab maintains different records for different questions. A current-state inventory cannot replace a chronology, and a public technical reference cannot safely contain every operational detail required to administer a live environment. The historical public runbook has been retired; full environment-specific procedures are kept outside this repository.
 
 The goal is to preserve evidence and reproducibility while making the material understandable to readers outside the lab.
 
@@ -13,7 +13,6 @@ The goal is to preserve evidence and reproducibility while making the material u
 | Current-state reference | Describe the implemented inventory, architecture and services | Update when the implementation changes |
 | Historical record | Explain dated events, decisions, experiments and incidents | Preserve superseded approaches as history |
 | Roadmap | Explain what has been demonstrated and what might come next | Keep deployed and proposed capabilities distinct |
-| Public operations guide | Describe reusable methods and safe observations | Avoid live configuration, credentials and fragile recovery details |
 | Restricted handbook | Retain commands, configuration, access methods and environment-specific procedures | Keep private and independently backed up |
 
 ## Evidence vocabulary
