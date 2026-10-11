@@ -1,0 +1,38 @@
+# Local and environment-specific files
+.env
+.env.*
+!.env.example
+*.local
+*.log
+*.tmp
+
+# Credentials, keys and private infrastructure material
+*.key
+*.pem
+*.p12
+*.pfx
+*.kdbx
+*.ovpn
+id_rsa*
+id_ed25519*
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+*.auto.tfvars
+
+# Backups, exports and database copies
+*.bak
+*.backup
+*.dump
+*.sql
+*.tar.gz
+*.zip
+backups/
+private/
+secrets/
+
+# Editor and OS metadata
+.DS_Store
+Thumbs.db
+.vscode/
+__pycache__/
