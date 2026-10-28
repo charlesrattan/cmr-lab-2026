@@ -99,11 +99,7 @@ The following is the sanitised original June changelog. It preserves the sequenc
 * Integrated media services with Homepage.
 * Added media services to Uptime Kuma monitoring.
 * Added Nginx Proxy Manager proxy hosts for media services.
-* Created dedicated media storage structure:
-
-  * a media storage directory
-  * a media storage directory
-  * a media storage directory
+* Created a dedicated media storage structure on VM120.
 
 ### Changed
 
@@ -136,25 +132,25 @@ Created:
 ## 2026-06-12 - Stable Namespace, Internal PKI and Vaultwarden Production Use
 
 ### Added
-- Enabled Tailscale subnet routing on VM100 `ubuntu-mgmt-01` for `the lab subnet`.
+- Enabled Tailscale subnet routing on VM100 `ubuntu-mgmt-01` for the lab subnet.
 - Integrated AdGuard Home with Tailscale DNS clients.
-- Standardized local and remote service access through `the former internal service namespace`.
+- Standardized local and remote service access through the internal service namespace.
 - Enhanced Homepage with Docker integration and live container status.
 - Added Homepage resource, search and datetime widgets.
 - Created the CMR Lab internal Root Certificate Authority.
-- Issued a TLS certificate for `the former internal service namespace`.
+- Issued a TLS certificate for the internal service namespace.
 - Configured Vaultwarden HTTPS through Nginx Proxy Manager.
 - Installed and validated Vaultwarden/Bitwarden clients on Chrome and iPhone.
 - Imported passwords from Chrome Password Manager.
 - Imported passwords from Apple Passwords.
 
 ### Changed
-- Homepage service links were updated to use stable `the former internal service namespace` hostnames.
+- Homepage service links were updated to use stable internal hostnames.
 - Remote access now uses Tailscale subnet routing instead of service-specific Tailscale URLs.
 - Vaultwarden moved from lab testing to active production use.
 
 ### Validated
-- `the former internal service namespace` service access works locally and remotely.
+- Access to services by internal hostname works locally and remotely.
 - Vaultwarden HTTPS secure context warning is resolved.
 - Chrome extension sync is working.
 - iPhone Bitwarden app sync is working.
@@ -202,10 +198,10 @@ Operations and Governance
 - Installed AdGuard Home on VM100 `ubuntu-mgmt-01`.
 - Migrated DNS port 53 from `systemd-resolved` stub listener to AdGuard Home.
 - Configured Quad9 DNS-over-HTTPS upstream: `https://dns10.quad9.net/dns-query`.
-- Created internal DNS namespace: `the former internal service namespace`.
+- Created an internal DNS namespace for lab services.
 - Added DNS rewrites for core lab services.
 - Integrated Nginx Proxy Manager with the new `.internal` namespace.
-- Updated Homepage allowed hosts to include `the former internal service namespace`.
+- Updated Homepage allowed hosts to include the internal namespace.
 - Validated internal service access from Windows workstation.
 - Created Proxmox snapshots for VM100 and VM120 after successful DNS and proxy validation.
 
@@ -240,7 +236,7 @@ scripts/ansible/health-check.yml
 - Configured passwordless SSH from VM100 to VM110 and VM120.
 - Created Ansible inventory for management, network, and services VMs.
 - Validated Ansible connectivity across VM100, VM110, and VM120.
-- Consolidated Docker services on VM120 under `a private Docker Compose manifest`.
+- Consolidated Docker services on VM120 under a Docker Compose manifest (kept private).
 - Confirmed Homepage, Portainer, Uptime Kuma, Vaultwarden, and Nginx Proxy Manager as active Docker services.
 - Created Docker backup archive `docker-backup-20260610.tar.gz`.
 - Validated Proxmox backup of VM120 to a local backup destination.
@@ -259,7 +255,7 @@ scripts/ansible/health-check.yml
 ### VM120 Docker Services Platform
 
 - Created VM120 `docker-services-01`.
-- Assigned VM120 IP address `the lab subnet`.
+- Assigned VM120 a static address on the lab subnet.
 - Installed Docker Engine.
 - Added user `charles` to the Docker group.
 - Deployed Portainer CE for Docker management.
@@ -271,7 +267,7 @@ scripts/ansible/health-check.yml
 - Confirmed Vaultwarden container health.
 - Identified Vaultwarden HTTPS requirement before production use.
 - Deployed Nginx Proxy Manager.
-- Created initial `.the former internal service namespace` proxy host entries.
+- Created initial internal proxy host entries.
 - Configured temporary Windows hosts file mappings for lab service names.
 - Updated Homepage dashboard links and bookmarks.
 
@@ -349,7 +345,7 @@ scripts/ansible/health-check.yml
 - Recovered UniFi Cloud Key Gen1.
 - Factory reset and upgraded Cloud Key firmware.
 - Confirmed UniFi controller operational.
-- Confirmed AP reachable at the lab subnet.
+- Confirmed AP reachable on the lab subnet.
 - Determined AP is adopted by existing controller on main workstation.
 - Evaluated migration of network management to Proxmox-hosted controller.
 

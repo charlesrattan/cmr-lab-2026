@@ -22,7 +22,7 @@ The guiding objective is to develop practical infrastructure, security and opera
 | 19–26 September 2026 | Independent cyber-range | Hyper-V Windows domain, endpoint, Kali workstation and controlled gateway established; domain behaviour and Wazuh alerts observed |
 | October 2026 | Documentation reconciliation | Asset Register, Architecture, Services Platform and README updated against verified evidence |
 
-Milestone dates are based on project records and lab conversations; a month or range is used where the exact completion day was not established. Deployment means a system was established, not that every possible use case or recovery scenario was tested.
+Milestone dates are based on project records and build notes; a month or range is used where the exact completion day was not established. Deployment means a system was established, not that every possible use case or recovery scenario was tested.
 
 The August Proxmox expansion and monitoring milestones are recorded separately from the September Wazuh and cyber-range experiments. This prevents the broad implementation periods from obscuring the earlier monitoring work.
 

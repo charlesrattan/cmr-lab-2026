@@ -6,7 +6,7 @@ CMR Lab did not begin with a clean architectural blueprint or a rack of newly pu
 
 The defining change in 2026 was not a particular installation. It was a change of method: **inventory what exists, test its capabilities, assign clear responsibilities, observe the results and retain the reasoning behind decisions**.
 
-This is a historical record. For what is currently deployed, consult the [Asset Register](02-asset-register.md) and [Architecture](03-architecture.md). The dates below are drawn from project records and conversations; approximate periods are labelled accordingly.
+This is a historical record. For what is currently deployed, consult the [Asset Register](02-asset-register.md) and [Architecture](03-architecture.md). The dates below are drawn from project records and build notes; approximate periods are labelled accordingly.
 
 ## June 2026 — Rebuilding the foundation
 
@@ -108,11 +108,11 @@ The initial idea of dedicating entire laptops to offensive and defensive experim
 
 The workstation's spare capacity offered a more suitable home for controlled Windows/Linux experiments than either of the resource-constrained SOC laptops. The required test cycle remained **test → observe → document → harden → retest**, but the September work established its supporting systems and initial telemetry rather than completing that full cycle.
 
-### 18–26 September: Windows security experimentation
+### 19–26 September: Windows security experimentation
 
 The Windows workstation's Hyper-V environment hosted a Kali Linux testing VM, a Windows domain controller, a Windows client and, later, a controlled gateway. Domain services and DNS were demonstrated on 19 September. On 24 September, network observations showed different exposure profiles: expected domain services on the controller versus filtered probes against the Windows client.
 
-On 25 September, failed local authentication attempts on the Kali test system produced Wazuh alerts, including rule identifiers **5557** and **5503**. This was evidence of a specific log-collection and detection path; it was not a completed exploitation or defensive retest. The following day, a dual-homed Debian gateway configuration advanced controlled connectivity between the isolated range and authorised supporting systems.
+On 25 September, failed local authentication attempts on the Kali test system produced Wazuh alerts, including rule identifiers **5557** and **5503**. This was evidence of a specific log-collection and detection path; it was not a completed exploitation or defensive retest. Because it preceded the gateway build, the event reached Wazuh through Kali's upstream NAT interface, not the controlled gateway. The following day, a dual-homed Debian gateway configuration advanced controlled connectivity between the isolated range and authorised supporting systems.
 
 ### Networking experiments and maintenance
 

@@ -36,7 +36,7 @@ flowchart TB
     G -.->|Selected event telemetry| W["Wazuh security monitoring<br/>Separate Proxmox workload"]
 ```
 
-The diagram shows roles rather than addressing, access policies or executable routes.
+The diagram shows roles rather than addressing, access policies or executable routes. The gateway telemetry path reflects the design from 26 September onwards; the 25 September Kali event described below predates it.
 
 ## What has been demonstrated
 
@@ -71,7 +71,7 @@ Controlled network enumeration showed the domain controller answering on expecte
 
 ### 25 September: Security events visible in Wazuh
 
-An intentionally incorrect local authentication attempt on `KALI01` produced Wazuh events, including rules **5557** (password check failure) and **5503** (PAM login failure), with an MITRE ATT&CK classification including **T1110.001**. This demonstrated that the tested event made its way from the experiment VM to Wazuh on SOC2.
+An intentionally incorrect local authentication attempt on `KALI01` produced Wazuh events, including rules **5557** (password check failure) and **5503** (PAM login failure), with an MITRE ATT&CK classification including **T1110.001**. This demonstrated that the tested event made its way from the experiment VM to Wazuh on SOC2. The test preceded the gateway build on 26 September, so the event travelled over `KALI01`'s upstream NAT interface rather than through `RANGE-GW01`.
 
 The Windows client was also integrated into the endpoint telemetry design. A successful agent connection or alert is not a comprehensive security-detection test.
 
