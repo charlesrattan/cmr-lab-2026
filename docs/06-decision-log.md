@@ -25,8 +25,8 @@ Dates reflect available project evidence; month-level entries avoid invented pre
 | July 2026 | Build a separate internal MkDocs workspace | Keep operational notes useful and independently editable | Local working documentation established; public GitHub is a separately reviewed record |
 | August 2026 | Move primary DNS to a Raspberry Pi and maintain a secondary resolver | Separate a core utility from the primary hypervisor | Implemented and resolver failover tested |
 | August 2026 | Move Tailscale's network utility role onto a dedicated Raspberry Pi | Reduce reliance on the core VM for this access function | Implemented |
-| August–September 2026 | Expand Proxmox with repurposed ThinkPads | Reuse available compute for different operational requirements | Three-node cluster implemented; placement follows practical capacity |
-| September 2026 | Assign observability, home automation and Wazuh to appropriate Proxmox nodes | Balance service continuity and resource limitations | Implemented; original dedicated SOC-node concept adapted |
+| 3–15 August 2026 | Expand Proxmox with repurposed ThinkPads | Reuse available compute for different operational requirements | Three-node cluster implemented; placement follows practical capacity |
+| August–September 2026 | Assign observability, home automation and Wazuh to appropriate Proxmox nodes | Balance service continuity and resource limitations | Implemented; original dedicated SOC-node concept adapted |
 | September 2026 | Build an independent Hyper-V cyber-range on the Windows workstation | Use spare capacity for attacker, victim and defender experiments | Domain, test endpoint, Kali and controlled gateway established; initial security telemetry captured |
 | September 2026 | Retain the existing gateway after exploratory replacement testing | Prioritise stable household networking | Legacy gateway remains active; replacement is a future evaluation |
 | October 2026 | Reconcile the public repository against actual deployments | June documentation no longer represented the entire environment | Current-state documents refreshed; history and operational detail assigned separate responsibilities |
